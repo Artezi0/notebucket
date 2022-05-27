@@ -1,0 +1,109 @@
+@import './var.scss';
+
+.top {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    padding: .5em .8em;
+    user-select: none;
+    color: $text_innactive;
+
+    button {
+        color: inherit;
+        display: flex;
+        align-items: center;
+        transition: .3s;
+        border-radius: 4px;
+        padding: .1em .2em;
+
+        &:hover {
+            background: $main_mid;
+        }
+    }
+
+    &__info {
+        gap: .2em;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+
+        &-filename {
+            font-weight: 600;
+            transition: .3s;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: .2em .4em;
+
+            &:hover {
+                background: $main_mid;
+            }
+        }
+
+        &-input {
+            margin-right: .2em;
+
+            input {
+                outline: none;
+                border: 1px solid $main_dark;
+                font-size: inherit;
+                font-family: inherit;
+                font-weight: 500;
+                color: $text_innactive;
+                background: $main_mid;
+                border-radius: 4px;
+                padding: .2em;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    &__menu {
+        display: flex;
+        align-items: center;
+        gap: .3em; 
+    }
+}
+
+.submenu {
+    z-index: 3;
+    background: $main_light;
+    border: 1px solid $main_dark;
+    width: 12em;
+    height: fit-content;
+    position: absolute;
+    right: .8em;
+    top: 4em;
+    border-radius: 4px;
+    color: $text_innactive;
+    font-size: 13px;
+    user-select: none;
+    
+    &__title {
+        font-weight: 600;
+        padding: .5em;
+    }
+
+    &__info {
+        width: 100%;
+        border-top: 1px solid $main_dark;
+        padding: .5em;
+
+        li {
+            list-style: none;
+            font-weight: 500;
+            width: 100%;
+            padding: .3em 0;
+
+            svg {
+                color: inherit;
+                position: relative;
+                margin-right: .4em;
+                top: .18em;                
+            }
+        }
+    }
+}

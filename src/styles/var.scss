@@ -19,25 +19,37 @@ $shade_red: #FF605C;
 $shade_yellow: #FFBD44; 
 $shade_green: #89CA00;
 
+$media_queries : (
+    'mobile'    : "only screen and (max-width: 667px)",
+    'tablet'    : "only screen and (min-width: 668px) and (max-width: $size__site_content_width)",
+    'desktop'   : "only screen and (min-width: ($size__site_content_width + 1))",
+    'retina2'   : "only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)",
+    'retina3'   : "only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)",
+    'landscape' : "screen and (orientation:landscape) ",    
+    'portrait'  : "screen and (orientation:portrait) "
+);
+
+
 *, *::before, *::after {
     padding: 0;
     margin: 0;  
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-body {
-    height: 100%;
+.App {
+    height: 100vh;
     width: 100%;
+    display: flex;
     position: relative;
     background: $main_light;
     color: $text_active;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     
     a {
         text-decoration: none;
         color: inherit;
     }
-
+    
     button {
         font-size: inherit;
         font-family: inherit;
@@ -45,5 +57,27 @@ body {
         border: none;
         background: none;
         cursor: pointer;
+    }
+
+    label {
+        cursor: pointer;
+    }
+    
+    &__left {
+        height: 100%;
+        width: 18rem;
+        overflow: auto;
+        transition: .3s ease-in-out;
+    }
+    
+    &__left.active {
+        width: 0;
+    }
+    
+    &__right {
+        height: 100%;
+        width: 100%;
+        // overflow: auto;
+        overflow: hidden;
     }
 }
