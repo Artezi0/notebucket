@@ -100,7 +100,7 @@
                 }
 
                 .react-tabs__tab-panel--selected {
-                    padding: .4em;
+                    padding: .5em;
                 }
 
                 &-color {
@@ -199,14 +199,13 @@
 
                 button:nth-child(2) {
                     border-left: 1px solid $main_dark;
-                    border-right: 1px solid $main_dark;
                 }
             }
             
             .cover-image {
                 top: 50%;
                 left: 50%;
-                image-rendering: optimizeQuality;
+                image-rendering: optimizeSpeed;
                 transform: translate(-50%, -50%);
                 position: absolute;
                 width: 100%;
@@ -270,7 +269,7 @@
             .status {
                 position: absolute;
                 top: 2em;
-                width: 5em;
+                width: 6em;
                 height: fit-content;
                 border: 1px solid $main_dark;
                 border-radius: 4px;
@@ -285,6 +284,7 @@
                     text-align: left;
                     width: 100%;
                     transition: .3s;
+                    font-weight: 500;
                     color: $text_innactive !important;
                 }
 

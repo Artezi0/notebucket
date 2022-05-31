@@ -23,7 +23,30 @@ export default function Body({ onAdd, onUpdate, active }) {
     })
   }
 
-  const Modal = () => {
+  const Modal = (e) => {
+    async function handleImage(e) {
+      const file = e.target.files[0]
+      const data = new FormData()
+
+      data.append('file', file)
+      data.append('upload_preset', 'notebucket')
+      data.append('cloud_name', 'artezi0')
+      
+      if(file.size > 5000000) {
+        alert('File too big')
+      }
+      if(file.size < 5000000) {
+        let resp = await fetch('https://api.cloudinary.com/v1_1/artezi0/image/upload', {
+          method: 'POST',
+          body: data
+        })
+
+        let res = await resp.json() 
+        let img = res.url
+        onEdit('coverVal', img)
+      }
+    }
+
     function handleLinks(e) {
       e.preventDefault()
       
@@ -32,6 +55,7 @@ export default function Body({ onAdd, onUpdate, active }) {
         onEdit('coverVal', inputLink.value)
       }
 
+      isModal(false)
     }
 
     function handleColor() {
@@ -57,8 +81,9 @@ export default function Body({ onAdd, onUpdate, active }) {
           <button onClick={handleColor}>Randomize</button>
         </TabPanel>
         <TabPanel className='cover__modal-link'>
-          <form onSubmit={handleLinks}>
-            <input type="text" placeholder='Insert image link' id='inputLink'/>
+          <form onSubmit={handleLinks} autoComplete='off'>
+            <input type='hidden' autoComplete='false'/>
+            <input type='text' placeholder='Insert image link' id='inputLink' spellCheck='false'/>
           </form>
         </TabPanel>
         <TabPanel className='cover__modal-upload'>
@@ -66,6 +91,8 @@ export default function Body({ onAdd, onUpdate, active }) {
           <input 
             type="file"  
             id='inputImg'
+            onChange={handleImage}
+            accept='.png, .jpeg, .jpg, .webp'
             style={{ display: 'none' }}
           />
           <p>Image can't be larger than 5mb</p>
@@ -76,10 +103,11 @@ export default function Body({ onAdd, onUpdate, active }) {
 
   const Cover = () => {    
     return (
-      <div className='body__header-cover' style={{ background: active.coverVal} }>
+      <div className='body__header-cover' style={{ background: active.coverVal}}>
         {modal && <Modal />}
         <div className='cover__actions'>
           <button type='button' onClick={() => isModal(!modal)}>Set cover</button>
+          <button type='button' onClick={() => onEdit('cover', false)}>Remove</button>
         </div>
         <img src={active.coverVal} className='cover-image' alt=''/>
       </div>
@@ -90,7 +118,7 @@ export default function Body({ onAdd, onUpdate, active }) {
     function handleStatus(e) {
       let val = e.target.value
       if (val == 0) {
-        onEdit('stats', '#19171199')
+        onEdit('stats', '#007DFF')
       }
       if (val == 1) {
         onEdit('stats', '#FFBD44')
