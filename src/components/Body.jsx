@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Input from './Input'
 import '../styles/app.scss'
 
 export default function Body({ onAdd, onUpdate, active }) {
-  const [ image, setImage ] = useState(null)
   const [ status, isStatus ] = useState(false)
+  const [ modal, isModal ] = useState(false)
 
   function onEdit(field, value) {
     onUpdate({
@@ -22,10 +23,18 @@ export default function Body({ onAdd, onUpdate, active }) {
     })
   }
 
-  const Cover = () => {    
-    function handleColor() {
-      setImage(null)
+  const Modal = () => {
+    function handleLinks(e) {
+      e.preventDefault()
+      
+      const inputLink = document.getElementById('inputLink')
+      if (inputLink.value !== "" || undefined) {
+        onEdit('coverVal', inputLink.value)
+      }
 
+    }
+
+    function handleColor() {
       let hexColor = "#"
       const hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
       const randomHex = () => { return Math.floor(Math.random() * hex.length)}    
@@ -38,17 +47,41 @@ export default function Body({ onAdd, onUpdate, active }) {
     }
 
     return (
-      <div className='body__header-cover' style={{ background: active.coverVal}}>
-        <div className='cover-actions'>
-          <button type='button' onClick={() => onEdit('cover', false)}>Remove</button>
-          <button type='button' onClick={handleColor}>Color</button>
-          <label htmlFor='uploadImage'>Image</label>
-          <input type="file" accept="image/*"
-            value=''
-            id='uploadImage'
+      <Tabs className='cover__modal'>
+        <TabList className='cover__modal-tab'>
+          <Tab>Color</Tab>
+          <Tab>Link</Tab>
+          <Tab>Upload</Tab>
+        </TabList>
+        <TabPanel className='cover__modal-color'>
+          <button onClick={handleColor}>Randomize</button>
+        </TabPanel>
+        <TabPanel className='cover__modal-link'>
+          <form onSubmit={handleLinks}>
+            <input type="text" placeholder='Insert image link' id='inputLink'/>
+          </form>
+        </TabPanel>
+        <TabPanel className='cover__modal-upload'>
+          <label htmlFor="inputImg">Select image</label>
+          <input 
+            type="file"  
+            id='inputImg'
             style={{ display: 'none' }}
           />
+          <p>Image can't be larger than 5mb</p>
+        </TabPanel>
+      </Tabs>
+    )
+  }
+
+  const Cover = () => {    
+    return (
+      <div className='body__header-cover' style={{ background: active.coverVal} }>
+        {modal && <Modal />}
+        <div className='cover__actions'>
+          <button type='button' onClick={() => isModal(!modal)}>Set cover</button>
         </div>
+        <img src={active.coverVal} className='cover-image' alt=''/>
       </div>
     )
   }
@@ -112,7 +145,10 @@ export default function Body({ onAdd, onUpdate, active }) {
             </div>
           </div>
           <div className="body__header-input">
-            <Input />
+            <Input 
+              onUpdate={onUpdate}
+              active={active}
+            />
           </div>
         </>
       }

@@ -2,9 +2,10 @@ import React from 'react'
 import CodeMirror from '@uiw/react-codemirror'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
+import '../styles/app.scss'
 
 export default function Input() {
-    // Dummy text
+  // Dummy text
   const code = `## Title
 
   \`\`\`jsx

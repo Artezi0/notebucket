@@ -1,12 +1,17 @@
 @import './var.scss';
 
 .body {
-    height: 100%;
+    height: 90%;
     width: 100%;
-    overflow: auto;
+    overflow-y: scroll;
 
     &::-webkit-scrollbar {
-        width: 0;             
+        width: 8px;
+        background: none;             
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $main_dark;
     }
 
     &__msg {
@@ -51,19 +56,122 @@
         width: 100%;
         height: fit-content;
         user-select: none;
+        padding-bottom: .5em;
 
         &-cover {
             width: 100%;
             height: 12em;
             position: relative;
-            overflow: hidden;
             user-select: none;
+            overflow: hidden;
 
-            &:hover .cover-actions {
+            .cover__modal {
+                z-index: 4;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                bottom: -4em;
+                width: fit-content;
+                height: fit-content;
+                position: absolute;
+                background: $main_light;
+                border-radius: 4px;
+                
+                &-tab {
+                    width: 100%;
+                    padding: .4em 1em;
+                    display: flex;
+                    gap: 2em;
+                    justify-content: center;
+                    color: $text_innactive;
+                    border-bottom: 1px solid $main_dark;
+                    font-size: 13px;
+                    font-weight: 500;
+
+                    li {
+                        list-style: none;
+                        cursor: pointer;
+                        transition: .3s;
+
+                        &:hover {
+                            color: $text_active
+                        }
+                    }
+                }
+
+                .react-tabs__tab-panel--selected {
+                    padding: .4em;
+                }
+
+                &-color {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    button {
+                        color: $shade_blue;
+                        font-size: 13px;
+                        font-weight: 500;
+                    }
+                }
+
+                &-link {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    input {
+                        outline: none;
+                        border: 1px solid $main_dark;
+                        font-size: 13px;
+                        font-family: inherit;
+                        font-weight: 500;
+                        color: $text_innactive;
+                        background: $main_mid;
+                        border-radius: 2px;
+                        padding: .2em;
+        
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+
+                &-upload {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    
+                    label {
+                        color: $shade_blue;
+                        font-size: 13px;
+                        font-weight: 500;
+                    }
+
+                    p {
+                        font-size: 13px;
+                        font-weight: 500;
+                        color: $text_innactive;
+                        text-align: center;
+                    }
+                }
+            }
+
+            &:hover .cover__actions {
                 display: block;
             }
             
-            .cover-actions {
+            .cover__actions {
                 z-index: 3;
                 width: fit-content;
                 height: fit-content;
@@ -80,7 +188,7 @@
                     height: 100%;
                     padding: 0 .5em;
                     font-weight: 500;
-                    font-size: 12px;
+                    font-size: 13px;
                     color: $text_innactive;
                     transition: .3s;
 
@@ -98,11 +206,14 @@
             .cover-image {
                 top: 50%;
                 left: 50%;
+                image-rendering: optimizeQuality;
                 transform: translate(-50%, -50%);
                 position: absolute;
                 width: 100%;
                 z-index: 2;
             }
+
+            
         }
 
         &-info {

@@ -1,0 +1,36 @@
+@import './var.scss';
+
+.cm-editor {
+    background: $main_light;
+    outline: none !important;
+    color: $text_active;
+    
+    &.ͼ1 .cm-scroller {
+        font-size: 14px;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    &.cm-focused .cm-selectionBackground {
+        background: $main_mid;
+    }
+
+    .cm-activeLine {
+        background: $main_mid;
+    }
+
+    .cm-matchingBracket,
+    .cm-focused .cm-matchingBracket {
+        background: $shade_lighterBlue !important;
+    }
+}
+
+.cm-gutter {
+    background: $main_light;
+    color: $text_innactive;
+    user-select: none;
+
+    .cm-activeLineGutter {
+        background: $main_dark !important;
+    }
+}
+

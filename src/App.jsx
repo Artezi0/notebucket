@@ -17,13 +17,13 @@ export default function App() {
   }, [notes])
 
   function onAdd() {
-    const newNote = {
+    var newNote = {
       id: uuid(),
       cover: false,
       coverVal: '#E8E7E3',
       stats: '',
       title: "Untitled",
-      body: "",
+      body: `# Hello world`,
       lastModified: Date.now()
     }
 
