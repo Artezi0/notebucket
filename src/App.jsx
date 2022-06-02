@@ -9,6 +9,7 @@ import './styles/app.scss'
 export default function App() {
   const [ submenu, isSubmenu ] = useState(false)
   const [ sidebar, isSidebar ] = useState(false)
+  const [ read, isRead ] = useState(false)
   const [ notes, setNotes ] = useState( localStorage.notes ? JSON.parse(localStorage.notes) : [])
   const [ active, setActive ] = useState(false)
 
@@ -72,12 +73,16 @@ export default function App() {
           handleSide={handleSide}
           onUpdate={onUpdate}
           active={getActive()}
+          isRead={isRead}
+          read={read}
         />
         {submenu && <Submenu />}
         <Body
           onAdd={onAdd}
           onUpdate={onUpdate}
           active={getActive()}
+          isRead={isRead}
+          read={read}
         />
       </section>
     </main>

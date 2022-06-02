@@ -4,35 +4,29 @@ import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 import '../styles/app.scss'
 
-export default function Input() {
-  // Dummy text
-  const code = `## Title
+export default function Input({ active, onUpdate }) {
+  function onEdit(field, value) {
+    onUpdate({
+      ...active,
+      [field]: value,
+      lastModified: Date.now()
+    })
+  }
 
-  \`\`\`jsx
-  function Demo() {
-    return <div>demo</div>
-  }
-  \`\`\`
+  const dummy = `# This is H1
+  ## This is H2
   
-  \`\`\`bash
-  # Not dependent on uiw.
-  npm install @codemirror/lang-markdown --save
-  npm install @codemirror/language-data --save
-  \`\`\`
+  *This is Itallic*
+  __This is Bold__
   
-  [weisit ulr](https://uiwjs.github.io/react-codemirror/)
+  [ALT]('www.thisisalink.com')
   
-  \`\`\`go
-  package main
-  import "fmt"
-  func main() {
-    fmt.Println("Hello, 世界")
-  }
-  \`\`\``
+  This is a paragraph`
 
   return (
     <CodeMirror 
-      value={code} 
+      className='input__input'
+      value={dummy} 
       extensions={[
         markdown({ 
           base: markdownLanguage, 

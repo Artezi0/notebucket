@@ -1,4 +1,5 @@
 import React from 'react'
+import data from '../../package.json'
 import '../styles/app.scss'
 
 export default function Side({ onAdd, onDelete, setActive, active, notes}) {
@@ -8,8 +9,7 @@ export default function Side({ onAdd, onDelete, setActive, active, notes}) {
     <div className='side'>
       <div className="side__header">
         <div className="side__header-logo">
-          <span>
-          </span>
+          <span>{data.version}</span>
         </div>
         <div className="side__header-actions">
           <button type='button' className='action-btn'>Setting</button>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Input from './Input'
+import View from './View'
 import '../styles/app.scss'
 
-export default function Body({ onAdd, onUpdate, active }) {
+export default function Body({ onAdd, onUpdate, active, isRead, read }) {
   const [ status, isStatus ] = useState(false)
   const [ modal, isModal ] = useState(false)
 
@@ -173,10 +174,15 @@ export default function Body({ onAdd, onUpdate, active }) {
             </div>
           </div>
           <div className="body__header-input">
+            {read ? 
+            <View 
+              active={active}
+            /> :
             <Input 
               onUpdate={onUpdate}
               active={active}
             />
+            }
           </div>
         </>
       }

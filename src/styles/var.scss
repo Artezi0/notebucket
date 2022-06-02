@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
-/* 
-Variables needed to make the website
-also some normalize style for the web
-*/
+// ----------------------------------------------------------------------------
+// Variables needed to make the website
+// also some normalize style for the web
+// ----------------------------------------------------------------------------
 
 $main_light: #FFFFFF;
 $main_mid: #F7F6F3;
@@ -20,16 +20,46 @@ $shade_red: #FF605C;
 $shade_yellow: #FFBD44; 
 $shade_green: #89CA00;
 
-$media_queries : (
-    'mobile'    : "only screen and (max-width: 667px)",
-    'tablet'    : "only screen and (min-width: 668px) and (max-width: $size__site_content_width)",
-    'desktop'   : "only screen and (min-width: ($size__site_content_width + 1))",
-    'retina2'   : "only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)",
-    'retina3'   : "only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)",
-    'landscape' : "screen and (orientation:landscape) ",    
-    'portrait'  : "screen and (orientation:portrait) "
-);
+// ----------------------------------------------------------------------------
+// Gruvbox scss file
+// June 18 2017
+// Author: Will Tanna
+// ----------------------------------------------------------------------------
 
+// Background
+$gb-lm-bg0: #fbf1c7;
+$gb-lm-bg0-hard: #f9f5d7;
+$gb-lm-bg0-soft: #f2e5bc;
+$gb-lm-bg1: #ebdbb2;
+$gb-lm-bg2: #d5c4a1;
+$gb-lm-bg3: #bdae93;
+$gb-lm-bg4: #a89984;
+
+// Foreground
+$gb-lm-fg0: #282828;
+$gb-lm-fg1: #3c3836;
+$gb-lm-fg2: #504945;
+$gb-lm-fg3: #665c54;
+$gb-lm-fg4: #7c6f64;
+
+// Colors
+$gb-lm-dark-red: #cc241d;
+$gb-lm-dark-green: #98971a;
+$gb-lm-dark-yellow: #d79921;
+$gb-lm-dark-blue: #458588;
+$gb-lm-dark-purple: #b16286;
+$gb-lm-dark-aqua: #689d6a;
+$gb-lm-dark-orange: #d65d0e;
+$gb-lm-dark-gray: #928374;
+
+$gb-lm-light-red: #9d0006;
+$gb-lm-light-green: #79740e;
+$gb-lm-light-yellow: #b57614;
+$gb-lm-light-blue: #7ebbc7;
+$gb-lm-light-purple: #8f3f71;
+$gb-lm-light-aqua: #427b58;
+$gb-lm-light-orange: #af3a03;
+$gb-lm-light-gray: #7c6f64;
 
 *, *::before, *::after {
     padding: 0;
