@@ -20,8 +20,10 @@ export default function App() {
   function onAdd() {
     var newNote = {
       id: uuid(),
-      cover: false,
-      coverVal: '#E8E7E3',
+      cover: {
+        isCover: false,
+        value: '#E8E7E3',
+      },
       stats: '',
       title: "Untitled",
       body: `# Hello world`,

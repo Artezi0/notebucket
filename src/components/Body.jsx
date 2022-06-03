@@ -44,7 +44,14 @@ export default function Body({ onAdd, onUpdate, active, isRead, read }) {
 
         let res = await resp.json() 
         let img = res.url
-        onEdit('coverVal', img)
+        onUpdate({
+          ...active, 
+          cover: {
+            isCover: true,
+            value: img
+          },
+          lastModified: Date.now()
+        })
       }
     }
 
@@ -53,7 +60,14 @@ export default function Body({ onAdd, onUpdate, active, isRead, read }) {
       
       const inputLink = document.getElementById('inputLink')
       if (inputLink.value !== "" || undefined) {
-        onEdit('coverVal', inputLink.value)
+        onUpdate({
+          ...active, 
+          cover: {
+            isCover: true,
+            value: inputLink.value
+          },
+          lastModified: Date.now()
+        })
       }
 
       isModal(false)
@@ -67,8 +81,15 @@ export default function Body({ onAdd, onUpdate, active, isRead, read }) {
       for (let i = 0; i < 6; i++) {
         hexColor += hex[randomHex()]
       }
-      
-      onEdit('coverVal', hexColor.toString())
+
+      onUpdate({
+        ...active, 
+        cover: {
+          isCover: true,
+          value: hexColor.toString()
+        },
+        lastModified: Date.now()
+      })
     }
 
     return (
@@ -104,13 +125,13 @@ export default function Body({ onAdd, onUpdate, active, isRead, read }) {
 
   const Cover = () => {    
     return (
-      <div className='body__header-cover' style={{ background: active.coverVal}}>
+      <div className='body__header-cover' style={{ background: active.cover.value}}>
         {modal && <Modal />}
         <div className='cover__actions'>
           <button type='button' onClick={() => isModal(!modal)}>Set cover</button>
-          <button type='button' onClick={() => onEdit('cover', false)}>Remove</button>
+          <button type='button' onClick={() => () => onUpdate({...active, cover: {isCover: false, value: '#E8E7E3'}, lastModified: Date.now()})}>Remove</button>
         </div>
-        <img src={active.coverVal} className='cover-image' alt=''/>
+        <img src={active.cover.value} className='cover-image' alt=''/>
       </div>
     )
   }
@@ -158,7 +179,7 @@ export default function Body({ onAdd, onUpdate, active, isRead, read }) {
       {active &&
         <>
           <div className="body__header">
-            {active.cover && <Cover />}
+            {active.cover.isCover && <Cover />}
             <div className="body__header-info">
               <h2 className='info-filename'>{active.title}</h2>
               <p className='info-date'>Last modified {handleDateStr()}</p>
@@ -169,7 +190,7 @@ export default function Body({ onAdd, onUpdate, active, isRead, read }) {
               <button type='button' onClick={() => isStatus(!status)}>
                 Status <i class={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
               </button>
-              <button type='button' onClick={() => onEdit('cover', true)}>Add Cover</button>
+              <button type='button' onClick={() => onUpdate({...active, cover: {isCover: true, value: '#E8E7E3'}, lastModified: Date.now()})}>Add Cover</button>
               <button type='button'>Tags</button>
             </div>
           </div>

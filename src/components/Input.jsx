@@ -1,10 +1,12 @@
-import React from 'react'
-import CodeMirror from '@uiw/react-codemirror'
+import React, { useState, useEffect } from 'react'
+import CodeMirror, { lineNumbers } from '@uiw/react-codemirror'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 import '../styles/app.scss'
 
 export default function Input({ active, onUpdate }) {
+  const [ state, setState ] = useState(active.body)
+
   function onEdit(field, value) {
     onUpdate({
       ...active,
@@ -13,26 +15,27 @@ export default function Input({ active, onUpdate }) {
     })
   }
 
-  const dummy = `# This is H1
-  ## This is H2
-  
-  *This is Itallic*
-  __This is Bold__
-  
-  [ALT]('www.thisisalink.com')
-  
-  This is a paragraph`
-
   return (
-    <CodeMirror 
-      className='input__input'
-      value={dummy} 
-      extensions={[
-        markdown({ 
-          base: markdownLanguage, 
-          codeLanguages: languages 
-        })
-      ]} 
-    />
+    <>
+      <button onClick={() => console.log(state)}>Yield</button>
+      <CodeMirror 
+        className='input__input'
+        value={active.body}
+        onChange={(value) => {
+          onUpdate({
+            ...active,
+            body: state,
+            lastModified: Date.now()
+          })
+          setState(value)
+        }}
+        extensions={[
+          markdown({ 
+            base: markdownLanguage, 
+            codeLanguages: languages 
+          })
+        ]} 
+      />
+    </>
   )
 }
