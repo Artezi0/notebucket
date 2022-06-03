@@ -83,6 +83,7 @@ export default function App() {
           onAdd={onAdd}
           onUpdate={onUpdate}
           active={getActive()}
+          setActive={setActive}
           isRead={isRead}
           read={read}
         />

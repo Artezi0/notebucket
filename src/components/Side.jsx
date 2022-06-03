@@ -22,7 +22,7 @@ export default function Side({ onAdd, onDelete, setActive, active, notes}) {
         {sorted.map(({ id, cover, title }) => {
           return (
             <div className={`note ${id === active && "active"}`}
-                onClick={() => setActive(id) && console.log(active)} 
+                onClick={() => setActive(id)} 
                 key={id}>
               <span className='note__block' style={{ background: `${cover}` }}></span>
               <p className='note__title'>{title}</p>
