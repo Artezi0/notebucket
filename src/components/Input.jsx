@@ -16,26 +16,22 @@ export default function Input({ active, onUpdate }) {
   }
 
   return (
-    <>
-      <button onClick={() => console.log(state)}>Yield</button>
-      <CodeMirror 
-        className='input__input'
-        value={active.body}
-        onChange={(value) => {
-          onUpdate({
-            ...active,
-            body: state,
-            lastModified: Date.now()
-          })
-          setState(value)
-        }}
-        extensions={[
-          markdown({ 
-            base: markdownLanguage, 
-            codeLanguages: languages 
-          })
-        ]} 
-      />
-    </>
+    <CodeMirror 
+      className='input__input'
+      value={active.body}
+      onChange={(value) => {
+        onUpdate({
+          ...active,
+          body: value,
+          lastModified: Date.now()
+        })
+      }}
+      extensions={[
+        markdown({ 
+          base: markdownLanguage, 
+          codeLanguages: languages 
+        })
+      ]} 
+    />
   )
 }
