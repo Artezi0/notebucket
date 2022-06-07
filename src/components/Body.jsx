@@ -4,7 +4,7 @@ import Input from './Input'
 import View from './View'
 import '../styles/app.scss'
 
-export default function Body({ onAdd, onUpdate, active, isRead, read }) {
+export default function Body({ onAdd, onUpdate, active, split, read }) {
   const [ status, isStatus ] = useState(false)
   const [ modal, isModal ] = useState(false)
 
@@ -188,23 +188,25 @@ export default function Body({ onAdd, onUpdate, active, isRead, read }) {
               {status && <Status />}
               <div className='status-block' style={{ background: `${active.stats}` }}></div>
               <button type='button' onClick={() => isStatus(!status)}>
-                Status <i class={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+                Status <i className={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
               </button>
               <button type='button' onClick={() => onUpdate({...active, cover: {isCover: true, value: '#E8E7E3'}, lastModified: Date.now()})}>Add Cover</button>
               <button type='button'>Tags</button>
             </div>
           </div>
-          <div className="body__header-input">
+          {split ?
+          <div className="body__header-split">
+            <Input onUpdate={onUpdate} active={active} />
+            <View active={active} />
+          </div> : 
+          <div className="body__header-main">
             {read ? 
-            <View 
-              active={active}
-            /> :
-            <Input 
-              onUpdate={onUpdate}
-              active={active}
-            />
+            <View active={active} /> :
+            <Input onUpdate={onUpdate} active={active} />
             }
-          </div>
+          </div> 
+          }
+         
         </>
       }
     </section>

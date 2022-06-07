@@ -10,6 +10,7 @@ export default function App() {
   const [ submenu, isSubmenu ] = useState(false)
   const [ sidebar, isSidebar ] = useState(false)
   const [ read, isRead ] = useState(false)
+  const [ split, isSplit ] = useState(false)
   const [ notes, setNotes ] = useState( localStorage.notes ? JSON.parse(localStorage.notes) : [])
   const [ active, setActive ] = useState(false)
 
@@ -75,6 +76,8 @@ export default function App() {
           handleSide={handleSide}
           onUpdate={onUpdate}
           active={getActive()}
+          isSplit={isSplit}
+          split={split}
           isRead={isRead}
           read={read}
         />
@@ -84,7 +87,7 @@ export default function App() {
           onUpdate={onUpdate}
           active={getActive()}
           setActive={setActive}
-          isRead={isRead}
+          split={split}
           read={read}
         />
       </section>

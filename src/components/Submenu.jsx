@@ -5,6 +5,9 @@ export default function Submenu() {
   return (
     <div className='submenu'>
       <p className='submenu__title'>Options</p>
+      <ul className="submenu__actions">
+        <button type='button'>Export as .txt</button>
+      </ul>
       <ul className='submenu__info'>
         <li><a href="#">
           <svg width="14" height="14" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
