@@ -1,16 +1,47 @@
 import React from "react"
+import ReactMarkdown from "react-markdown"
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+
+// Rehype plugins
+import rehypeRaw from "rehype-raw"
+import rehypeKatex from "rehype-katex"
+// Remark plugins
+import remarkRehype from "remark-rehype"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
-import rehypeKatex from "rehype-katex"
-import ReactMarkdown from "react-markdown"
 
 export default function View({ active }) {
   return (
     <ReactMarkdown 
       className='view'
       children={active.body} 
-      remarkPlugins={[remarkGfm, remarkMath]}
-      rehypePlugins={[rehypeKatex]} 
+      remarkPlugins={[[remarkGfm, {singleTilde: false}], remarkMath, remarkRehype]}
+      rehypePlugins={[rehypeKatex, rehypeRaw]} 
+      linkTarget='_blank'
+      components={{
+        code({node, inline, className, children, ...props}) {
+          const match = /language-(\w+)/.exec(className || '')
+          return !inline && match ? (
+            <SyntaxHighlighter
+              children={String(children).replace(/\n$/, '')}
+              style={solarizedlight}
+              wrapLongLines
+              customStyle={{
+                background: 'none',
+                padding: '0',
+              }}
+              language={match[1]}
+              PreTag="div"
+              {...props}
+            />
+          ) : (
+            <code className={className} {...props}>
+              {children}
+            </code>
+          )
+        }
+      }}
     />
   )
 } 

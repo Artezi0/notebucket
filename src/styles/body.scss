@@ -299,20 +299,135 @@
             .input {
                 width: 100%;
                 height: 100%;
+                padding: .5em;
                 resize: none;
                 border: none;
                 font-family: 'Hack NF';
                 font-weight: 500;
                 font-size: 14px;
+                line-height: 1.3rem;
 
                 &:focus {
                     outline: none;
                 }
+
+                &::-webkit-scrollbar {
+                    width: 0;
+                }
             }
 
             .view {
+                // Global stylesheet
+                padding: .5em;
+                font-size: 14px;
                 border-left: 1px solid $main_dark;
-                padding-left: 1em;
+
+                // Header stylesheet
+                h1, h2, h3 { font-weight: 600; }
+                h4, h5, h6 { font-weight: 500; }
+                h1 { font-size: 32px; }
+                h2 { font-size: 24px; }
+                h3 { font-size: 18.72px; }
+                h4 { font-size: 16px; }
+                h5 { font-size: 13.28px; }
+                h6 { font-size: 10.72px; }
+
+                // Other text stylesheet
+                p { line-height: 1.3rem; text-align: justify; }
+                a { color: $shade_blue; }
+
+                blockquote {
+                    border-left: 5px solid $main_mid;
+                    margin: .5em 0;
+                    padding: .5em 10px;
+                    font-weight: 500;
+                    font-style: italic;
+                }
+            
+                // List stylesheet
+                ol, ul { padding-left: 1.2em; }
+            
+                .contains-task-list {
+                    padding: 0;
+                
+                    li {
+                        list-style: none;
+                    
+                        input {
+                            position: relative;
+                            top: 1px;
+                        }
+                    }
+                }
+            
+                // Codeblock stylesheet
+                code {
+                    background: $main_mid;
+                    border-radius: 2px;
+                    padding: .2em;
+                }
+            
+                pre {
+                    background: $main_mid;
+                    border-radius: 2px;
+                    padding: .2em 1em;
+
+                    div {
+                        font-size: 20px;
+
+                        code {
+                            padding: 0;
+                            background: none;
+                            border-radius: 0;
+                            font-family: 'Hack NF' !important;
+                        }  
+                    }
+                }
+            
+                hr {
+                    width: 100%;
+                    height: .5px;
+                    outline: none;
+                    border: none;
+                    margin: 1em 0;
+                    background: $text_innactive;
+                }
+            
+                // Table stylesheet
+                table {
+                    border: 1px solid $main_dark;
+                    padding: 0;
+                    margin: 0;                    
+                
+                    thead {
+                        background: $main_mid;
+                        font-weight: 500;
+                    
+                        tr {          
+                            padding: 0;
+                            margin: 0;
+                        
+                            th {
+                                font-weight: 600;
+                                padding: .2em 2em;
+                            }
+                        }
+                    }
+                
+                    tbody {
+                        font-size: 14px;
+                        text-align: center;
+                    }
+                }
+            
+                // Katex stylesheet
+                .katex-display {
+                    width: fit-content;
+                    background: $main_mid;
+                    border-radius: 2px;
+                    padding: .5em 1em;
+                    display: flex;
+                }
             }
         }
 
@@ -329,9 +444,127 @@
                 font-family: 'Hack NF';
                 font-weight: 500;
                 font-size: 14px;
+                text-align: justify;
+                line-height: 1.3rem;
 
                 &:focus {
                     outline: none;
+                }
+
+                &::-webkit-scrollbar {
+                    width: 0;
+                }
+            }
+
+            .view {
+                // Global stylesheet
+                font-size: 14px;
+             
+                // Header stylesheet
+                h1, h2, h3 { font-weight: 600; }
+                h4, h5, h6 { font-weight: 500; }
+                h1 { font-size: 32px; }
+                h2 { font-size: 24px; }
+                h3 { font-size: 18.72px; }
+                h4 { font-size: 16px; }
+                h5 { font-size: 13.28px; }
+                h6 { font-size: 10.72px; }
+
+                // Other text stylesheet
+                p { line-height: 1.3rem; text-align: justify; }
+                a { color: $shade_blue; }
+
+                blockquote {
+                    border-left: 5px solid $main_mid;
+                    margin: .5em 0;
+                    padding: .5em 10px;
+                    font-weight: 500;
+                    font-style: italic;
+                }
+
+                // List stylesheet
+                ol, ul { padding-left: 1.2em; }
+
+                .contains-task-list {
+                    padding: 0;
+
+                    li {
+                        list-style: none;
+
+                        input {
+                            position: relative;
+                            top: 1px;
+                        }
+                    }
+                }
+
+                // Codeblock stylesheet
+                code {
+                    background: $main_mid;
+                    border-radius: 2px;
+                    padding: .2em;
+                }
+
+                pre {
+                    background: $main_mid;
+                    border-radius: 2px;
+                    padding: .2em 1em;
+                    
+                    div {
+                        font-size: 20px;
+                        
+                        code {
+                            padding: 0;
+                            background: none;
+                            border-radius: 0;
+                            font-family: 'Hack NF' !important;
+                        }  
+                    }
+                }
+
+                hr {
+                    width: 100%;
+                    height: .5px;
+                    outline: none;
+                    border: none;
+                    margin: 1em 0;
+                    background: $text_innactive;
+                }
+
+                // Table stylesheet
+                table {
+                    border: 1px solid $main_dark;
+                    padding: 0;
+                    margin: 0;                    
+
+                    thead {
+                        background: $main_mid;
+                        font-weight: 500;
+
+                        tr {          
+                            padding: 0;
+                            margin: 0;
+
+                            th {
+                                font-weight: 600;
+                                padding: .2em 2em;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        font-size: 14px;
+                        text-align: center;
+                    }
+                }
+
+                // Katex stylesheet
+                .katex-display {
+                    width: fit-content;
+                    background: $main_mid;
+                    border-radius: 2px;
+                    padding: .5em 1em;
+                    display: flex;
                 }
             }
         }

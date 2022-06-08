@@ -18,7 +18,7 @@ export default function Top({ submenu, isSubmenu, handleSide, onUpdate, active, 
     if (active) {
       filename = active.title
       filenameStyle = { color: "#000000" }
-      document.title = active.title
+      document.title = active.title + " - Notebucket"
     } 
     if (!active) {
       filename = "No selected"

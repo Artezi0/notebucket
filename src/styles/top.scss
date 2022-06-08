@@ -69,7 +69,7 @@
 }
 
 .submenu {
-    z-index: 3;
+    z-index: 4;
     background: $main_light;
     border: 1px solid $main_dark;
     width: 12em;
@@ -85,6 +85,25 @@
     &__title {
         font-weight: 600;
         padding: .5em;
+    }
+    
+    &__actions {
+        width: 100%;
+        border-top: 1px solid $main_dark;
+        padding: .5em;
+        
+        button {
+            font-weight: 500;
+            padding: .3em 0;
+            color: $text_innactive;
+
+            svg {
+                color: inherit;
+                position: relative;
+                margin-right: .4em;
+                top: .18em;                
+            }
+        }
     }
 
     &__info {

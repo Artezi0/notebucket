@@ -7,6 +7,8 @@ export default function Submenu() {
       <p className='submenu__title'>Options</p>
       <ul className="submenu__actions">
         <button type='button'>Export as .txt</button>
+        <button type='button'>Export as .pdf</button>
+        <button type='button'>Export as .docx</button>
       </ul>
       <ul className='submenu__info'>
         <li><a href="#">
