@@ -2,12 +2,10 @@ import { useState, useEffect } from 'react'
 import uuid from 'react-uuid'
 import Body from './components/Body'
 import Side from './components/Side'
-import Submenu from './components/Submenu'
 import Top from './components/Top'
 import './styles/app.scss'
 
 export default function App() {
-  const [ submenu, isSubmenu ] = useState(false)
   const [ sidebar, isSidebar ] = useState(false)
   const [ read, isRead ] = useState(false)
   const [ split, isSplit ] = useState(false)
@@ -36,7 +34,6 @@ export default function App() {
 
   function onDelete(noteId) {
     setNotes(notes.filter(({ id }) => id !== noteId))
-    location.reload()
   }
 
   function onUpdate(updated) {
@@ -71,8 +68,6 @@ export default function App() {
       </section>
       <section className='App__right' id='right'>
         <Top 
-          submenu={submenu}
-          isSubmenu={isSubmenu}
           handleSide={handleSide}
           onUpdate={onUpdate}
           active={getActive()}
@@ -81,7 +76,6 @@ export default function App() {
           isRead={isRead}
           read={read}
         />
-        {submenu && <Submenu />}
         <Body
           onAdd={onAdd}
           onUpdate={onUpdate}

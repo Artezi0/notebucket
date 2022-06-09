@@ -3,7 +3,27 @@
 .side {
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     white-space: nowrap;
     background: $main_mid;
+    padding: .5em;
+
+    button {
+        text-align: left;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;   
+    }
+
+    &__toggle {
+        width: fit-content;
+        color: $text_innactive;
+        font-weight: 500;
+        transition: .3s;
+        border-radius: 4px;
+    }
 }

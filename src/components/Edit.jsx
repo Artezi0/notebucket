@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
 import '../styles/app.scss'
 
-export default function Input({ active, onUpdate }) {
+export default function Edit({ active, onUpdate }) {
   let [ state, setState ] = useState({
     body: active.body
   })

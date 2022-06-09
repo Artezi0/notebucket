@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import Input from './Input'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import Edit from './Edit'
 import View from './View'
 import '../styles/app.scss'
 
 export default function Body({ onAdd, onUpdate, active, split, read }) {
+  const [ state, setState ] = useState('')
   const [ status, isStatus ] = useState(false)
   const [ modal, isModal ] = useState(false)
+  const [ input, isInput ] = useState(false)
 
   function onEdit(field, value) {
     onUpdate({
@@ -53,6 +55,7 @@ export default function Body({ onAdd, onUpdate, active, split, read }) {
           lastModified: Date.now()
         })
       }
+      isModal(false)
     }
 
     function handleLinks(e) {
@@ -69,7 +72,6 @@ export default function Body({ onAdd, onUpdate, active, split, read }) {
           lastModified: Date.now()
         })
       }
-
       isModal(false)
     }
 
@@ -129,7 +131,7 @@ export default function Body({ onAdd, onUpdate, active, split, read }) {
         {modal && <Modal />}
         <div className='cover__actions'>
           <button type='button' onClick={() => isModal(!modal)}>Set cover</button>
-          <button type='button' onClick={() => () => onUpdate({...active, cover: {isCover: false, value: '#E8E7E3'}, lastModified: Date.now()})}>Remove</button>
+          <button type='button' onClick={() => onUpdate({...active, cover: {isCover: false, value: active.cover.value}, lastModified: Date.now()})}>Remove</button>
         </div>
         <img src={active.cover.value} className='cover-image' alt=''/>
       </div>
@@ -139,16 +141,21 @@ export default function Body({ onAdd, onUpdate, active, split, read }) {
   const Status = () => {
     function handleStatus(e) {
       let val = e.target.value
+      let text
       if (val == 0) {
-        onEdit('stats', '#007DFF')
+        onEdit('stats', '#E8E7E3')
+        text = 'Active'
       }
       if (val == 1) {
         onEdit('stats', '#FFBD44')
+        text = 'Delayed'
       }
       if (val == 2) {
         onEdit('stats', '#89CA00')
+        text = 'Done'
       }
-  
+      
+      setState(text)
       isStatus(!status)
     }
 
@@ -181,28 +188,35 @@ export default function Body({ onAdd, onUpdate, active, split, read }) {
           <div className="body__header">
             {active.cover.isCover && <Cover />}
             <div className="body__header-info">
-              <h2 className='info-filename'>{active.title}</h2>
+              <div onDoubleClick={() => isInput(!input)}  className={input ? 'info-name disabled' : 'info-name'}>
+                <input 
+                  onChange={(e) => onEdit('title', e.target.value)} 
+                  value={active.title} 
+                  spellCheck='false'
+                  disabled={input ? false : true}
+                />
+              </div>
               <p className='info-date'>Last modified {handleDateStr()}</p>
             </div>
             <div className="body__header-actions">
               {status && <Status />}
               <div className='status-block' style={{ background: `${active.stats}` }}></div>
               <button type='button' onClick={() => isStatus(!status)}>
-                Status <i className={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+                {state} <i className={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
               </button>
-              <button type='button' onClick={() => onUpdate({...active, cover: {isCover: true, value: '#E8E7E3'}, lastModified: Date.now()})}>Add Cover</button>
+              <button type='button' onClick={() => onUpdate({...active, cover: {isCover: true, value: active.cover.value}, lastModified: Date.now()})}>Add Cover</button>
               <button type='button'>Tags</button>
             </div>
           </div>
           {split ?
           <div className="body__header-split">
-            <Input onUpdate={onUpdate} active={active} />
+            <Edit onUpdate={onUpdate} active={active} />
             <View active={active} />
           </div> : 
           <div className="body__header-main">
             {read ? 
             <View active={active} /> :
-            <Input onUpdate={onUpdate} active={active} />
+            <Edit onUpdate={onUpdate} active={active} />
             }
           </div> 
           }

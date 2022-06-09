@@ -61,7 +61,7 @@
             overflow: hidden;
 
             .cover__modal {
-                z-index: 4;
+                z-index: 3;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
@@ -204,7 +204,6 @@
                 transform: translate(-50%, -50%);
                 position: absolute;
                 width: 100%;
-                z-index: 2;
             }
 
             
@@ -214,10 +213,29 @@
             padding: 2em 15% 1em 15%;
             width: 100%;
 
-            .info-filename {
-                font-size: 40px;
-                font-weight: 700;
-            }
+            .info-name {
+                width: fit-content;
+                height: fit-content;
+                cursor: pointer;
+
+                input {
+                    font-size: 40px;
+                    font-weight: 700;
+                    font-family: inherit;
+                    border: none;
+                    padding-bottom: .2em;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &:disabled {
+                        color: $text_active;
+                        background: none;
+                        cursor: pointer;
+                    }
+                }
+            }    
 
             .info-date {
                 font-size: 14px;
@@ -247,18 +265,23 @@
             button {
                 height: fit-content;
                 color: inherit;
-                transition: .3s;
                 font-weight: 600;
-                border-radius: 4px;
+                transition: .3s;
+
+                &:hover {
+                    color: $text_active;
+                }
             }
 
             button:nth-child(2) {
-                color: $shade_blue;
-
                 i {
                     position: relative;
                     top: 1px;
                 } 
+
+                &:hover {
+                    color: $text_active;
+                }
             }
 
             .status {
@@ -280,7 +303,11 @@
                     width: 100%;
                     transition: .3s;
                     font-weight: 500;
-                    color: $text_innactive !important;
+                    color: $text_innactive;
+                    
+                    &:hover {
+                        color: $text_active;
+                    }
                 }
 
                 button:nth-child(2) {
@@ -302,8 +329,8 @@
                 padding: .5em;
                 resize: none;
                 border: none;
-                font-family: 'Hack NF';
-                font-weight: 500;
+                font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+                font-weight: 400;
                 font-size: 14px;
                 line-height: 1.3rem;
 
@@ -320,6 +347,7 @@
                 // Global stylesheet
                 padding: .5em;
                 font-size: 14px;
+                line-height: 1.3rem;
                 border-left: 1px solid $main_dark;
 
                 // Header stylesheet
@@ -365,6 +393,7 @@
                     background: $main_mid;
                     border-radius: 2px;
                     padding: .2em;
+                    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
                 }
             
                 pre {
@@ -379,7 +408,7 @@
                             padding: 0;
                             background: none;
                             border-radius: 0;
-                            font-family: 'Hack NF' !important;
+                            font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
                         }  
                     }
                 }
@@ -441,8 +470,8 @@
                 height: 100%;
                 resize: none;
                 border: none;
-                font-family: 'Hack NF';
-                font-weight: 500;
+                font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+                font-weight: 400;
                 font-size: 14px;
                 text-align: justify;
                 line-height: 1.3rem;
@@ -459,6 +488,7 @@
             .view {
                 // Global stylesheet
                 font-size: 14px;
+                line-height: 1.3rem;
              
                 // Header stylesheet
                 h1, h2, h3 { font-weight: 600; }
@@ -503,6 +533,7 @@
                     background: $main_mid;
                     border-radius: 2px;
                     padding: .2em;
+                    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
                 }
 
                 pre {
@@ -517,7 +548,7 @@
                             padding: 0;
                             background: none;
                             border-radius: 0;
-                            font-family: 'Hack NF' !important;
+                            font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
                         }  
                     }
                 }
