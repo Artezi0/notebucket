@@ -101,6 +101,7 @@ $gb-lm-light-gray: #7c6f64;
     }
     
     &__left {
+        z-index: 10;
         height: 100%;
         width: 20rem;
         overflow: auto;
@@ -116,11 +117,11 @@ $gb-lm-light-gray: #7c6f64;
         width: 100%;
         overflow: hidden;
     }
-
+    
     @media screen and (min-width: 320px) and (max-width: 480px) {
         &__left {
             position: fixed;
-            width: 12rem;
+            width: 18rem;
         }
     }
 }

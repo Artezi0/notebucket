@@ -59,6 +59,7 @@ export default function App() {
     <main className='App'>
       <section className='App__left' id='left'>
         <Side
+          handleSide={handleSide}
           onAdd={onAdd}
           onDelete={onDelete}
           setActive={setActive}
@@ -69,12 +70,12 @@ export default function App() {
       <section className='App__right' id='right'>
         <Top 
           handleSide={handleSide}
-          onUpdate={onUpdate}
           active={getActive()}
           isSplit={isSplit}
           split={split}
           isRead={isRead}
           read={read}
+          sidebar={sidebar}
         />
         <Body
           onAdd={onAdd}
