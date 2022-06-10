@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import data from '../../package.json'
+import Spotlight from './Spotlight'
 import '../styles/app.scss'
 
 export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide }) {
   const [ note, isNote ] = useState(true)
-  const [ status, isStatus ] = useState(false)
+  const [ status, isStatus ] = useState(true)
   const [ state, setState ] = useState(true)
-  const [ search, setSearch ] = useState('')
+  const [ spot, isSpot ] = useState(false)
+
   let sorted
   
   if (state) {
@@ -24,11 +26,14 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
   function deleteAll() {
     confirm('Are you sure?')
     if (true) {
-      localStorage.removeItem(notes)
+      localStorage.removeItem('notes')
+      location.reload()
     }
   }
 
   return (
+    <>
+    {spot && <Spotlight setActive={setActive} notes={notes} />}
     <div className='side'>
       <div className='side__header'>
         <div className='side__header-logo'>
@@ -45,7 +50,7 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
         </button>
       </div>
       <ul className='side__actions'>
-        <button type='button'>
+        <button type='button' onClick={() => isSpot(!spot)}>
           <svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.53223 14.0332C8.92969 14.0332 10.2393 13.6113 11.3291 12.8906L15.1787 16.749C15.4336 16.9951 15.7588 17.1182 16.1104 17.1182C16.8398 17.1182 17.376 16.5469 17.376 15.8262C17.376 15.4922 17.2617 15.167 17.0156 14.9209L13.1924 11.0801C13.9834 9.95508 14.4492 8.59277 14.4492 7.11621C14.4492 3.31055 11.3379 0.199219 7.53223 0.199219C3.73535 0.199219 0.615234 3.31055 0.615234 7.11621C0.615234 10.9219 3.72656 14.0332 7.53223 14.0332ZM7.53223 12.1875C4.74609 12.1875 2.46094 9.90234 2.46094 7.11621C2.46094 4.33008 4.74609 2.04492 7.53223 2.04492C10.3184 2.04492 12.6035 4.33008 12.6035 7.11621C12.6035 9.90234 10.3184 12.1875 7.53223 12.1875Z" fill="currentColor"/>
           </svg>
@@ -64,6 +69,36 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
           Delete all
         </button>
       </ul>
+      <div className='side__status'>
+        <div className="side__status-btn">
+          <button onClick={() => isStatus(!status)}>
+            <svg width="12" height="16" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.31543 19.1816H12.6846C14.5654 19.1816 15.5498 18.1885 15.5498 16.29V3.02734C15.5498 1.12012 14.5742 0.135742 12.6846 0.135742H10.0566C9.73145 0.135742 9.5293 0.337891 9.5293 0.663086C9.5293 1.52441 8.93164 2.18359 8 2.18359C7.07715 2.18359 6.4707 1.52441 6.4707 0.663086C6.4707 0.337891 6.26855 0.135742 5.94336 0.135742H3.31543C1.43457 0.135742 0.450195 1.12012 0.450195 3.02734V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.47363 17.4238C2.62109 17.4238 2.19922 16.9756 2.19922 16.1758V3.1416C2.19922 2.33301 2.62109 1.88477 3.47363 1.88477H5.15234C5.53027 3.09766 6.59375 3.84473 8 3.84473C9.40625 3.84473 10.4697 3.09766 10.8477 1.88477H12.5264C13.3789 1.88477 13.8008 2.33301 13.8008 3.1416V16.1758C13.8008 16.9756 13.3789 17.4238 12.5264 17.4238H3.47363ZM4.80078 6.89453H11.208C11.5244 6.89453 11.7705 6.64844 11.7705 6.32324C11.7705 6.01562 11.5244 5.77832 11.208 5.77832H4.80078C4.4668 5.77832 4.22949 6.01562 4.22949 6.32324C4.22949 6.64844 4.4668 6.89453 4.80078 6.89453ZM4.80078 9.93555H7.90332C8.22852 9.93555 8.46582 9.68945 8.46582 9.38184C8.46582 9.06543 8.22852 8.81934 7.90332 8.81934H4.80078C4.4668 8.81934 4.22949 9.06543 4.22949 9.38184C4.22949 9.68945 4.4668 9.93555 4.80078 9.93555Z" fill="currentColor"/>
+            </svg>
+            Status
+          </button>
+        </div>
+        {status &&
+        <div className='side__status-list'>
+          <ul className='list'>
+            <div className="list__stats"></div>
+            Active
+          </ul>
+          <ul className='list'>
+            <div className="list__stats"></div>
+            Delayed
+          </ul>
+          <ul className='list'>
+            <div className="list__stats"></div>
+            Completed
+          </ul>
+          <ul className='list'>
+            <div className="list__stats"></div>
+            Dropped
+          </ul>
+        </div>
+        }
+      </div>
       <div className='side__notes'>
         <div className="side__notes-btn">
           <button onClick={() => isNote(!note)}>
@@ -73,23 +108,20 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
             Notes
           </button>
           <button type='button' onClick={onAdd}>
-            <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13.9912 22.7422C18.9746 22.7422 23.0879 18.6289 23.0879 13.6543C23.0879 8.67969 18.9658 4.56641 13.9824 4.56641C9.00781 4.56641 4.90332 8.67969 4.90332 13.6543C4.90332 18.6289 9.0166 22.7422 13.9912 22.7422ZM13.9912 20.9316C9.95703 20.9316 6.73145 17.6885 6.73145 13.6543C6.73145 9.62012 9.95703 6.38574 13.9824 6.38574C18.0166 6.38574 21.2598 9.62012 21.2686 13.6543C21.2773 17.6885 18.0254 20.9316 13.9912 20.9316ZM10.748 14.4893H13.1562V16.9062C13.1562 17.3896 13.499 17.7324 13.9736 17.7324C14.4658 17.7324 14.8174 17.3896 14.8174 16.9062V14.4893H17.2344C17.7178 14.4893 18.0693 14.1465 18.0693 13.6631C18.0693 13.1797 17.7266 12.8281 17.2344 12.8281H14.8174V10.4111C14.8174 9.91895 14.4658 9.57617 13.9736 9.57617C13.499 9.57617 13.1562 9.91895 13.1562 10.4111V12.8281H10.748C10.2471 12.8281 9.9043 13.1797 9.9043 13.6631C9.9043 14.1465 10.2559 14.4893 10.748 14.4893Z" fill="currentColor"/>
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.63672 8.65625H6.99805V14.0176C6.99805 14.5625 7.44629 15.0195 8 15.0195C8.55371 15.0195 9.00195 14.5625 9.00195 14.0176V8.65625H14.3633C14.9082 8.65625 15.3652 8.20801 15.3652 7.6543C15.3652 7.10059 14.9082 6.65234 14.3633 6.65234H9.00195V1.29102C9.00195 0.746094 8.55371 0.289062 8 0.289062C7.44629 0.289062 6.99805 0.746094 6.99805 1.29102V6.65234H1.63672C1.0918 6.65234 0.634766 7.10059 0.634766 7.6543C0.634766 8.20801 1.0918 8.65625 1.63672 8.65625Z" fill="currentColor"/>
             </svg>
           </button>
         </div>
         {note &&
         <ul className='side__notes-list'>
-        {sorted.map(({ id, title, body }) => {
+        {sorted.map(({ id, title, stats }) => {
           return (
             <div className={`note ${id === active && "active"}`}
                 onClick={() => setActive(id)} 
                 key={id}>
+              <div className='note__stats' style={{ background: stats }}></div>
               <p className='note__title'>{title}</p>
-              <p className='note__bodt'>{body}</p>
-              <button type='button' className='note__delete' onClick={(e) => onDelete(id)}>
-                <i className="fa-solid fa-ban"></i>
-              </button>
             </div>       
           )})
         }
@@ -97,5 +129,6 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
         }
       </div>
     </div>
+    </>
   )
 }

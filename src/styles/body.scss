@@ -285,37 +285,48 @@
             }
 
             .status {
-                position: absolute;
                 top: 2em;
-                width: 6em;
+                width: 8em;
                 height: fit-content;
-                border: 1px solid $main_dark;
-                border-radius: 4px;
-                background: $main_light;
+                position: absolute;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
+                gap: .5em;
+                padding: .2em;
+                border: 1px solid $main_dark;
+                border-radius: 4px;
+                background: $main_light;
                 
                 &__btn {
-                    border-radius: 0;
-                    padding: .2em;
-                    text-align: left;
                     width: 100%;
-                    transition: .3s;
-                    font-weight: 500;
+                    display: flex;
+                    gap: .5em;
+                    padding: .2em;
+                    font-size: 13px;
+                    font-weight: 600;
+                    text-align: left;
                     color: $text_innactive;
+                    transition: .3s;
                     
+                    &-stats {
+                        width: 13px;
+                        aspect-ratio: 1/1;
+                        border-radius: 2px;
+                    }
+
                     &:hover {
                         color: $text_active;
                     }
                 }
 
-                button:nth-child(2) {
-                    border-top: 1px solid $main_dark;
-                    border-bottom: 1px solid $main_dark;
-                }
+                button:nth-child(1) > div { background: $main_dark; }
+                button:nth-child(2) > div { background: $shade_yellow; }
+                button:nth-child(3) > div { background: $shade_green; }
+                button:nth-child(4) > div { background: $shade_red; }
             }
         }
+
         &-split {
             padding: 0 15%;
             width: 100%;

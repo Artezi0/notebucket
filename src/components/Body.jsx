@@ -152,7 +152,11 @@ export default function Body({ onAdd, onUpdate, active, split, read }) {
       }
       if (val == 2) {
         onEdit('stats', '#89CA00')
-        text = 'Done'
+        text = 'Completed'
+      }
+      if (val == 3) {
+        onEdit('stats', '#FF605C')
+        text = 'Dropped'
       }
       
       setState(text)
@@ -161,9 +165,22 @@ export default function Body({ onAdd, onUpdate, active, split, read }) {
 
     return (
       <div className="status">
-        <button className="status__btn" value={0} onClick={handleStatus}>Active</button>
-        <button className="status__btn" value={1} onClick={handleStatus}>Delayed</button>
-        <button className="status__btn" value={2} onClick={handleStatus}>Done</button>
+        <button className="status__btn" value={0} onClick={handleStatus}>
+          <div className='status__btn-stats'></div>
+          Active
+        </button>
+        <button className="status__btn" value={1} onClick={handleStatus}>
+          <div className='status__btn-stats'></div>
+          Delayed
+        </button>
+        <button className="status__btn" value={2} onClick={handleStatus}>
+          <div className='status__btn-stats'></div>
+          Completed
+        </button>
+        <button className="status__btn" value={3} onClick={handleStatus}>
+          <div className='status__btn-stats'></div>
+          Dropped
+        </button>
       </div>
     )
   }
