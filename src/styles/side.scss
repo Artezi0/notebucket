@@ -176,3 +176,102 @@
         }
     }
 }
+
+.spotlight {
+    z-index: 10;
+    top: 100px;
+    left: 50%;
+    width: 18em;
+    height: fit-content;
+    transform: translateX(-50%);
+    position: fixed;
+    background: $main_light;
+    border: 1px solid $main_dark;
+    border-radius: 4px;
+    box-shadow: 0 5px 10px 0px rgba(0,0,0,0.05);
+
+    &__input {
+        width: 100%;
+        height: fit-content;
+        position: relative;
+        padding: .5em;
+        display: flex;
+        gap: .5em;
+        justify-content: space-between;
+        align-items: center;
+        // border-bottom: 1px solid $main_dark;
+        
+        &-icon {
+            height: 100%;
+            width: fit-content;
+            display: flex;
+            color: $text_innactive;
+        }
+
+        input {
+            height: 100%;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            font-family: inherit;
+            
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    &__result {
+        width: 100%;
+        height: fit-content;
+        position: relative;
+        padding: .5em;
+        border-top: 1px solid $main_dark;        
+        
+        &-list {
+            .note {
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                align-items: center;
+                gap: .5em;
+                padding: .5em;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                border-radius: 4px;
+
+                &__stats {
+                    width: 13px;
+                    height: 13px;
+                    border-radius: 2px;
+                    background: $main_dark;
+                }
+
+                &:hover {
+                    background: $main_mid;
+                }
+            }
+
+            .result-list-warn {
+                width: 100%;
+                text-align: center;
+    
+                h3 {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+    
+                p {
+                    margin: 0 2em;
+                    color: $text_innactive;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+            }
+        }
+
+       
+    }
+}

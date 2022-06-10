@@ -24,8 +24,7 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
   }
 
   function deleteAll() {
-    confirm('Are you sure?')
-    if (true) {
+    if (confirm('Are you sure want delete all of your data?') == true) {
       localStorage.removeItem('notes')
       location.reload()
     }
@@ -33,7 +32,7 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
 
   return (
     <>
-    {spot && <Spotlight setActive={setActive} notes={notes} />}
+    {spot && <Spotlight setActive={setActive} active={active} notes={notes} isSpot={isSpot} />}
     <div className='side'>
       <div className='side__header'>
         <div className='side__header-logo'>
