@@ -17,7 +17,7 @@ export default function App() {
   }, [notes])
 
   function onAdd() {
-    var newNote = {
+    let newNote = {
       id: uuid(),
       cover: {
         isCover: false,
@@ -30,6 +30,7 @@ export default function App() {
     }
 
     setNotes([newNote, ...notes])
+    setActive(newNote.id)
   }
 
   function onDelete(noteId) {
@@ -61,7 +62,6 @@ export default function App() {
         <Side
           handleSide={handleSide}
           onAdd={onAdd}
-          onDelete={onDelete}
           setActive={setActive}
           active={active}
           notes={notes}
@@ -80,6 +80,7 @@ export default function App() {
         <Body
           onAdd={onAdd}
           onUpdate={onUpdate}
+          onDelete={onDelete}
           active={getActive()}
           setActive={setActive}
           split={split}

@@ -79,22 +79,10 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
         </div>
         {status &&
         <div className='side__status-list'>
-          <ul className='list'>
-            <div className="list__stats"></div>
-            Active
-          </ul>
-          <ul className='list'>
-            <div className="list__stats"></div>
-            Delayed
-          </ul>
-          <ul className='list'>
-            <div className="list__stats"></div>
-            Completed
-          </ul>
-          <ul className='list'>
-            <div className="list__stats"></div>
-            Dropped
-          </ul>
+          <ul className='status__list'>Active</ul>
+          <ul className='status__list'>Delayed</ul>
+          <ul className='status__list'>Completed</ul>
+          <ul className='status__list'>Dropped</ul>
         </div>
         }
       </div>

@@ -4,7 +4,7 @@ import Edit from './Edit'
 import View from './View'
 import '../styles/app.scss'
 
-export default function Body({ onAdd, onUpdate, active, split, read }) {
+export default function Body({ onAdd, onUpdate, onDelete, active, split, read }) {
   const [ state, setState ] = useState('')
   const [ status, isStatus ] = useState(false)
   const [ modal, isModal ] = useState(false)
@@ -107,7 +107,7 @@ export default function Body({ onAdd, onUpdate, active, split, read }) {
         <TabPanel className='cover__modal-link'>
           <form onSubmit={handleLinks} autoComplete='off'>
             <input type='hidden' autoComplete='false'/>
-            <input type='text' placeholder='Insert image link' id='inputLink' spellCheck='false'/>
+            <input type='text' placeholder='Image link' id='inputLink' spellCheck='false'/>
           </form>
         </TabPanel>
         <TabPanel className='cover__modal-upload'>
@@ -222,7 +222,7 @@ export default function Body({ onAdd, onUpdate, active, split, read }) {
                 {state} <i className={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
               </button>
               <button type='button' onClick={() => onUpdate({...active, cover: {isCover: true, value: active.cover.value}, lastModified: Date.now()})}>Add Cover</button>
-              <button type='button'>Tags</button>
+              <button type='button' onClick={() => onDelete(active.id)}>Delete note</button>
             </div>
           </div>
           {split ?

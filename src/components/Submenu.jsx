@@ -1,16 +1,35 @@
 import React from 'react'
 import FileSaver from 'file-saver'
+import { useRef, useEffect } from 'react'
 
 import '../styles/app.scss'
 
-export default function Submenu({ active }) {
+export default function Submenu({ active, isSubmenu }) {
+  const ref = useRef(null)
+  
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClick(e) {
+        if (ref.current && !ref.current.contains(e.target)) {
+          isSubmenu(false)
+        }
+      }
+      document.addEventListener('mousedown', handleClick)
+      return () => {
+        document.removeEventListener('mousedown', handleClick)
+      }
+    }, [ref])
+  }
+
+  useOutsideAlerter(ref)
+
   function handleExport() {
     let blob = new Blob([active.body], {type: "text/plain;charset=utf-8"})
     FileSaver.saveAs(blob, `${active.title}.txt`)
   }
 
   return (
-    <div className='submenu'>
+    <div className='submenu' ref={ref}>
       <p className='submenu__title'>Options</p>
       <ul className="submenu__actions">
         <button type='button' onClick={handleExport}>

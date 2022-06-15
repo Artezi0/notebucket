@@ -96,27 +96,16 @@
         &-list {
             padding: 0 0 1em 0;
 
-            .list {
+            .status__list {
                 display: flex;
                 align-items: center;
                 gap: .5em;
-                margin: .5em .8em;
+                margin: .5em 1.3em;
                 font-size: 14px;
-                font-weight: 500;
+                font-weight: 600;
                 color: $text_innactive;
                 cursor: pointer;
-
-                &__stats {
-                    width: 13px;
-                    height: 13px;
-                    border-radius: 2px;
-                }
             }
-
-            ul:nth-child(1) > div { background: $main_dark; }
-            ul:nth-child(2) > div { background: $shade_yellow; }
-            ul:nth-child(3) > div { background: $shade_green; }
-            ul:nth-child(4) > div { background: $shade_red; }
         }
     }
 
@@ -152,14 +141,13 @@
 
             .note {
                 height: fit-content;
-                width: 13em;
+                width: 100%;
                 display: flex;
                 align-items: center;
                 gap: .5em;
-                margin: 0 .5em;                
-                padding: .2em;
-                cursor: pointer;
+                padding: .3em .3em .3em 1.3em;
                 border-radius: 4px;
+                cursor: pointer;
 
                 &__stats {
                     width: 13px;
@@ -173,15 +161,19 @@
                     font-weight: 500;
                 }
             }
+
+            .note.active {
+                background: $main_dark;
+            }
         }
     }
 }
 
 .spotlight {
     z-index: 10;
-    top: 100px;
+    top: 3em;
     left: 50%;
-    width: 18em;
+    width: 20em;
     height: fit-content;
     transform: translateX(-50%);
     position: fixed;
@@ -199,7 +191,6 @@
         gap: .5em;
         justify-content: space-between;
         align-items: center;
-        // border-bottom: 1px solid $main_dark;
         
         &-icon {
             height: 100%;
@@ -256,6 +247,7 @@
 
             .result-list-warn {
                 width: 100%;
+                padding: .5em 0;
                 text-align: center;
     
                 h3 {
