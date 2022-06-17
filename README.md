@@ -15,17 +15,6 @@
 
 
 
-
-Tired of seeing your notes scattered around and untidy?  Organize your notes with Notebucket. With powerfull markdown editor build on it, you can customize your note whatever you want.
-
-## Feature
-
-- Plain text notes
-- Markdown preview
-- Linked notes
-- Search notes
-## Usage
-
-Notebucket is only available on browser right now with ongoing expansion on other platform. Web app still on development, please report any bug on issue section.
-  
-
+<p align='center'>
+Tired of seeing your notes scattered around and untidy?  Organize your notes with Notebucket. With powerfull markdown editor build on it, you can customize your note whatever you want. 
+</p>
