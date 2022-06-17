@@ -62,8 +62,9 @@ export default function App() {
         <Side
           handleSide={handleSide}
           onAdd={onAdd}
+          onDelete={onDelete}
           setActive={setActive}
-          active={active}
+          active={getActive()}
           notes={notes}
         />
       </section>

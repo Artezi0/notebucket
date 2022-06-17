@@ -171,67 +171,103 @@
 
 .spotlight {
     z-index: 10;
-    top: 3em;
-    left: 50%;
-    width: 20em;
-    height: fit-content;
-    transform: translateX(-50%);
-    position: fixed;
-    background: $main_light;
-    border: 1px solid $main_dark;
-    border-radius: 4px;
-    box-shadow: 0 5px 10px 0px rgba(0,0,0,0.05);
-
-    &__input {
-        width: 100%;
-        height: fit-content;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    pointer-events: initial;
+    user-select: none;
+    
+    &__container {
+        top: 5em;
+        left: 50%;
+        transform: translateX(-50%);
         position: relative;
-        padding: .5em;
-        display: flex;
-        gap: .5em;
-        justify-content: space-between;
-        align-items: center;
-        
-        &-icon {
-            height: 100%;
-            width: fit-content;
-            display: flex;
-            color: $text_innactive;
-        }
+        height: 12em;
+        width: 25em;
+        display: block;
+        background: $main_light;
+        border: 1px solid $main_dark;
+        border-radius: 4px;
+        box-shadow: 0 5px 10px 0px rgba(0,0,0,0.05);
+        overflow: hidden;
 
-        input {
-            height: 100%;
-            width: 100%;
-            border: none;
-            font-size: 16px;
-            font-weight: 500;
-            font-family: inherit;
-            
-            &:focus {
-                outline: none;
+        &-input {
+            padding: .5em 1em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .5em;
+            border-bottom: 1px solid $main_dark;
+            color: $text_innactive;
+
+            input {
+                height: 100%;
+                width: 100%;
+                border: none;
+                font-size: 14px;
+                font-family: inherit;
+                font-weight: 500;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            button {
+                height: 100%;
+                display: flex;
+                color: inherit;
             }
         }
-    }
 
-    &__result {
-        width: 100%;
-        height: fit-content;
-        position: relative;
-        padding: .5em;
-        border-top: 1px solid $main_dark;        
-        
-        &-list {
+        &-tips {
+            width: 100%;
+            padding: .5em 1em;
+            display: flex;
+            align-items: center;
+
+            .tip {
+                font-size: 14px;
+                font-weight: 500;
+                color: $text_innactive;
+
+                span {
+                    font-weight: 600;
+                }
+
+                code {
+                    background: $main_mid;
+                    border-radius: 4px;
+                    padding: .1em .4em;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &-result {
+            width: 100%;
+            height: 55%;
+            padding: .5em 1em;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 0;
+            }
+
             .note {
                 width: 100%;
                 height: fit-content;
+                position: relative;
                 display: flex;
                 align-items: center;
+                justify-content: flex-start;
                 gap: .5em;
                 padding: .5em;
+                border-radius: 4px;
                 font-size: 14px;
                 font-weight: 500;
                 cursor: pointer;
-                border-radius: 4px;
+                transition: .3s;
 
                 &__stats {
                     width: 13px;
@@ -240,30 +276,61 @@
                     background: $main_dark;
                 }
 
+                &__action {
+                    right: .5em;
+                    position: absolute;
+                    color: $text_innactive;
+                    font-weight: inherit;  
+                }
+
                 &:hover {
                     background: $main_mid;
                 }
             }
 
-            .result-list-warn {
-                width: 100%;
-                padding: .5em 0;
+            .result__warn {
+                padding-top: 1em;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 text-align: center;
-    
-                h3 {
-                    font-size: 14px;
-                    font-weight: 600;
-                }
-    
+                font-size: 14px;
+                font-weight: 500;
+                
                 p {
-                    margin: 0 2em;
                     color: $text_innactive;
+                    margin: 0 4em;
+                }
+            }
+            
+            .result__commands {
+                .command {
+                    width: 100%;
+                    height: fit-content;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: .5em;
+                    padding: .5em;
                     font-size: 14px;
                     font-weight: 500;
+                    color: $text_innactive;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: .3s;
+
+                    &__action {
+                        position: absolute;
+                        right: .5em;
+                    }
+
+                    &:hover {
+                        background: $main_mid;
+                    }
                 }
             }
         }
-
-       
     }
 }

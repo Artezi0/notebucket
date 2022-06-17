@@ -216,6 +216,7 @@
             .info-name {
                 width: fit-content;
                 height: fit-content;
+                transition: .3s;
                 cursor: pointer;
 
                 input {
@@ -240,7 +241,7 @@
             .info-date {
                 font-size: 14px;
                 font-weight: 500;
-                color: $shade_blue;
+                color: $text_innactive;
             }
         }
 

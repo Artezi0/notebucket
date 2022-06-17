@@ -5,7 +5,7 @@ import View from './View'
 import '../styles/app.scss'
 
 export default function Body({ onAdd, onUpdate, onDelete, active, split, read }) {
-  const [ state, setState ] = useState('')
+  const [ state, setState ] = useState('Status')
   const [ status, isStatus ] = useState(false)
   const [ modal, isModal ] = useState(false)
   const [ input, isInput ] = useState(false)
@@ -26,7 +26,7 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
     })
   }
 
-  const Modal = (e) => {
+  const Modal = () => {
     async function handleImage(e) {
       const file = e.target.files[0]
       const data = new FormData()
@@ -205,24 +205,24 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
           <div className="body__header">
             {active.cover.isCover && <Cover />}
             <div className="body__header-info">
-              <div onDoubleClick={() => isInput(!input)}  className={input ? 'info-name disabled' : 'info-name'}>
-                <input 
-                  onChange={(e) => onEdit('title', e.target.value)} 
-                  value={active.title} 
-                  spellCheck='false'
-                  disabled={input ? false : true}
-                />
+              <div onClick={() => isInput(true)}  className={input ? 'info-name disabled' : 'info-name'}>
+                <form onSubmit={(e) => e.preventDefault() & isInput(false)}>
+                  <input 
+                    onChange={(e) => onEdit('title', e.target.value)} 
+                    value={active.title} 
+                    spellCheck='false'
+                    disabled={input ? false : true}
+                  />
+                </form>
               </div>
               <p className='info-date'>Last modified {handleDateStr()}</p>
             </div>
             <div className="body__header-actions">
               {status && <Status />}
               <div className='status-block' style={{ background: `${active.stats}` }}></div>
-              <button type='button' onClick={() => isStatus(!status)}>
-                {state} <i className={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
-              </button>
-              <button type='button' onClick={() => onUpdate({...active, cover: {isCover: true, value: active.cover.value}, lastModified: Date.now()})}>Add Cover</button>
-              <button type='button' onClick={() => onDelete(active.id)}>Delete note</button>
+              <button type='button' className='actions__stats' onClick={() => isStatus(!status)}>{state} <i className={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i></button>
+              <button type='button' className='actions__cover' onClick={() => onUpdate({...active, cover: {isCover: true, value: active.cover.value}, lastModified: Date.now()})}>Add Cover</button>
+              <button type='button' className='actions__delete' onClick={() => onDelete(active.id)}>Delete note</button>
             </div>
           </div>
           {split ?

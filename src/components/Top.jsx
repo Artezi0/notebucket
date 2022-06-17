@@ -61,12 +61,7 @@ export default function Top({ handleSide, active, isSplit, split, isRead, read, 
           </button>
         </div>
       </nav>
-      {submenu && 
-      <Submenu 
-        active={active}
-        isSubmenu={isSubmenu}
-      />
-      }
+      {submenu && <Submenu active={active} /> }
     </>
    
   )
