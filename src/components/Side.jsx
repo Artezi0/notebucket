@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import data from '../../package.json'
 import Spotlight from './Spotlight'
 import '../styles/app.scss'
@@ -8,8 +8,21 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
   const [ status, isStatus ] = useState(true)
   const [ state, setState ] = useState(true)
   const [ spot, isSpot ] = useState(false)
+  const handleKeyPress = useCallback((e) => {
+    if (e.ctrlKey == true && e.altKey == true && e.keyCode == 70) {
+      isSpot(true)    
+    }
+  }, [])
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [handleKeyPress])
+
   let sorted
-  
   if (state) {
     sorted = notes.sort((a, b) => b.lastModified - a.lastModified)
   }
