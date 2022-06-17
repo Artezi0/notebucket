@@ -3,6 +3,7 @@
 .body {
     height: 90%;
     width: 100%;
+    overflow-x: hidden;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {

@@ -1,12 +1,14 @@
 <div align='center'>
-  <img src='src/assets/logo.svg'>
-  <br>
+<img src='src/assets/logo.svg'>
+
+<br>
   
-# **Notebucket** *v0.1.0*
+# **Notebucket** v0.1.0
+
 [![GitHub license](https://img.shields.io/github/license/Artezi0/note?style=flat-square)](https://github.com/Artezi0/note/blob/new/LICENSE)
 ![GitHub deployments](https://img.shields.io/github/deployments/Artezi0/note/Production?color=lightGreen&label=build&style=flat-square)
 ![App Version](https://img.shields.io/badge/version-v0.1.0-orange?style=flat-square)
-![Website](https://img.shields.io/badge/website-online-blueviolet?style=flat-square&logo=vercel)
+[![Website](https://img.shields.io/badge/website-online-blueviolet?style=flat-square&logo=vercel)](https://notebucket.vercel.app)
 </div>
 
 

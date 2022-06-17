@@ -108,7 +108,7 @@ $gb-lm-light-gray: #7c6f64;
         transition: .3s ease-in-out;
     }
     
-    &__left.active {
+    &__left.disabled {
         width: 0;
     }
     

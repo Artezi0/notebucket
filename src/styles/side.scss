@@ -68,6 +68,11 @@
             display: flex;
             align-items: center;
             gap: .5em;
+            transition: .3s;
+
+            &:hover {
+                color: $text_active;
+            }
         }
     }
 

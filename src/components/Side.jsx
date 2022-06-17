@@ -3,29 +3,14 @@ import data from '../../package.json'
 import Spotlight from './Spotlight'
 import '../styles/app.scss'
 
-export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide }) {
+export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide, sidebar }) {
   const [ note, isNote ] = useState(true)
   const [ status, isStatus ] = useState(true)
   const [ state, setState ] = useState(true)
   const [ spot, isSpot ] = useState(false)
-  const handleKeyPress = useCallback((e) => {
-    if (e.ctrlKey == true && e.altKey == true && e.keyCode == 70) {
-      isSpot(true)    
-    }
-  }, [])
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [handleKeyPress])
-
+  
   let sorted
-  if (state) {
-    sorted = notes.sort((a, b) => b.lastModified - a.lastModified)
-  }
+  if (state) { sorted = notes.sort((a, b) => b.lastModified - a.lastModified)}
   if (!state) {
     sorted = notes.sort((a, b) => {
       if(a.title.toLowerCase() < b.title.toLowerCase()) return -1
@@ -42,6 +27,19 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
     }
   }
 
+  /* Keyboard shortcuts handler */
+  function handleShortcut(e) {
+    if (e.ctrlKey === true && e.altKey === true && e.keyCode === 70) { isSpot(!spot) }
+  }
+
+  useEffect(() => {
+    document.addEventListener('keyup', handleShortcut)
+    
+    return () => {
+      document.removeEventListener('keyup', handleShortcut)
+    }
+  }, [handleShortcut])
+
   return (
     <>
       {spot && 
@@ -54,7 +52,6 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
         isSpot={isSpot} 
         spot={spot} />
       }
-
       <div className='side'>
         <div className='side__header'>
           <div className='side__header-logo'>

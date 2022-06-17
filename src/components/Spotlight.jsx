@@ -86,6 +86,7 @@ export default function Spotlight({ onAdd, onDelete, notes, setActive, active, i
             id="search"
             type="text" 
             placeholder="Search or jump to"
+            autoFocus="true"
             spellCheck="false"
             autoComplete="off"
             onChange={(e) => setSearch(e.target.value)}
