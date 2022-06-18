@@ -10,7 +10,15 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
   const [ spot, isSpot ] = useState(false)
   
   let sorted
-  if (state) { sorted = notes.sort((a, b) => b.lastModified - a.lastModified)}
+
+  let sortedActive = notes.filter((note) => note.stats.includes('#E8E7E3'))
+  let sortedDelayed = notes.filter((note) => note.stats.includes('#FFBD44'))
+  let sortedCompleted = notes.filter((note) => note.stats.includes('#89CA00'))
+  let sortedDropped = notes.filter((note) => note.stats.includes('#FF605C'))
+
+  if (state) { 
+    sorted = notes.sort((a, b) => b.lastModified - a.lastModified)
+  }
   if (!state) {
     sorted = notes.sort((a, b) => {
       if(a.title.toLowerCase() < b.title.toLowerCase()) return -1
@@ -97,12 +105,76 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
             </button>
           </div>
           {status &&
-          <div className='side__status-list'>
-            <ul className='status__list'>Active</ul>
-            <ul className='status__list'>Delayed</ul>
-            <ul className='status__list'>Completed</ul>
-            <ul className='status__list'>Dropped</ul>
-          </div>
+          <>
+            <div className='side__status-list'>
+              <button type='button' className='list__btn'>
+                <div className='list__btn-stats active'></div>
+                Active
+              </button>
+              <ul className="list__notes">
+              {sortedActive.map(({ id, title }) => {
+              return (
+              <div className={`note ${id === active && "active"}`}
+                  onClick={() => setActive(id)} 
+                  key={id}>
+                <p className='note__title'>{title}</p>
+              </div>       
+              )})
+              }
+              </ul>
+            </div>
+            <div className='side__status-list'>
+              <button type='button' className='list__btn'>
+                <div className='list__btn-stats delayed'></div>
+                Delayed
+              </button>
+              <ul className="list__notes">
+              {sortedDelayed.map(({ id, title }) => {
+              return (
+              <div className={`note ${id === active && "active"}`}
+                  onClick={() => setActive(id)} 
+                  key={id}>
+                <p className='note__title'>{title}</p>
+              </div>       
+              )})
+              }
+              </ul>
+            </div>
+            <div className='side__status-list'>
+              <button type='button' className='list__btn'>
+                <div className='list__btn-stats completed'></div>
+                Completed
+              </button>
+              <ul className="list__notes">
+              {sortedCompleted.map(({ id, title }) => {
+              return (
+              <div className={`note ${id === active && "active"}`}
+                  onClick={() => setActive(id)} 
+                  key={id}>
+                <p className='note__title'>{title}</p>
+              </div>       
+              )})
+              }
+              </ul>
+            </div>
+            <div className='side__status-list'>
+              <button type='button' className='list__btn'>
+                <div className='list__btn-stats dropped'></div>
+                Dropped
+              </button>
+              <ul className="list__notes">
+              {sortedDropped.map(({ id, title }) => {
+              return (
+              <div className={`note ${id === active && "active"}`}
+                  onClick={() => setActive(id)} 
+                  key={id}>
+                <p className='note__title'>{title}</p>
+              </div>       
+              )})
+              }
+              </ul>
+            </div>
+          </>
           }
         </div>
         <div className='side__notes'>
