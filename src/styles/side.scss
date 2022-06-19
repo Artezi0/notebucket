@@ -107,7 +107,7 @@
                 font-size: 14px;
                 font-weight: 600;
                 color: $text_innactive;
-
+                
                 &-stats {
                     width: 13px;
                     height: 13px;
@@ -120,8 +120,9 @@
                 &-stats.completed { background: $shade_green; }
                 &-stats.dropped { background: $shade_red; }
             }
-
+            
             .list__notes {
+                padding: .5em 0 0 0;
                 overflow-y: scroll;
                 width: 100%;
                 position: relative;
@@ -197,10 +198,14 @@
                     font-size: 14px;
                     font-weight: 500;
                 }
+
+                &:hover {
+                    background: $main_dark;
+                }
             }
 
             .note.active {
-                background: $main_dark;
+                background: red;
             }
         }
     }

@@ -1,10 +1,14 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import data from '../../package.json'
 import Spotlight from './Spotlight'
 import '../styles/app.scss'
 
 export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide, sidebar }) {
   const [ note, isNote ] = useState(true)
+  const [ ongoing, isOngoing ] = useState(false) 
+  const [ delayed, isDelayed ] = useState(false) 
+  const [ completed, isCompleted ] = useState(false) 
+  const [ dropped, isDropped ] = useState(false) 
   const [ status, isStatus ] = useState(true)
   const [ state, setState ] = useState(true)
   const [ spot, isSpot ] = useState(false)
@@ -107,10 +111,10 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
           {status &&
           <>
             <div className='side__status-list'>
-              <button type='button' className='list__btn'>
-                <div className='list__btn-stats active'></div>
-                Active
+              <button type='button' className='list__btn' onClick={() => isOngoing(!ongoing)}>
+                <div className='list__btn-stats active'></div>Active
               </button>
+              {ongoing && 
               <ul className="list__notes">
               {sortedActive.map(({ id, title }) => {
               return (
@@ -119,15 +123,15 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
                   key={id}>
                 <p className='note__title'>{title}</p>
               </div>       
-              )})
-              }
+              )})}
               </ul>
+              }
             </div>
-            <div className='side__status-list'>
+            <div className='side__status-list' onClick={() => isDelayed(!delayed)}>
               <button type='button' className='list__btn'>
-                <div className='list__btn-stats delayed'></div>
-                Delayed
+                <div className='list__btn-stats delayed'></div>Delayed
               </button>
+              {delayed && 
               <ul className="list__notes">
               {sortedDelayed.map(({ id, title }) => {
               return (
@@ -136,15 +140,15 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
                   key={id}>
                 <p className='note__title'>{title}</p>
               </div>       
-              )})
-              }
+              )})}
               </ul>
+              }
             </div>
             <div className='side__status-list'>
-              <button type='button' className='list__btn'>
-                <div className='list__btn-stats completed'></div>
-                Completed
+              <button type='button' className='list__btn' onClick={() => isCompleted(!completed)}>
+                <div className='list__btn-stats completed'></div>Completed
               </button>
+              {completed && 
               <ul className="list__notes">
               {sortedCompleted.map(({ id, title }) => {
               return (
@@ -153,15 +157,15 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
                   key={id}>
                 <p className='note__title'>{title}</p>
               </div>       
-              )})
-              }
+              )})}
               </ul>
+              }
             </div>
             <div className='side__status-list'>
-              <button type='button' className='list__btn'>
-                <div className='list__btn-stats dropped'></div>
-                Dropped
+              <button type='button' className='list__btn' onClick={() => isDropped(!dropped)}>
+                <div className='list__btn-stats dropped'></div>Dropped
               </button>
+              {dropped && 
               <ul className="list__notes">
               {sortedDropped.map(({ id, title }) => {
               return (
@@ -170,9 +174,9 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
                   key={id}>
                 <p className='note__title'>{title}</p>
               </div>       
-              )})
+              )})}
+              </ul>              
               }
-              </ul>
             </div>
           </>
           }
@@ -193,12 +197,11 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
           </div>
           {note &&
           <ul className='side__notes-list'>
-          {sorted.map(({ id, title, stats }) => {
+          {sorted.map(({ id, title }) => {
             return (
               <div className={`note ${id === active && "active"}`}
                   onClick={() => setActive(id)} 
                   key={id}>
-                <div className='note__stats' style={{ background: stats }}></div>
                 <p className='note__title'>{title}</p>
               </div>       
             )})
