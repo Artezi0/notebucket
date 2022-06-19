@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react"
 import FileSaver from 'file-saver'
 import '../styles/app.scss'
 
-export default function Spotlight({ onAdd, onDelete, notes, setActive, active, isSpot, spot }) {
+export default function Spotlight({ onAdd, onDelete, notes, setActive, active, isSpot }) {
   const [ search, setSearch ] = useState('')
   const [ command, isCommand ] = useState(false)
   const ref = useRef(null)

@@ -11,8 +11,8 @@
 [![Website](https://img.shields.io/badge/website-online-blueviolet?style=flat-square&logo=vercel)](https://notebucket.vercel.app)
 </div>
 
+<br>
 
+## **About**
 
-<p align='center'>
 Tired of seeing your notes scattered around and untidy?  Organize your notes with Notebucket. With powerfull markdown editor build on it, you can customize your note whatever you want. 
-</p>

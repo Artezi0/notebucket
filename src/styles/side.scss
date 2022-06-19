@@ -132,12 +132,19 @@
                 }
 
                 .note {
+                    height: fit-content;
+                    width: 100%;
                     padding: .3em .3em .3em 1.3em;
+                    border-radius: 4px;
                     cursor: pointer;
 
                     &__title {
                         font-size: 14px;
                         font-weight: 500;
+                    }
+
+                    &:hover {
+                        background: $main_dark;
                     }
                 }
             }
@@ -180,9 +187,6 @@
             .note {
                 height: fit-content;
                 width: 100%;
-                display: flex;
-                align-items: center;
-                gap: .5em;
                 padding: .3em .3em .3em 1.3em;
                 border-radius: 4px;
                 cursor: pointer;
