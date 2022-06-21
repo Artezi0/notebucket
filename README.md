@@ -30,3 +30,5 @@ Tired of seeing your notes scattered around and untidy?  Organize your notes wit
     - `Ctrl + Alt + S` &nbsp; Toggle sidebar 
     - `Ctrl + Alt + W` &nbsp; Split edit window
     - `Ctrl + Alt + R` &nbsp; Read-only
+
+

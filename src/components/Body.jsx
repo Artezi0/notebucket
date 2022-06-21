@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { HexColorPicker } from 'react-colorful'
 import Edit from './Edit'
 import View from './View'
 import '../styles/app.scss'
@@ -103,11 +104,24 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
         </TabList>
         <TabPanel className='cover__modal-color'>
           <button onClick={handleColor}>Randomize</button>
+          <HexColorPicker 
+            color={active.cover.value}
+            onChange={
+              (e) => onUpdate({
+                ...active, 
+                cover: {
+                  isCover: true,
+                  value: e
+                },
+                lastModified: Date.now()
+              })
+            }
+          />
         </TabPanel>
         <TabPanel className='cover__modal-link'>
           <form onSubmit={handleLinks} autoComplete='off'>
             <input type='hidden' autoComplete='false'/>
-            <input type='text' placeholder='Image link' id='inputLink' spellCheck='false'/>
+            <input type='text' placeholder='Paste image link' id='inputLink' spellCheck='false'/>
           </form>
         </TabPanel>
         <TabPanel className='cover__modal-upload'>
@@ -119,7 +133,7 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
             accept='.png, .jpeg, .jpg, .webp'
             style={{ display: 'none' }}
           />
-          <p>Image can't be larger than 5mb</p>
+          <p>The maximum size per file is 5 MB.</p>
         </TabPanel>
       </Tabs>
     )

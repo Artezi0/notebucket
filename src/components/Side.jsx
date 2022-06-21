@@ -5,10 +5,10 @@ import '../styles/app.scss'
 
 export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide, sidebar }) {
   const [ note, isNote ] = useState(true)
-  const [ ongoing, isOngoing ] = useState(false) 
-  const [ delayed, isDelayed ] = useState(false) 
-  const [ completed, isCompleted ] = useState(false) 
-  const [ dropped, isDropped ] = useState(false) 
+  const [ ongoing, isOngoing ] = useState(true) 
+  const [ delayed, isDelayed ] = useState(true) 
+  const [ completed, isCompleted ] = useState(true) 
+  const [ dropped, isDropped ] = useState(true) 
   const [ status, isStatus ] = useState(true)
   const [ state, setState ] = useState(true)
   const [ spot, isSpot ] = useState(false)

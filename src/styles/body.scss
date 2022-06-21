@@ -58,7 +58,6 @@
             width: 100%;
             height: 12em;
             position: relative;
-            user-select: none;
             overflow: hidden;
 
             .cover__modal {
@@ -81,8 +80,8 @@
                     justify-content: center;
                     color: $text_innactive;
                     border-bottom: 1px solid $main_dark;
-                    font-size: 13px;
-                    font-weight: 500;
+                    font-size: 14px;
+                    font-weight: 600;
 
                     li {
                         list-style: none;
@@ -102,15 +101,37 @@
                 &-color {
                     width: 100%;
                     height: 100%;
+                    text-align: center;
                     display: flex;
+                    flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    text-align: center;
 
                     button {
                         color: $shade_blue;
                         font-size: 13px;
                         font-weight: 500;
+                        transition: .3s;
+                    }
+
+                    .react-colorful {
+                        height: 5em;
+                        width: 15em;
+                        margin-top: .5em;
+
+                        .react-colorful__saturation {
+                            border-radius: 4px 4px 0 0;
+                        }
+
+                        .react-colorful__hue {
+                            border-radius: 0 0 4px 4px;
+                        }
+
+                        .react-colorful__hue-pointer,
+                        .react-colorful__saturation-pointer {
+                            width: 13px;
+                            height: 13px;
+                        }
                     }
                 }
 
@@ -123,6 +144,7 @@
                     text-align: center;
 
                     input {
+                        width: 20em;
                         outline: none;
                         border: 1px solid $main_dark;
                         font-size: 13px;
@@ -149,12 +171,22 @@
                     text-align: center;
                     
                     label {
+                        background: $shade_lightBlue;
                         color: $shade_blue;
+                        padding: .3em 5em;
+                        border-radius: 4px;
                         font-size: 13px;
                         font-weight: 500;
+                        transition: .3s;
+
+                        &:hover {
+                            background: $shade_blue;
+                            color: $main_light;
+                        }
                     }
 
                     p {
+                        margin-top: .5em;
                         font-size: 13px;
                         font-weight: 500;
                         color: $text_innactive;
@@ -168,7 +200,7 @@
             }
             
             .cover__actions {
-                z-index: 3;
+                z-index: 2;
                 width: fit-content;
                 height: fit-content;
                 display: none;
@@ -383,13 +415,19 @@
             
                 .contains-task-list {
                     padding: 0;
-                
-                    li {
-                        list-style: none;
-                    
+                    list-style: none;
+
+                    .task-list-item {
                         input {
+                            accent-color: $shade_blue;
                             position: relative;
                             top: 1px;
+                        }
+
+                        ul {
+                            li {
+                                margin-left: 1.2em;   
+                            }
                         }
                     }
                 }
@@ -523,13 +561,19 @@
 
                 .contains-task-list {
                     padding: 0;
+                    list-style: none;
 
-                    li {
-                        list-style: none;
-
+                    .task-list-item {
                         input {
+                            accent-color: $shade_blue;
                             position: relative;
                             top: 1px;
+                        }
+
+                        ul {
+                            li {
+                                margin-left: 1.2em;   
+                            }
                         }
                     }
                 }
