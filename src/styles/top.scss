@@ -42,21 +42,21 @@
 }
 
 .submenu {
-    z-index: 4;
-    background: $main_light;
-    border: 1px solid $main_dark;
-    width: 12em;
-    height: fit-content;
-    position: absolute;
+    z-index: 10;
     right: .8em;
     top: 4em;
+    width: 12em;
+    position: fixed;
+    height: fit-content;
+    border: 1px solid $main_dark;
     border-radius: 4px;
+    background: $main_light;
     color: $text_innactive;
-    font-size: 13px;
     user-select: none;
     box-shadow: 0 5px 10px 0px rgba(0,0,0,0.05);
     
     &__title {
+        font-size: 14px;
         font-weight: 600;
         padding: .5em;
     }
@@ -65,23 +65,33 @@
         width: 100%;
         border-top: 1px solid $main_dark;
         
-        button {
+        &-import {
             width: 100%;
-            height: 100%;
-            padding: .5em;
-            font-weight: 400;
-            color: $text_innactive;
-            text-align: left;
-            transition: .3s;
-
-            span:nth-child(1) {
+            
+            label {
+                padding: .5em;
                 font-weight: 600;
-            }
-
-            &:hover {
-                color: $text_active;
+                font-size: 14px;
             }
         }
+
+        &-export {
+            width: 100%;
+            
+            button {
+                padding: .5em;
+                color: $text_innactive;
+                font-weight: 600;
+                font-size: 14px !important;
+                text-align: left;
+
+                pre {
+                    font-family: inherit;
+                    font-size: inherit;
+                    font-weight: 500;
+                }
+            }
+        }        
     }
 
     &__info {
@@ -91,7 +101,8 @@
 
         li {
             list-style: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 14px;
             width: 100%;
             padding: .3em 0;
             transition: .3s;

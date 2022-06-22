@@ -24,7 +24,7 @@ export default function App() {
         value: '#E8E7E3',
       },
       stats: '',
-      title: "Untitled",
+      title: 'Untitled',
       body: `# Hello world`,
       lastModified: Date.now()
     }
@@ -78,31 +78,34 @@ export default function App() {
     <main className='App'>
       <section className='App__left' id='left'>
         <Side
-          handleSide={handleSide}
+          notes={notes}
           onAdd={onAdd}
           onDelete={onDelete}
           setActive={setActive}
           active={getActive()}
-          notes={notes}
+          handleSide={handleSide}
           sidebar={sidebar}
         />
       </section>
       <section className='App__right' id='right'>
         <Top 
-          handleSide={handleSide}
+          notes={notes}
+          setNotes={setNotes}
+          setActive={setActive}
           active={getActive()}
+          handleSide={handleSide}
+          sidebar={sidebar}
           isSplit={isSplit}
           split={split}
           isRead={isRead}
           read={read}
-          sidebar={sidebar}
         />
         <Body
           onAdd={onAdd}
           onUpdate={onUpdate}
           onDelete={onDelete}
-          active={getActive()}
           setActive={setActive}
+          active={getActive()}
           split={split}
           read={read}
         />
