@@ -10,6 +10,8 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
   const [ status, isStatus ] = useState(false)
   const [ modal, isModal ] = useState(false)
   const [ input, isInput ] = useState(false)
+  const [ info, setInfo ] = useState('')
+  const [ notif, isNotif ] = useState(false)
 
   function onEdit(field, value) {
     onUpdate({
@@ -27,6 +29,14 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
     })
   }
 
+  const Notification = () => {
+    return (
+      <div className="body__notif">
+        <div className="body__notif-text">{info}</div>
+      </div>
+    )
+  }
+
   const Modal = () => {
     async function handleImage(e) {
       const file = e.target.files[0]
@@ -37,14 +47,18 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
       data.append('cloud_name', 'artezi0')
       
       if(file.size > 5000000) {
-        alert('File too big')
+        alert('File is too big')
       }
       if(file.size < 5000000) {
+        isNotif(true)
+        setInfo('Uploading...')        
         let resp = await fetch('https://api.cloudinary.com/v1_1/artezi0/image/upload', {
           method: 'POST',
           body: data
         })
 
+        setInfo('Image uploaded')  
+        setTimeout(function() { isNotif(false) }, 3000)
         let res = await resp.json() 
         let img = res.url
         onUpdate({
@@ -225,6 +239,7 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
       {!active && <Warn />}
       {active &&
         <>
+          {notif && <Notification />}
           <div className="body__header">
             {active.cover.isCover && <Cover />}
             <div className="body__header-info">
