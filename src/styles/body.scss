@@ -92,6 +92,16 @@
                             color: $text_active
                         }
                     }
+
+                    button {
+                        font-weight: inherit;
+                        color: inherit;
+                        transition: .3s;
+
+                        &:hover {
+                            color: $text_active
+                        }
+                    }
                 }
 
                 .react-tabs__tab-panel--selected {
@@ -224,10 +234,6 @@
                         color: $text_active;
                     }
                 }
-
-                button:nth-child(2) {
-                    border-left: 1px solid $main_dark;
-                }
             }
             
             .cover-image {
@@ -259,6 +265,7 @@
                     border: none;
                     padding-bottom: .2em;
 
+
                     &:focus {
                         outline: none;
                     }
@@ -283,7 +290,7 @@
             padding: 0 15% 1em 15%;
             display: flex;
             align-items: center;
-            gap: .8em;
+            gap: .5em;
             color: $text_innactive;
             font-size: 13px;
             position: relative;
@@ -300,13 +307,14 @@
                 display: flex;
                 align-items: center;
                 gap: .5em;
+                padding: .1em .4em;
                 height: fit-content;
                 color: inherit;
                 font-weight: 600;
-                transition: .3s;
-
+                border-radius: 4px;
+                
                 &:hover {
-                    color: $text_active;
+                    background: $main_mid;
                 }
             }
 
@@ -334,7 +342,6 @@
                     font-weight: 600;
                     text-align: left;
                     color: $text_innactive;
-                    transition: .3s;
                     
                     &-stats {
                         width: 13px;
@@ -344,6 +351,7 @@
 
                     &:hover {
                         color: $text_active;
+                        background: none;
                     }
                 }
 
@@ -437,7 +445,7 @@
                     background: $main_mid;
                     border-radius: 2px;
                     padding: .2em;
-                    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+                    font-family: 'JetBrains Mono', Courier, monospace !important;
                 }
             
                 pre {
@@ -583,7 +591,8 @@
                     background: $main_mid;
                     border-radius: 2px;
                     padding: .2em;
-                    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+                    font-size: 14px !important;
+                    font-family: 'JetBrains Mono', Courier, monospace !important;
                 }
 
                 pre {

@@ -101,6 +101,16 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
           <Tab>Color</Tab>
           <Tab>Link</Tab>
           <Tab>Upload</Tab>
+          <button onClick={
+            () => onUpdate({
+              ...active, 
+              cover: {
+                isCover: false,
+                value: active.cover.value
+              },
+              lastModified: Date.now()
+            })
+          }>Remove</button>
         </TabList>
         <TabPanel className='cover__modal-color'>
           <button onClick={handleColor}>Randomize</button>
@@ -144,8 +154,7 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
       <div className='body__header-cover' style={{ background: active.cover.value}}>
         {modal && <Modal />}
         <div className='cover__actions'>
-          <button type='button' onClick={() => isModal(!modal)}>Set cover</button>
-          <button type='button' onClick={() => onUpdate({...active, cover: {isCover: false, value: active.cover.value}, lastModified: Date.now()})}>Remove</button>
+          <button type='button' onClick={() => isModal(!modal)}>Customize</button>
         </div>
         <img src={active.cover.value} className='cover-image' alt=''/>
       </div>

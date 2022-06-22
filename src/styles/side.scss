@@ -41,7 +41,6 @@
             color: $text_innactive;
             padding: .1em .2em;
             border-radius: 4px;
-            transition: .3s;
             display: flex;
             align-items: center;
 
@@ -68,7 +67,6 @@
             display: flex;
             align-items: center;
             gap: .5em;
-            transition: .3s;
 
             &:hover {
                 color: $text_active;
@@ -77,7 +75,7 @@
     }
 
     &__status {
-        padding-top: .5em;
+        padding: .5em 0;
 
         &-btn {
             width: 100%;
@@ -92,6 +90,7 @@
                 font-size: 14px !important;
                 font-weight: 600;
                 color: $text_innactive;
+                cursor: default !important;
             }
         }
 
@@ -112,13 +111,16 @@
                     width: 13px;
                     height: 13px;
                     border-radius: 2px;
-                    background: red;
                 }
                 
                 &-stats.active { background: $main_dark; }
                 &-stats.delayed { background: $shade_yellow; }
                 &-stats.completed { background: $shade_green; }
                 &-stats.dropped { background: $shade_red; }
+                
+                &:hover {
+                    color: $text_active;
+                }
             }
             
             .list__notes {
@@ -165,6 +167,13 @@
                display: flex;
                align-items: center;
                gap: .5em;
+               cursor: default;
+            }
+
+            button:nth-child(2) {
+                &:hover {
+                    color: $text_active;
+                }
             }
 
             button {

@@ -4,12 +4,10 @@ import Spotlight from './Spotlight'
 import '../styles/app.scss'
 
 export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide, sidebar }) {
-  const [ note, isNote ] = useState(true)
-  const [ ongoing, isOngoing ] = useState(true) 
-  const [ delayed, isDelayed ] = useState(true) 
-  const [ completed, isCompleted ] = useState(true) 
-  const [ dropped, isDropped ] = useState(true) 
-  const [ status, isStatus ] = useState(true)
+  const [ ongoing, isOngoing ] = useState(false) 
+  const [ delayed, isDelayed ] = useState(false) 
+  const [ completed, isCompleted ] = useState(false) 
+  const [ dropped, isDropped ] = useState(false) 
   const [ state, setState ] = useState(true)
   const [ spot, isSpot ] = useState(false)
   
@@ -101,89 +99,85 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
         </ul>
         <div className='side__status'>
           <div className="side__status-btn">
-            <button onClick={() => isStatus(!status)}>
+            <button type='button'>
               <svg width="12" height="16" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.31543 19.1816H12.6846C14.5654 19.1816 15.5498 18.1885 15.5498 16.29V3.02734C15.5498 1.12012 14.5742 0.135742 12.6846 0.135742H10.0566C9.73145 0.135742 9.5293 0.337891 9.5293 0.663086C9.5293 1.52441 8.93164 2.18359 8 2.18359C7.07715 2.18359 6.4707 1.52441 6.4707 0.663086C6.4707 0.337891 6.26855 0.135742 5.94336 0.135742H3.31543C1.43457 0.135742 0.450195 1.12012 0.450195 3.02734V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.47363 17.4238C2.62109 17.4238 2.19922 16.9756 2.19922 16.1758V3.1416C2.19922 2.33301 2.62109 1.88477 3.47363 1.88477H5.15234C5.53027 3.09766 6.59375 3.84473 8 3.84473C9.40625 3.84473 10.4697 3.09766 10.8477 1.88477H12.5264C13.3789 1.88477 13.8008 2.33301 13.8008 3.1416V16.1758C13.8008 16.9756 13.3789 17.4238 12.5264 17.4238H3.47363ZM4.80078 6.89453H11.208C11.5244 6.89453 11.7705 6.64844 11.7705 6.32324C11.7705 6.01562 11.5244 5.77832 11.208 5.77832H4.80078C4.4668 5.77832 4.22949 6.01562 4.22949 6.32324C4.22949 6.64844 4.4668 6.89453 4.80078 6.89453ZM4.80078 9.93555H7.90332C8.22852 9.93555 8.46582 9.68945 8.46582 9.38184C8.46582 9.06543 8.22852 8.81934 7.90332 8.81934H4.80078C4.4668 8.81934 4.22949 9.06543 4.22949 9.38184C4.22949 9.68945 4.4668 9.93555 4.80078 9.93555Z" fill="currentColor"/>
               </svg>
               Status
             </button>
           </div>
-          {status &&
-          <>
-            <div className='side__status-list'>
-              <button type='button' className='list__btn' onClick={() => isOngoing(!ongoing)}>
-                <div className='list__btn-stats active'></div>Active
-              </button>
-              {ongoing && 
-              <ul className="list__notes">
-              {sortedActive.map(({ id, title }) => {
-              return (
-              <div className={`note ${id === active && "active"}`}
-                  onClick={() => setActive(id)} 
-                  key={id}>
-                <p className='note__title'>{title}</p>
-              </div>       
-              )})}
-              </ul>
-              }
-            </div>
-            <div className='side__status-list' onClick={() => isDelayed(!delayed)}>
-              <button type='button' className='list__btn'>
-                <div className='list__btn-stats delayed'></div>Delayed
-              </button>
-              {delayed && 
-              <ul className="list__notes">
-              {sortedDelayed.map(({ id, title }) => {
-              return (
-              <div className={`note ${id === active && "active"}`}
-                  onClick={() => setActive(id)} 
-                  key={id}>
-                <p className='note__title'>{title}</p>
-              </div>       
-              )})}
-              </ul>
-              }
-            </div>
-            <div className='side__status-list'>
-              <button type='button' className='list__btn' onClick={() => isCompleted(!completed)}>
-                <div className='list__btn-stats completed'></div>Completed
-              </button>
-              {completed && 
-              <ul className="list__notes">
-              {sortedCompleted.map(({ id, title }) => {
-              return (
-              <div className={`note ${id === active && "active"}`}
-                  onClick={() => setActive(id)} 
-                  key={id}>
-                <p className='note__title'>{title}</p>
-              </div>       
-              )})}
-              </ul>
-              }
-            </div>
-            <div className='side__status-list'>
-              <button type='button' className='list__btn' onClick={() => isDropped(!dropped)}>
-                <div className='list__btn-stats dropped'></div>Dropped
-              </button>
-              {dropped && 
-              <ul className="list__notes">
-              {sortedDropped.map(({ id, title }) => {
-              return (
-              <div className={`note ${id === active && "active"}`}
-                  onClick={() => setActive(id)} 
-                  key={id}>
-                <p className='note__title'>{title}</p>
-              </div>       
-              )})}
-              </ul>              
-              }
-            </div>
-          </>
-          }
+          <div className='side__status-list'>
+            <button type='button' className='list__btn' onClick={() => isOngoing(!ongoing)}>
+              <div className='list__btn-stats active'></div>Active
+            </button>
+            {ongoing && 
+            <ul className="list__notes">
+            {sortedActive.map(({ id, title }) => {
+            return (
+            <div className={`note ${id === active && "active"}`}
+                onClick={() => setActive(id)} 
+                key={id}>
+              <p className='note__title'>{title}</p>
+            </div>       
+            )})}
+            </ul>
+            }
+          </div>
+          <div className='side__status-list' onClick={() => isDelayed(!delayed)}>
+            <button type='button' className='list__btn'>
+              <div className='list__btn-stats delayed'></div>Delayed
+            </button>
+            {delayed && 
+            <ul className="list__notes">
+            {sortedDelayed.map(({ id, title }) => {
+            return (
+            <div className={`note ${id === active && "active"}`}
+                onClick={() => setActive(id)} 
+                key={id}>
+              <p className='note__title'>{title}</p>
+            </div>       
+            )})}
+            </ul>
+            }
+          </div>
+          <div className='side__status-list'>
+            <button type='button' className='list__btn' onClick={() => isCompleted(!completed)}>
+              <div className='list__btn-stats completed'></div>Completed
+            </button>
+            {completed && 
+            <ul className="list__notes">
+            {sortedCompleted.map(({ id, title }) => {
+            return (
+            <div className={`note ${id === active && "active"}`}
+                onClick={() => setActive(id)} 
+                key={id}>
+              <p className='note__title'>{title}</p>
+            </div>       
+            )})}
+            </ul>
+            }
+          </div>
+          <div className='side__status-list'>
+            <button type='button' className='list__btn' onClick={() => isDropped(!dropped)}>
+              <div className='list__btn-stats dropped'></div>Dropped
+            </button>
+            {dropped && 
+            <ul className="list__notes">
+            {sortedDropped.map(({ id, title }) => {
+            return (
+            <div className={`note ${id === active && "active"}`}
+                onClick={() => setActive(id)} 
+                key={id}>
+              <p className='note__title'>{title}</p>
+            </div>       
+            )})}
+            </ul>              
+            }
+          </div>
         </div>
         <div className='side__notes'>
           <div className="side__notes-btn">
-            <button onClick={() => isNote(!note)}>
+            <button type='button'>
               <svg width="12" height="16" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z" fill="currentColor"/>
               </svg>
@@ -195,7 +189,6 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
               </svg>
             </button>
           </div>
-          {note &&
           <ul className='side__notes-list'>
           {sorted.map(({ id, title }) => {
             return (
@@ -207,7 +200,6 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
             )})
           }
           </ul> 
-          }
         </div>
       </div>
     </>

@@ -35,6 +35,7 @@ export default function App() {
 
   function onDelete(noteId) {
     setNotes(notes.filter(({ id }) => id !== noteId))
+    
   }
 
   function onUpdate(updated) {
