@@ -107,6 +107,10 @@
                 font-weight: 600;
                 color: $text_innactive;
                 
+                .fa-solid {
+                    margin-right: .4em;
+                }
+
                 &-stats {
                     width: 13px;
                     height: 13px;

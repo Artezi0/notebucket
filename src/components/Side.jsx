@@ -108,7 +108,9 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
           </div>
           <div className='side__status-list'>
             <button type='button' className='list__btn' onClick={() => isOngoing(!ongoing)}>
-              <div className='list__btn-stats active'></div>Active
+              <i className={ongoing ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+              <div className='list__btn-stats active'></div>
+              Active
             </button>
             {ongoing && 
             <ul className="list__notes">
@@ -125,7 +127,9 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
           </div>
           <div className='side__status-list' onClick={() => isDelayed(!delayed)}>
             <button type='button' className='list__btn'>
-              <div className='list__btn-stats delayed'></div>Delayed
+              <i className={delayed ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+              <div className='list__btn-stats delayed'></div>
+              Delayed
             </button>
             {delayed && 
             <ul className="list__notes">
@@ -142,7 +146,9 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
           </div>
           <div className='side__status-list'>
             <button type='button' className='list__btn' onClick={() => isCompleted(!completed)}>
-              <div className='list__btn-stats completed'></div>Completed
+              <i className={completed ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+              <div className='list__btn-stats completed'></div>
+              Completed
             </button>
             {completed && 
             <ul className="list__notes">
@@ -159,7 +165,9 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
           </div>
           <div className='side__status-list'>
             <button type='button' className='list__btn' onClick={() => isDropped(!dropped)}>
-              <div className='list__btn-stats dropped'></div>Dropped
+              <i className={dropped ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+              <div className='list__btn-stats dropped'></div>
+              Dropped
             </button>
             {dropped && 
             <ul className="list__notes">
