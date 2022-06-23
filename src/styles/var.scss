@@ -124,4 +124,12 @@ $gb-lm-light-gray: #7c6f64;
             width: 18rem;
         }
     }
+
+    .tooltip {    
+        padding: .5em !important;
+        color: $main_light !important;
+        font-size: 12px !important;
+        font-family: inherit !important;
+        font-weight: 500 !important;
+    }
 }

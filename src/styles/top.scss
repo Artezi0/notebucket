@@ -44,7 +44,7 @@
 .submenu {
     z-index: 10;
     right: .8em;
-    top: 4em;
+    top: 3em;
     width: 12em;
     position: fixed;
     height: fit-content;
@@ -63,35 +63,35 @@
     
     &__actions {
         width: 100%;
-        border-top: 1px solid $main_dark;
+        font-weight: 600;
+        font-size: 14px;
         
-        &-import {
-            width: 100%;
-            
-            label {
-                padding: .5em;
-                font-weight: 600;
-                font-size: 14px;
-            }
-        }
-
+        &-import,
         &-export {
             width: 100%;
+            display: flex;
+            align-items: center;
             
-            button {
+            label {
+                width: 100%;
                 padding: .5em;
-                color: $text_innactive;
-                font-weight: 600;
-                font-size: 14px !important;
-                text-align: left;
+
+                svg {
+                    margin-right: .5em;
+                }
 
                 pre {
+                    margin-left: 1.6em;
                     font-family: inherit;
                     font-size: inherit;
                     font-weight: 500;
                 }
             }
-        }        
+
+            &:hover {
+                background: $main_mid;
+            }
+        }  
     }
 
     &__info {
