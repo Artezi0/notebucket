@@ -1,8 +1,14 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import uuid from 'react-uuid'
+import { Route, Routes } from 'react-router-dom'
+import { AuthContextProvider } from './components/context/AuthContext'
+import { UserRoutes, NoUserRoutes } from './components/context/ProtectedRoutes'
+
 import Body from './components/Body'
 import Side from './components/Side'
 import Top from './components/Top'
+import Login from './components/web/Login'
+import Signup from './components/web/Signup'
 import './styles/app.scss'
 
 export default function App() {
@@ -13,7 +19,7 @@ export default function App() {
   const [ active, setActive ] = useState(false)
 
   useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes))
+    localStorage.setItem('notes', JSON.stringify(notes))
   }, [notes])
 
   function onAdd() {
@@ -76,40 +82,65 @@ export default function App() {
 
   return (
     <main className='App'>
-      <section className='App__left' id='left'>
-        <Side
-          notes={notes}
-          onAdd={onAdd}
-          onDelete={onDelete}
-          setActive={setActive}
-          active={getActive()}
-          handleSide={handleSide}
-          sidebar={sidebar}
-        />
-      </section>
-      <section className='App__right' id='right'>
-        <Top 
-          notes={notes}
-          setNotes={setNotes}
-          setActive={setActive}
-          active={getActive()}
-          handleSide={handleSide}
-          sidebar={sidebar}
-          isSplit={isSplit}
-          split={split}
-          isRead={isRead}
-          read={read}
-        />
-        <Body
-          onAdd={onAdd}
-          onUpdate={onUpdate}
-          onDelete={onDelete}
-          setActive={setActive}
-          active={getActive()}
-          split={split}
-          read={read}
-        />
-      </section>
+      <AuthContextProvider>
+        <Routes>
+          {/* User login page */}
+          <Route path='/' element={
+            <NoUserRoutes>
+              <Login />
+            </NoUserRoutes>} 
+          />
+
+          {/* User sign up page */}
+          <Route path='/signup' element={
+            <NoUserRoutes>
+              <Signup />
+            </NoUserRoutes>} 
+          />
+          
+          {/* Main page */}
+          <Route path='/notes' element={
+            <UserRoutes>
+              <main className='App__app'>
+                <section className='App__app-left' id='left'>
+                  <Side
+                    notes={notes}
+                    onAdd={onAdd}
+                    onDelete={onDelete}
+                    setActive={setActive}
+                    active={getActive()}
+                    handleSide={handleSide}
+                    sidebar={sidebar}
+                  />
+                </section>
+                <section className='App__app-right' id='right'>
+                  <Top 
+                    notes={notes}
+                    setNotes={setNotes}
+                    setActive={setActive}
+                    active={getActive()}
+                    handleSide={handleSide}
+                    sidebar={sidebar}
+                    isSplit={isSplit}
+                    split={split}
+                    isRead={isRead}
+                    read={read}
+                  />
+                  <Body
+                    onAdd={onAdd}
+                    onUpdate={onUpdate}
+                    onDelete={onDelete}
+                    setActive={setActive}
+                    active={getActive()}
+                    split={split}
+                    read={read}
+                  />
+                </section>
+              </main>
+            </UserRoutes>}
+          />
+        </Routes>
+      </AuthContextProvider>
     </main>
   )
 }

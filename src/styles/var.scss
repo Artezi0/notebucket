@@ -76,7 +76,6 @@ $gb-lm-light-gray: #7c6f64;
 .App {
     height: 100vh;
     width: 100%;
-    display: flex;
     position: relative;
     background: $main_light;
     color: $text_active;
@@ -99,37 +98,43 @@ $gb-lm-light-gray: #7c6f64;
     label {
         cursor: pointer;
     }
-    
-    &__left {
-        z-index: 10;
-        height: 100%;
-        width: 20rem;
-        overflow: auto;
-        transition: .3s ease-in-out;
-    }
-    
-    &__left.disabled {
-        width: 0;
-    }
-    
-    &__right {
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-    }
-    
-    @media screen and (min-width: 320px) and (max-width: 480px) {
-        &__left {
-            position: fixed;
-            width: 18rem;
-        }
-    }
 
-    .tooltip {    
-        padding: .5em !important;
-        color: $main_light !important;
-        font-size: 12px !important;
-        font-family: inherit !important;
-        font-weight: 500 !important;
+    &__app {
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+        &-left {
+            z-index: 10;
+            height: 100%;
+            width: 20em;
+            overflow: auto;
+            transition: .3s ease-in-out;
+        }
+        
+        &-left.disabled {
+            width: 0;
+        }
+        
+        &-right {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        @media screen and (min-width: 320px) and (max-width: 480px) {
+            &-left {
+                position: fixed;
+                width: 18rem;
+            }
+        }
+    
+        .tooltip {    
+            padding: .5em !important;
+            color: $main_light !important;
+            font-size: 12px !important;
+            font-family: inherit !important;
+            font-weight: 500 !important;
+        }
     }
 }

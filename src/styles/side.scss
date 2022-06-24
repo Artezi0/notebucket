@@ -73,6 +73,19 @@
                 color: $text_active;
             }
         }
+
+        &-user {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: .5em;
+            color: $text_innactive;
+
+            p {
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
     }
 
     &__status {
