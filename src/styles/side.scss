@@ -142,8 +142,15 @@
                     height: fit-content;
                     width: 100%;
                     padding: .3em .3em .3em 1.3em;
+                    display: flex;
+                    align-items: center;
+                    gap: .5em;
                     border-radius: 4px;
                     cursor: pointer;
+                    
+                    svg {
+                        color: $text_innactive;
+                    }
 
                     &__title {
                         font-size: 14px;
@@ -191,39 +198,35 @@
         &-list {
             overflow-y: scroll;
             width: 100%;
-            height: 28em;
+            height: 15em;
             position: relative;
 
             &::-webkit-scrollbar {
-                width: 0; 
+                width: 0;
             }
 
             .note {
                 height: fit-content;
                 width: 100%;
                 padding: .3em .3em .3em 1.3em;
+                display: flex;
+                align-items: center;
+                gap: .5em;
                 border-radius: 4px;
                 cursor: pointer;
-
-                &__stats {
-                    width: 13px;
-                    height: 13px;
-                    border-radius: 2px;
-                    background: $main_dark;
+                
+                svg {
+                    color: $text_innactive;
                 }
 
                 &__title {
                     font-size: 14px;
                     font-weight: 500;
                 }
-
+                
                 &:hover {
                     background: $main_dark;
                 }
-            }
-
-            .note.active {
-                background: red;
             }
         }
     }

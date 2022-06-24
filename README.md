@@ -38,15 +38,5 @@ Tired of seeing your notes scattered around and untidy?  Organize your notes wit
     - `Ctrl + Alt + R` &nbsp; Read-only
 
 ## **Made with**
-- react-colorful": "^5.5.1",
-- react-markdown": "^8.0.3",
-- react-syntax-highlighter": "^15.50",
-- react-tabs": "^5.1.0",
-- react-textarea-autosize": "^8.3.4",
-- react-toastify": "^9.0.5",
-- react-uuid": "^1.0.2",
-- rehype-katex": "^6.0.2",
-- rehype-raw": "^6.1.1",
-- remark-gfm": "^3.0.1",
-- remark-math": "^5.1.1",
-- remark-rehype": "^10.1.0",
+- React js via Vite
+- RemarkJs

@@ -168,7 +168,7 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
       <div className='body__header-cover' style={{ background: active.cover.value}}>
         {modal && <Modal />}
         <div className='cover__actions'>
-          <button type='button' onClick={() => isModal(!modal)}>Customize</button>
+          <button type='button' onClick={() => isModal(!modal)}>Edit</button>
         </div>
         <img src={active.cover.value} className='cover-image' alt=''/>
       </div>
@@ -246,6 +246,7 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
               <div onClick={() => isInput(true)}  className={input ? 'info-name disabled' : 'info-name'}>
                 <form onSubmit={(e) => e.preventDefault() & isInput(false)}>
                   <input 
+                    autoFocus
                     onChange={(e) => onEdit('title', e.target.value)} 
                     value={active.title} 
                     spellCheck='false'

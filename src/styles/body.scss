@@ -317,6 +317,10 @@
                 border-radius: 2px;
             }
 
+            .actions__delete {
+                color: $shade_red;
+            }
+
             button {
                 display: flex;
                 align-items: center;
@@ -440,14 +444,17 @@
                     line-height: 1.5em;
 
                     .task-list-item {
-                        input {
-                            accent-color: $shade_blue;
-                            position: relative;
-                            top: 1px;
+                        input[type="checkbox"]:disabled {
+
+                            &:checked {
+                                background: blue !important;
+                                accent-color: blue !important;
+                                color: blue !important;
+                                accent-color: blue !important;    
+                            }
                         }
-
+                    
                         ul {
-
                             li {
                                 margin-left: 1.2em;   
                             }
