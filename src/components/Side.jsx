@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import { UserAuth } from './context/AuthContext'
 import ReactTooltip from 'react-tooltip'
 import data from '../../package.json'
 import Spotlight from './Spotlight'
+import { UserAuth } from '../context/AuthContext'
+
 import '../styles/app.scss'
 
 export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide, sidebar }) {
@@ -14,9 +15,9 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
   const [ state, setState ] = useState(true)
   const [ spot, isSpot ] = useState(false)
 
-  const { user, logout } = UserAuth()
   const navigate = useNavigate()
-  
+  const { user, logout } = UserAuth()
+
   let sorted
 
   let sortedActive = notes.filter((note) => note.stats.includes('#E8E7E3'))
@@ -45,12 +46,12 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
 
   async function handleLogout() {
     try {
-        await logout()
-        navigate("/")
+      await logout()
+      navigate("/")
     } catch(err) {
-        console.error(err.message)
+      console.error(err.message)
     }
-  }
+  } 
 
   /* Keyboard shortcuts handler */
   function handleShortcut(e) {
@@ -100,7 +101,7 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
             <svg width="14" height="15" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.00879 8.5752C9.9248 8.5752 11.5508 6.87012 11.5508 4.66406C11.5508 2.51074 9.91602 0.858398 8.00879 0.858398C6.09277 0.858398 4.44922 2.53711 4.45801 4.68164C4.45801 6.87012 6.08398 8.5752 8.00879 8.5752ZM2.52441 16.749H13.4756C14.9258 16.749 15.4268 16.3096 15.4268 15.501C15.4268 13.2422 12.5615 10.1309 8 10.1309C3.44727 10.1309 0.573242 13.2422 0.573242 15.501C0.573242 16.3096 1.07422 16.749 2.52441 16.749Z" fill="currentColor"/>
             </svg>
-            <p className='user__name'>{user.displayName ? user.displayName : user.email}</p>
+            <p className='user__name'>User</p>
             <button className='user__logout' onClick={handleLogout}>
               <svg width="13" height="14" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.99121 0.427734C7.70996 0.427734 7.46387 0.55957 7.17383 0.788086L1.24121 5.58691C1.03027 5.7627 0.898438 6.02637 0.898438 6.35156C0.898438 6.94922 1.38184 7.38867 1.93555 7.38867C2.19043 7.38867 2.44531 7.29199 2.7002 7.08984L8 2.81836L13.291 7.08984C13.5371 7.29199 13.8008 7.38867 14.0557 7.38867C14.6094 7.38867 15.0928 6.94922 15.0928 6.35156C15.0928 6.02637 14.9609 5.7627 14.75 5.58691L8.80859 0.788086C8.52734 0.55957 8.28125 0.427734 7.99121 0.427734ZM7.99121 16.7139C8.28125 16.7139 8.52734 16.5908 8.80859 16.3623L14.75 11.5635C14.9609 11.3789 15.0928 11.1152 15.0928 10.7988C15.0928 10.1924 14.6094 9.75293 14.0557 9.75293C13.8008 9.75293 13.5371 9.8584 13.291 10.0605L8 14.332L2.7002 10.0605C2.44531 9.8584 2.19043 9.75293 1.93555 9.75293C1.38184 9.75293 0.898438 10.1924 0.898438 10.7988C0.898438 11.1152 1.03027 11.3789 1.24121 11.5635L7.17383 16.3535C7.46387 16.5908 7.70996 16.7139 7.99121 16.7139Z" fill='currentColor'/>

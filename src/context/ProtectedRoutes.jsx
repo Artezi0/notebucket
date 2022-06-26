@@ -19,4 +19,3 @@ export function NoUserRoutes({ children }) {
 
   return children
 }
-

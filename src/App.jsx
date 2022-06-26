@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import uuid from 'react-uuid'
-import { Route, Routes } from 'react-router-dom'
-import { AuthContextProvider } from './components/context/AuthContext'
-import { UserRoutes, NoUserRoutes } from './components/context/ProtectedRoutes'
 
 import Body from './components/Body'
 import Side from './components/Side'
 import Top from './components/Top'
-import Login from './components/web/Login'
-import Signup from './components/web/Signup'
+import Login from './components/Login'
+import { AuthContextProvider } from './context/AuthContext'
+import { NoUserRoutes, UserRoutes } from './context/ProtectedRoutes'
+ 
 import './styles/app.scss'
 
 export default function App() {
@@ -84,21 +84,11 @@ export default function App() {
     <main className='App'>
       <AuthContextProvider>
         <Routes>
-          {/* User login page */}
-          <Route path='/' element={
+          <Route path='/' element={    
             <NoUserRoutes>
               <Login />
-            </NoUserRoutes>} 
-          />
-
-          {/* User sign up page */}
-          <Route path='/signup' element={
-            <NoUserRoutes>
-              <Signup />
-            </NoUserRoutes>} 
-          />
-          
-          {/* Main page */}
+            </NoUserRoutes>        
+          }/>
           <Route path='/notes' element={
             <UserRoutes>
               <main className='App__app'>
@@ -137,8 +127,8 @@ export default function App() {
                   />
                 </section>
               </main>
-            </UserRoutes>}
-          />
+            </UserRoutes>
+          }/>
         </Routes>
       </AuthContextProvider>
     </main>
