@@ -24,7 +24,7 @@ export default function Login() {
   async function handleGithub() {
     try {
       await githubAuth()
-      navigate("/account")
+      navigate("/notes")
     } catch(err) {
       setError(err.message)
     }

@@ -81,6 +81,11 @@
             gap: .5em;
             color: $text_innactive;
 
+            img {
+                width: 20px;
+                border-radius: 4px;
+            }
+
             p {
                 font-size: 14px;
                 font-weight: 600;

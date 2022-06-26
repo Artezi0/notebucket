@@ -7,7 +7,7 @@ import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
-export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide, sidebar }) {
+export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide }) {
   const [ ongoing, isOngoing ] = useState(false) 
   const [ delayed, isDelayed ] = useState(false) 
   const [ completed, isCompleted ] = useState(false) 
@@ -47,7 +47,7 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
   async function handleLogout() {
     try {
       await logout()
-      navigate("/")
+      navigate('/')
     } catch(err) {
       console.error(err.message)
     }
@@ -98,15 +98,16 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
         </div>
         <ul className='side__actions'>
           <div className='side__actions-user'>
-            <svg width="14" height="15" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.00879 8.5752C9.9248 8.5752 11.5508 6.87012 11.5508 4.66406C11.5508 2.51074 9.91602 0.858398 8.00879 0.858398C6.09277 0.858398 4.44922 2.53711 4.45801 4.68164C4.45801 6.87012 6.08398 8.5752 8.00879 8.5752ZM2.52441 16.749H13.4756C14.9258 16.749 15.4268 16.3096 15.4268 15.501C15.4268 13.2422 12.5615 10.1309 8 10.1309C3.44727 10.1309 0.573242 13.2422 0.573242 15.501C0.573242 16.3096 1.07422 16.749 2.52441 16.749Z" fill="currentColor"/>
-            </svg>
-            <p className='user__name'>User</p>
-            <button className='user__logout' onClick={handleLogout}>
-              <svg width="13" height="14" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.99121 0.427734C7.70996 0.427734 7.46387 0.55957 7.17383 0.788086L1.24121 5.58691C1.03027 5.7627 0.898438 6.02637 0.898438 6.35156C0.898438 6.94922 1.38184 7.38867 1.93555 7.38867C2.19043 7.38867 2.44531 7.29199 2.7002 7.08984L8 2.81836L13.291 7.08984C13.5371 7.29199 13.8008 7.38867 14.0557 7.38867C14.6094 7.38867 15.0928 6.94922 15.0928 6.35156C15.0928 6.02637 14.9609 5.7627 14.75 5.58691L8.80859 0.788086C8.52734 0.55957 8.28125 0.427734 7.99121 0.427734ZM7.99121 16.7139C8.28125 16.7139 8.52734 16.5908 8.80859 16.3623L14.75 11.5635C14.9609 11.3789 15.0928 11.1152 15.0928 10.7988C15.0928 10.1924 14.6094 9.75293 14.0557 9.75293C13.8008 9.75293 13.5371 9.8584 13.291 10.0605L8 14.332L2.7002 10.0605C2.44531 9.8584 2.19043 9.75293 1.93555 9.75293C1.38184 9.75293 0.898438 10.1924 0.898438 10.7988C0.898438 11.1152 1.03027 11.3789 1.24121 11.5635L7.17383 16.3535C7.46387 16.5908 7.70996 16.7139 7.99121 16.7139Z" fill='currentColor'/>
+            <img src={user.photoURL} alt=''/>
+            <p className='user__name'>{user.displayName}</p>
+            <button className='user__logout' onClick={handleLogout} data-tip data-for='accTip'>
+              <svg width='14' height='13' viewBox='0 0 16 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M0.125 7.50488C0.125 8.06738 0.520508 8.46289 1.10059 8.46289H9.2832L11.1377 8.375L8.55371 10.7217L6.76953 12.5322C6.59375 12.708 6.48828 12.9453 6.48828 13.2178C6.48828 13.7539 6.88379 14.1494 7.42871 14.1494C7.68359 14.1494 7.9209 14.0439 8.13184 13.833L13.6953 8.2168C13.8447 8.07617 13.9414 7.90039 13.9854 7.70703V13.3145C13.9854 13.8506 14.3896 14.2373 14.9346 14.2373C15.4707 14.2373 15.875 13.8506 15.875 13.3145V1.7041C15.875 1.15918 15.4707 0.763672 14.9346 0.763672C14.3896 0.763672 13.9854 1.15918 13.9854 1.7041V7.30273C13.9414 7.10938 13.8447 6.93359 13.6953 6.78418L8.13184 1.16797C7.9209 0.957031 7.68359 0.860352 7.42871 0.860352C6.88379 0.860352 6.48828 1.24707 6.48828 1.7832C6.48828 2.05566 6.59375 2.29297 6.76953 2.46875L8.55371 4.2793L11.1289 6.62598L9.2832 6.53809H1.10059C0.520508 6.53809 0.125 6.93359 0.125 7.50488Z' fill='currentColor'/>
               </svg>
             </button>
+            <ReactTooltip id='accTip' effect='solid' type='dark' place='right' className='tooltip' backgroundColor='#000' arrowColor='transparent'>
+              <span>Log out</span>
+            </ReactTooltip>
           </div>
           <button type='button' onClick={() => isSpot(!spot)} data-tip data-for='findTip'>
             <svg width='14' height='14' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
