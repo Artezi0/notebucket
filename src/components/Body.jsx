@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { HexColorPicker } from 'react-colorful'
+
 import Edit from './Edit'
 import View from './View'
+
 import '../styles/app.scss'
 
 export default function Body({ onAdd, onUpdate, onDelete, active, split, read }) {
@@ -12,7 +14,7 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
   const [ input, isInput ] = useState(false)
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
-
+  
   function onEdit(field, value) {
     onUpdate({
       ...active,

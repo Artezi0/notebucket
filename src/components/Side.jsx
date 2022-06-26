@@ -1,24 +1,50 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import ReactTooltip from 'react-tooltip'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
+import { db } from '../firebase'
+
 import data from '../../package.json'
 import Spotlight from './Spotlight'
 import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
-export default function Side({ onAdd, onDelete, setActive, active, notes, handleSide }) {
+export default function Side({ onDelete, setActive, active, notes, handleSide }) {
   const [ ongoing, isOngoing ] = useState(false) 
   const [ delayed, isDelayed ] = useState(false) 
   const [ completed, isCompleted ] = useState(false) 
   const [ dropped, isDropped ] = useState(false) 
   const [ state, setState ] = useState(true)
   const [ spot, isSpot ] = useState(false)
+  const [ dummy, setDummy ] = useState([])
 
   const navigate = useNavigate()
   const { user, logout } = UserAuth()
-
+  
   let sorted
+
+  useEffect(() => {
+    async function fetchNotes() {
+      let list = []
+
+      try {
+        const notes = await getDocs(collection(db, user.uid))
+        notes.forEach((note) => {
+          list.push({
+            id: note.id,
+            ...note.data()
+          })
+        })
+        setDummy(list)
+      }
+      catch(error) {
+        console.log(error)
+      }
+    }
+
+    fetchNotes()
+  }, [])
 
   let sortedActive = notes.filter((note) => note.stats.includes('#E8E7E3'))
   let sortedDelayed = notes.filter((note) => note.stats.includes('#FFBD44'))
@@ -26,10 +52,10 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
   let sortedDropped = notes.filter((note) => note.stats.includes('#FF605C'))
 
   if (state) { 
-    sorted = notes.sort((a, b) => b.lastModified - a.lastModified)
+    sorted = dummy.sort((a, b) => b.lastModified - a.lastModified)
   }
   if (!state) {
-    sorted = notes.sort((a, b) => {
+    sorted = dummy.sort((a, b) => {
       if(a.title.toLowerCase() < b.title.toLowerCase()) return -1
       if(a.title.toLowerCase() > b.title.toLowerCase()) return 1
       
@@ -37,11 +63,19 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
     })
   }
 
-  function deleteAll() {
-    if (confirm('Are you sure want delete all of your data?') == true) {
-      localStorage.removeItem('notes')
-      location.reload()
-    }
+  async function onAdd() {
+    let newNote = await addDoc(collection(db, user.uid), {
+      cover: {
+        isCover: false,
+        value: '#E8E7E3',
+      },
+      stats: '',
+      title: 'Untitled',
+      body: `# Hello world`,
+      lastModified: Date.now()
+    })
+  
+    console.log(newNote)
   }
 
   async function handleLogout() {
@@ -52,6 +86,13 @@ export default function Side({ onAdd, onDelete, setActive, active, notes, handle
       console.error(err.message)
     }
   } 
+
+  function deleteAll() {
+    if (confirm('Are you sure want delete all of your data?') == true) {
+      localStorage.removeItem('notes')
+      location.reload()
+    }
+  }
 
   /* Keyboard shortcuts handler */
   function handleShortcut(e) {

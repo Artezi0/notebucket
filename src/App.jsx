@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import uuid from 'react-uuid'
+import { addDoc, collection } from 'firebase/firestore'
+import { db } from './firebase'
 
 import Body from './components/Body'
 import Side from './components/Side'
 import Top from './components/Top'
 import Login from './components/Login'
-import { AuthContextProvider } from './context/AuthContext'
+import { AuthContextProvider, UserAuth } from './context/AuthContext'
 import { NoUserRoutes, UserRoutes } from './context/ProtectedRoutes'
  
 import './styles/app.scss'
@@ -22,26 +23,8 @@ export default function App() {
     localStorage.setItem('notes', JSON.stringify(notes))
   }, [notes])
 
-  function onAdd() {
-    let newNote = {
-      id: uuid(),
-      cover: {
-        isCover: false,
-        value: '#E8E7E3',
-      },
-      stats: '',
-      title: 'Untitled',
-      body: `# Hello world`,
-      lastModified: Date.now()
-    }
-
-    setNotes([newNote, ...notes])
-    setActive(newNote.id)
-  }
-
   function onDelete(noteId) {
-    setNotes(notes.filter(({ id }) => id !== noteId))
-    
+    setNotes(notes.filter(({ id }) => id !== noteId)) 
   }
 
   function onUpdate(updated) {
@@ -51,7 +34,7 @@ export default function App() {
       }
       return note;
     })
-    setNotes(updatedArr);
+    setNotes(updatedArr)
   }
 
   function getActive() {
@@ -95,7 +78,6 @@ export default function App() {
                 <section className='App__app-left' id='left'>
                   <Side
                     notes={notes}
-                    onAdd={onAdd}
                     onDelete={onDelete}
                     setActive={setActive}
                     active={getActive()}
@@ -117,7 +99,6 @@ export default function App() {
                     read={read}
                   />
                   <Body
-                    onAdd={onAdd}
                     onUpdate={onUpdate}
                     onDelete={onDelete}
                     setActive={setActive}

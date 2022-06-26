@@ -16,10 +16,6 @@ export function AuthContextProvider({ children }) {
     const providerGoogle = new GoogleAuthProvider()
     const providerGithub = new GithubAuthProvider()
 
-    function createUser(email, password) {
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
-
     function googleAuth() {
         return ( 
             signInWithPopup(auth, providerGoogle) 
@@ -33,26 +29,6 @@ export function AuthContextProvider({ children }) {
     function githubAuth() {
         return (
             signInWithPopup(auth, providerGithub)
-            .then((result) => {
-                const user = result.user
-                console.log(user)
-            })
-        )
-    }
-
-    function updateUser(name, avatar, email, pass) {
-      const user = auth.currentUser
-
-      updateProfile(user, { displayName: name, photoURL: avatar })
-      updateEmail(user, email)
-      if (pass !== "" || undefined) { updatePassword(user, pass)}
-      
-      location.reload()
-    }
-
-    function login(email, password) {
-        return (
-            signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 const user = result.user
                 console.log(user)
@@ -75,11 +51,8 @@ export function AuthContextProvider({ children }) {
 
     return (
         <UserContext.Provider 
-            value={{ createUser, 
-                     googleAuth, 
+            value={{ googleAuth, 
                      githubAuth, 
-                     updateUser,
-                     login, 
                      logout, 
                      user }}>
             {children}

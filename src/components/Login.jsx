@@ -9,9 +9,7 @@ export default function Login() {
   const [ error, setError ] = useState('')
   const navigate = useNavigate()  
   const { googleAuth, githubAuth } = UserAuth()
-  
-  document.title = 'Notebucket - Log in'  
-  
+    
   async function handleGoogle() {
     try {
       await googleAuth()
