@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import ReactTooltip from 'react-tooltip'
 import FileSaver from 'file-saver'
+import { collection, addDoc } from 'firebase/firestore'
 
+import { db } from '../firebase'
 import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
 export default function Top({ handleSide, sidebar, isSplit, split, isRead, read,  }) {
   const [ submenu, isSubmenu ] = useState(false)
-  const { active, getActive } = UserAuth()
-  
+  const { active, getActive, user } = UserAuth()
+
   let filenameStyle = undefined
   let filename = undefined 
   let menuStyle = undefined
@@ -40,22 +42,21 @@ export default function Top({ handleSide, sidebar, isSplit, split, isRead, read,
       let blob = document.getElementById('importFile').files[0];
       let reader = new FileReader()
       let textFile = /text.plain.*/
-
-      console.log(blob)
       
       if (blob.type.match(textFile)) {
-        reader.onload = function(e) {
+        reader.onload = async function(e) {
           let newNote = {
-            id: uuid(),
-            cover: {
-              isCover: false,
-              value: '#E8E7E3',
-            },
-            stats: '',
             title: blob.name.replace(/\.[^.$]+$/, ''),
             body: e.target.result,
-            lastModified: Date.now()
+            lastModified: Date.now(),
+            cover: {
+              isCover: false,
+              value: '#E8E7E3'
+            },
+            stats: ''
           }
+    
+          await addDoc(collection(db, user.uid), newNote)
         }
       }
 
@@ -65,7 +66,7 @@ export default function Top({ handleSide, sidebar, isSplit, split, isRead, read,
     
   
     function handleExport() {
-      let blob = new Blob([active.body], {type: "text/plain;charset=utf-8"})
+      let blob = new Blob([getActive().body], {type: "text/plain;charset=utf-8"})
       
       FileSaver.saveAs(blob, `${getActive().title}.txt`)
       isSubmenu(false)

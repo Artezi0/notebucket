@@ -16,18 +16,17 @@ export default function Body({ split, read }) {
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
   
+  
   const { 
     onAdd,
     onUpdate,
     onDelete,
     active, 
     getActive } = UserAuth()
-
-  console.log(active)
-
+      
   function onEdit(field, value) {
     onUpdate({
-      ...active,
+      ...getActive(),
       [field]: value,
       lastModified: Date.now()
     })
@@ -74,7 +73,7 @@ export default function Body({ split, read }) {
         let res = await resp.json() 
         let img = res.url
         onUpdate({
-          ...active, 
+          ...getActive(), 
           cover: {
             isCover: true,
             value: img
@@ -91,7 +90,7 @@ export default function Body({ split, read }) {
       const inputLink = document.getElementById('inputLink')
       if (inputLink.value !== "" || undefined) {
         onUpdate({
-          ...active, 
+          ...getActive(), 
           cover: {
             isCover: true,
             value: inputLink.value
@@ -112,7 +111,7 @@ export default function Body({ split, read }) {
       }
 
       onUpdate({
-        ...active, 
+        ...getActive(), 
         cover: {
           isCover: true,
           value: hexColor.toString()
@@ -129,10 +128,10 @@ export default function Body({ split, read }) {
           <Tab>Upload</Tab>
           <button onClick={
             () => onUpdate({
-              ...active, 
+              ...getActive(), 
               cover: {
                 isCover: false,
-                value: active.cover.value
+                value: getActive().cover.value
               },
               lastModified: Date.now()
             })
@@ -141,10 +140,10 @@ export default function Body({ split, read }) {
         <TabPanel className='cover__modal-color'>
           <button onClick={handleColor}>Randomize</button>
           <HexColorPicker 
-            color={active.cover.value}
+            color={getActive().cover.value}
             onChange={
               (e) => onUpdate({
-                ...active, 
+                ...getActive(), 
                 cover: {
                   isCover: true,
                   value: e
@@ -177,12 +176,12 @@ export default function Body({ split, read }) {
 
   const Cover = () => {    
     return (
-      <div className='body__header-cover' style={{ background: active.cover.value}}>
+      <div className='body__header-cover' style={{ background: getActive().cover.value}}>
         {modal && <Modal />}
         <div className='cover__actions'>
           <button type='button' onClick={() => isModal(!modal)}>Edit</button>
         </div>
-        <img src={active.cover.value} className='cover-image' alt=''/>
+        <img src={getActive().cover.value} className='cover-image' alt=''/>
       </div>
     )
   }
@@ -253,7 +252,7 @@ export default function Body({ split, read }) {
         <>
           {notif && <Notification />}
           <div className="body__header">
-            {/* {active.cover.isCover && <Cover />} */}
+            {getActive().cover.isCover && <Cover />}
             <div className="body__header-info">
               <div onClick={() => isInput(true)}  className={input ? 'info-name disabled' : 'info-name'}>
                 <form onSubmit={(e) => e.preventDefault() & isInput(false)}>
@@ -272,7 +271,7 @@ export default function Body({ split, read }) {
               {status && <Status />}
               <div className='status-block' style={{ background: `${getActive().stats}` }}></div>
               <button type='button' className='actions__stats' onClick={() => isStatus(!status)}>{state} <i className={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i></button>
-              <button type='button' className='actions__cover' onClick={() => onUpdate({...active, cover: {isCover: true, value: active.cover.value}, lastModified: Date.now()})}>Add Cover</button>
+              <button type='button' className='actions__cover' onClick={() => onUpdate({...getActive(), cover: {isCover: true, value: getActive().cover.value}, lastModified: Date.now()})}>Add Cover</button>
               <button type='button' className='actions__delete' onClick={onDelete}>Delete note</button>
             </div>
           </div>

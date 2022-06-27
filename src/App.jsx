@@ -15,20 +15,6 @@ export default function App() {
   const [ read, isRead ] = useState(false)
   const [ split, isSplit ] = useState(false)  
 
-  function onDelete(noteId) {
-    setNotes(notes.filter(({ id }) => id !== noteId)) 
-  }
-
-  function onUpdate(updated) {
-    const updatedArr = notes.map((note) => {
-      if (note.id === updated.id) {
-        return updated;
-      }
-      return note;
-    })
-    setNotes(updatedArr)
-  }
-
   function handleSide() {
     isSidebar(!sidebar)
     document.getElementById('left').classList.toggle('disabled')

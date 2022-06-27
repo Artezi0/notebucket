@@ -16,6 +16,30 @@ export function AuthContextProvider({ children }) {
   const [ user, setUser ] = useState({})
   const [ active, setActive ] = useState(false)
 
+  /* Listen and fetch database realtime */
+  useEffect(() => {
+    const authChange = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+
+      onSnapshot(collection(db, currentUser.uid), (snapShot) => {
+        let list = []  
+  
+        snapShot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() })
+      })  
+        setNotes(list)
+      }, 
+      (error) => {
+        console.warn(error)
+      }) 
+    })
+    
+    return () => {
+      authChange() 
+    }
+  }, [])
+
+  /* Google authentication */ 
   function googleAuth() {
     return ( 
       signInWithPopup(auth, providerGoogle) 
@@ -24,103 +48,97 @@ export function AuthContextProvider({ children }) {
         })
     )
   } 
-
-    function githubAuth() {
-      return (
-        signInWithPopup(auth, providerGithub)
-          .then((result) => {
-            const user = result.user
-          })
-      )
-    }
-
-    function logout() {
-      return signOut(auth)
-    }
-
-    useEffect(() => {
-      const authChange = onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser)
-
-        onSnapshot(collection(db, currentUser.uid), (snapShot) => {
-          let list = []  
-    
-          snapShot.docs.forEach((doc) => {
-            list.push({ id: doc.id, ...doc.data() })
-        })  
-          setNotes(list)
-        }, 
-        (error) => {
-            console.warn(error)
+  
+  /* Github authentication */ 
+  function githubAuth() {
+    return (
+      signInWithPopup(auth, providerGithub)
+        .then((result) => {
+          const user = result.user
         })
+    )
+  }
+  
+  /* Log out current user */ 
+  function logout() {
+    return signOut(auth)
+  }
+
+  /* Get active document */ 
+  function getActive() {
+    let x = notes.find(({ id }) => id === active)
+    
+    return x
+  }
+
+  /* Create new document */ 
+  async function onAdd() {
+    let newNote = {
+      title: 'Untitled',
+      body: `# Hello world`,
+      lastModified: Date.now(),
+      cover: {
+        isCover: false,
+        value: '#E8E7E3'
+      },
+      stats: ''
+    }
+
+   await addDoc(collection(db, user.uid), newNote)
+  }
+
+  /* Delete current document */
+  async function onDelete() {
+    setActive(false)
+    await deleteDoc(doc(db, user.uid, active))
+  }
+
+  /* Wipe out current user data */
+  async function onDeleteAll() {
+    setActive(false)
+    await deleteDoc(collection(db, user.uid))
+  } 
+
+  /* Update user data */ 
+  async function onUpdate(updated) {
+    const arrays = notes.map((note) => {
+      if (note.id === updated.id) {
+        return updated
+      }
+
+     return note
     })
     
-      return () => {
-        authChange() 
-      }
-    }, [])
-
-    /* Get active document */ 
-    function getActive() {
-      let x = notes.find(({ id }) => id === active)
-      
-      return x
-    }
-
-    /* Create new document */ 
-    async function onAdd() {
-      let newNote = {
-        title: 'Untitled',
-        body: `# Hello world`,
-        lastModified: Date.now(),
-        cover: {
-          isCover: false,
-          value: '#E8E7E3'
-        },
-        stats: ''
-      }
-
-      await addDoc(collection(db, user.uid), newNote)
-    }
-
-    /* Delete current document */
-    async function onDelete() {
-      await deleteDoc(doc(db, user.uid, active))
-    }
-
-    /* Update user data */ 
-    async function onUpdate(updated) {
-      const updatedArray = notes.map((note) => {
-        if (note.id === updated.id) {
-          console.log(note.id)
-          return updated
-        }
-        else {
-          console.log(updated)
-        }
-
-        return note
-      })
-       
-      await updateDoc(collection(db, user.uid), updatedArray)
-    }
-    
-    return (
-      <UserContext.Provider 
-        value={{ googleAuth, 
-                 githubAuth, 
-                 logout,
-                 onAdd,
-                 onUpdate,
-                 onDelete,
-                 setActive,
-                 getActive,
-                 active,
-                 notes, 
-                 user }}>
-        {children}
-      </UserContext.Provider>
-    )
+    const x = arrays.find(({ id }) => id === active)
+    await updateDoc(doc(db, user.uid, active), {
+      title: x.title,
+      lastModified: x.lastModified,
+      stats: x.stats,
+      cover: {
+        isCover: x.cover.isCover,
+        value: x.cover.value
+      },
+      body: x.body,
+    })
+  }
+  
+  return (
+    <UserContext.Provider 
+      value={{ googleAuth, 
+               githubAuth, 
+               logout,
+               onAdd,
+               onUpdate,
+               onDelete,
+               onDeleteAll,
+               setActive,
+               getActive,
+               active,
+               notes, 
+               user }}>
+      {children}
+    </UserContext.Provider>
+  )
 }
 
 export function UserAuth() {
