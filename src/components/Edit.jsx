@@ -1,12 +1,15 @@
-import TextareaAutosize from 'react-textarea-autosize';
+import { useState } from 'react'
+import CodeMirror from '@uiw/react-codemirror'
+import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
+import { languages } from '@codemirror/language-data'
+import TextareaAutosize from 'react-textarea-autosize'
 
-import { UserAuth } from '../context/AuthContext';
+import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
 export default function Edit() {
   const { onUpdate, getActive } = UserAuth()
-  const placeholder = `Start writting... \nDon't know how write markdown?`
 
   function onEdit(field, value) {
     onUpdate({
@@ -17,12 +20,16 @@ export default function Edit() {
   }
 
   return (
-    <TextareaAutosize 
+    <CodeMirror 
       className='input'
-      value={getActive().body}
-      onChange={(e) => onEdit('body', e.target.value)}
-      placeholder={placeholder}
-      spellCheck='false'
+      value={getActive().body} 
+      onChange={(value) => onEdit('body', value)}
+      extensions={[
+        markdown({
+          base: markdownLanguage, 
+          codeLanguages: languages 
+        })
+      ]} 
     />
   )
 }

@@ -390,21 +390,51 @@
             .input {
                 width: 100%;
                 height: 100%;
-                padding: .5em;
-                resize: none;
-                border: none;
-                font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 1.3rem;
-
-                &:focus {
-                    outline: none;
+                
+                // Input container style
+                .cm-scroller {
+                    font-family: 'JetBrains Mono', monospace;                    
+                    line-height: 1.3rem;
+                    font-size: 14px;
                 }
 
-                &::-webkit-scrollbar {
-                    width: 0;
+                .cm-gutters {
+                    background: none;
+                    color: $text_innactive;
                 }
+                
+                .cm-activeLineGutter, .cm-activeLine { background: $main_mid; }
+                .cm-editor.cm-focused { outline: none; }
+                .cm-selectionMatch { background: $shade_green; }
+                .cm-selectionMatch { background: $shade_lightBlue; }
+                .cm-selectionBackground { background: $main_dark; }
+            
+                // Syntax style 
+                .ͼa { color: $gb-lm-dark-yellow; }
+                .ͼc { color: $gb-lm-dark-aqua; }
+                .ͼ5 { color: $gb-lm-dark-gray; }
+                .ͼ6 {
+                    color: $gb-lm-dark-red;
+                    text-decoration: none;
+                }
+
+                .ͼ6.ͼ5 { color: $gb-lm-dark-gray }
+                .ͼ6.ͼc {
+                    color: $gb-lm-dark-green;
+                    text-decoration: underline;
+                }
+                
+                .ͼ7 {
+                    text-decoration: none;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: $gb-lm-dark-blue;
+                }
+
+                .ͼ7.ͼ5 { color: $gb-lm-light-blue; }
+                .ͼ8.ͼ5, .ͼ9.ͼ5 { color: $gb-lm-light-orange }
+                .ͼ8, .ͼ9 { color: $gb-lm-dark-orange; }
+                .ͼa.ͼ5 { color: $gb-lm-light-yellow; }
             }
 
             .view {
@@ -543,21 +573,51 @@
             .input {
                 width: 100%;
                 height: 100%;
-                resize: none;
-                border: none;
-                font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
-                font-weight: 400;
-                font-size: 14px;
-                text-align: justify;
-                line-height: 1.3rem;
-
-                &:focus {
-                    outline: none;
+                
+                // Input container style
+                .cm-scroller {
+                    font-family: 'JetBrains Mono', monospace;                    
+                    line-height: 1.3rem;
+                    font-size: 14px;
                 }
 
-                &::-webkit-scrollbar {
-                    width: 0;
+                .cm-gutters {
+                    background: none;
+                    color: $text_innactive;
                 }
+                
+                .cm-activeLineGutter, .cm-activeLine { background: $main_mid; }
+                .cm-editor.cm-focused { outline: none; }
+                .cm-selectionMatch { background: $shade_green; }
+                .cm-selectionMatch { background: $shade_lightBlue; }
+                .cm-selectionBackground { background: $main_dark; }
+            
+                // Syntax style 
+                .ͼa { color: $gb-lm-dark-yellow; }
+                .ͼc { color: $gb-lm-dark-aqua; }
+                .ͼ5 { color: $gb-lm-dark-gray; }
+                .ͼ6 {
+                    color: $gb-lm-dark-red;
+                    text-decoration: none;
+                }
+
+                .ͼ6.ͼ5 { color: $gb-lm-dark-gray }
+                .ͼ6.ͼc {
+                    color: $gb-lm-dark-green;
+                    text-decoration: underline;
+                }
+                
+                .ͼ7 {
+                    text-decoration: none;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: $gb-lm-dark-blue;
+                }
+
+                .ͼ7.ͼ5 { color: $gb-lm-light-blue; }
+                .ͼ8.ͼ5, .ͼ9.ͼ5 { color: $gb-lm-light-orange }
+                .ͼ8, .ͼ9 { color: $gb-lm-dark-orange; }
+                .ͼa.ͼ5 { color: $gb-lm-light-yellow; }
             }
 
             .view {

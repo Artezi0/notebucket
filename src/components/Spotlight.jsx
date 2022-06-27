@@ -28,7 +28,7 @@ export default function Spotlight({ isSpot }) {
       </svg>           
       ,
       title: 'Delete note',
-      action: () => onDelete(active.id)
+      action: onDelete
     },
     {
       id: 2,
