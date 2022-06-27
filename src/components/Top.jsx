@@ -1,20 +1,24 @@
+import React, { useState } from 'react'
 import ReactTooltip from 'react-tooltip'
 import FileSaver from 'file-saver'
-import uuid from 'react-uuid'
-import React, { useState } from 'react'
+
+import { UserAuth } from '../context/AuthContext'
+
 import '../styles/app.scss'
 
-export default function Top({ notes, setNotes, setActive, handleSide, sidebar, active, isSplit, split, isRead, read,  }) {
+export default function Top({ handleSide, sidebar, isSplit, split, isRead, read,  }) {
   const [ submenu, isSubmenu ] = useState(false)
+  const { active, getActive } = UserAuth()
+  
   let filenameStyle = undefined
   let filename = undefined 
   let menuStyle = undefined
 
   function handleStyle() {
     if (active) {
-      filename = active.title
+      filename = getActive().title
       filenameStyle = { color: '#000000' }
-      document.title = active.title + " - Notebucket"
+      document.title = getActive().title + " - Notebucket"
     } 
     if (!active) {
       filename = "No selected"
@@ -52,9 +56,6 @@ export default function Top({ notes, setNotes, setActive, handleSide, sidebar, a
             body: e.target.result,
             lastModified: Date.now()
           }
-        
-          setNotes([newNote, ...notes])
-          setActive(newNote.id)
         }
       }
 
@@ -66,7 +67,7 @@ export default function Top({ notes, setNotes, setActive, handleSide, sidebar, a
     function handleExport() {
       let blob = new Blob([active.body], {type: "text/plain;charset=utf-8"})
       
-      FileSaver.saveAs(blob, `${active.title}.txt`)
+      FileSaver.saveAs(blob, `${getActive().title}.txt`)
       isSubmenu(false)
     }
   

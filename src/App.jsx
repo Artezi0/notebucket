@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { addDoc, collection } from 'firebase/firestore'
-import { db } from './firebase'
 
 import Body from './components/Body'
 import Side from './components/Side'
 import Top from './components/Top'
 import Login from './components/Login'
-import { AuthContextProvider, UserAuth } from './context/AuthContext'
+import { AuthContextProvider } from './context/AuthContext'
 import { NoUserRoutes, UserRoutes } from './context/ProtectedRoutes'
- 
+
 import './styles/app.scss'
 
 export default function App() {
   const [ sidebar, isSidebar ] = useState(true)
   const [ read, isRead ] = useState(false)
-  const [ split, isSplit ] = useState(false)
-  const [ notes, setNotes ] = useState( localStorage.notes ? JSON.parse(localStorage.notes) : [])
-  const [ active, setActive ] = useState(false)
-
-  useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes))
-  }, [notes])
+  const [ split, isSplit ] = useState(false)  
 
   function onDelete(noteId) {
     setNotes(notes.filter(({ id }) => id !== noteId)) 
@@ -35,10 +27,6 @@ export default function App() {
       return note;
     })
     setNotes(updatedArr)
-  }
-
-  function getActive() {
-    return notes.find(({ id }) => id === active);
   }
 
   function handleSide() {
@@ -62,7 +50,6 @@ export default function App() {
     }
   }, [handleShortcut])
 
-
   return (
     <main className='App'>
       <AuthContextProvider>
@@ -76,21 +63,10 @@ export default function App() {
             <UserRoutes>
               <main className='App__app'>
                 <section className='App__app-left' id='left'>
-                  <Side
-                    notes={notes}
-                    onDelete={onDelete}
-                    setActive={setActive}
-                    active={getActive()}
-                    handleSide={handleSide}
-                    sidebar={sidebar}
-                  />
+                  <Side handleSide={handleSide} />
                 </section>
                 <section className='App__app-right' id='right'>
                   <Top 
-                    notes={notes}
-                    setNotes={setNotes}
-                    setActive={setActive}
-                    active={getActive()}
                     handleSide={handleSide}
                     sidebar={sidebar}
                     isSplit={isSplit}
@@ -99,10 +75,6 @@ export default function App() {
                     read={read}
                   />
                   <Body
-                    onUpdate={onUpdate}
-                    onDelete={onDelete}
-                    setActive={setActive}
-                    active={getActive()}
                     split={split}
                     read={read}
                   />

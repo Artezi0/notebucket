@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from "react"
 import FileSaver from 'file-saver'
+
+import { UserAuth } from "../context/AuthContext"
 import '../styles/app.scss'
 
-export default function Spotlight({ onAdd, onDelete, notes, setActive, active, isSpot }) {
+export default function Spotlight({ isSpot }) {
   const [ search, setSearch ] = useState('')
   const [ command, isCommand ] = useState(false)
   const ref = useRef(null)
 
-  let sorted = notes.filter((note) => note.title.toLowerCase().replace(/\s/g, '').includes(search.toLowerCase().replace(/\s/g, '')))
+  const { onAdd, onDelete, active, setActive, notes } = UserAuth()
 
   let commands = [
     {
@@ -39,6 +41,7 @@ export default function Spotlight({ onAdd, onDelete, notes, setActive, active, i
     }
   ]
 
+  let sorted = notes.filter((data) => data.title.toLowerCase().replace(/\s/g, '').includes(search.toLowerCase().replace(/\s/g, '')))
   let sortedCommands = commands.filter((command) => command.title.toLowerCase().replace(/\s/g, '').includes(search.substr(1).toLowerCase().replace(/\s/g, '')))
 
   function useOutsideAlerter(ref) {

@@ -4,10 +4,11 @@ import { HexColorPicker } from 'react-colorful'
 
 import Edit from './Edit'
 import View from './View'
+import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
-export default function Body({ onAdd, onUpdate, onDelete, active, split, read }) {
+export default function Body({ split, read }) {
   const [ state, setState ] = useState('Status')
   const [ status, isStatus ] = useState(false)
   const [ modal, isModal ] = useState(false)
@@ -15,6 +16,15 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
   
+  const { 
+    onAdd,
+    onUpdate,
+    onDelete,
+    active, 
+    getActive } = UserAuth()
+
+  console.log(active)
+
   function onEdit(field, value) {
     onUpdate({
       ...active,
@@ -24,7 +34,7 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
   }
 
   function handleDateStr() {
-    return new Date(active.lastModified).toLocaleDateString('en-us', {
+    return new Date(getActive().lastModified).toLocaleDateString('en-us', {
       year: 'numeric',
       month: 'long', 
       day: 'numeric', 
@@ -243,14 +253,14 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
         <>
           {notif && <Notification />}
           <div className="body__header">
-            {active.cover.isCover && <Cover />}
+            {/* {active.cover.isCover && <Cover />} */}
             <div className="body__header-info">
               <div onClick={() => isInput(true)}  className={input ? 'info-name disabled' : 'info-name'}>
                 <form onSubmit={(e) => e.preventDefault() & isInput(false)}>
                   <input 
                     autoFocus
                     onChange={(e) => onEdit('title', e.target.value)} 
-                    value={active.title} 
+                    value={getActive().title} 
                     spellCheck='false'
                     disabled={input ? false : true}
                   />
@@ -260,25 +270,24 @@ export default function Body({ onAdd, onUpdate, onDelete, active, split, read })
             </div>
             <div className="body__header-actions">
               {status && <Status />}
-              <div className='status-block' style={{ background: `${active.stats}` }}></div>
+              <div className='status-block' style={{ background: `${getActive().stats}` }}></div>
               <button type='button' className='actions__stats' onClick={() => isStatus(!status)}>{state} <i className={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i></button>
               <button type='button' className='actions__cover' onClick={() => onUpdate({...active, cover: {isCover: true, value: active.cover.value}, lastModified: Date.now()})}>Add Cover</button>
-              <button type='button' className='actions__delete' onClick={() => onDelete(active.id)}>Delete note</button>
+              <button type='button' className='actions__delete' onClick={onDelete}>Delete note</button>
             </div>
           </div>
           {split ?
           <div className="body__header-split">
-            <Edit onUpdate={onUpdate} active={active} />
-            <View active={active} />
+            <Edit />
+            <View  />
           </div> : 
           <div className="body__header-main">
             {read ? 
-            <View active={active} /> :
-            <Edit onUpdate={onUpdate} active={active} />
+            <View /> :
+            <Edit />
             }
           </div> 
           }
-         
         </>
       }
     </section>
