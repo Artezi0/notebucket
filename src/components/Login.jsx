@@ -31,7 +31,7 @@ export default function Login() {
   return (
     <div className="login">
       <div className="login__header">
-        <h1>Log in</h1>
+        <h1>Log in account</h1>
         <p>Don't have an account? <Link to='signup'>Sign up</Link></p>
       </div>
       <div className="login__btn">
