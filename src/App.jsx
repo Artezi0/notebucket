@@ -35,16 +35,16 @@ export default function App() {
   }, [handleShortcut])
 
   return (
-    <main className='App'>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <main className='App'>
         <Routes>
           <Route path='/' element={    
-              <Login />
+            <Login />
           }/>
           <Route path='/notes' element={
               <main className='App__app'>
                 <section className='App__app-left' id='left'>
-                  <Side handleSide={handleSide} />
+                  <Side handleSide={handleSide}/>
                 </section>
                 <section className='App__app-right' id='right'>
                   <Top 
@@ -58,8 +58,8 @@ export default function App() {
               </main>
           }/>
         </Routes>
-      </AuthContextProvider>
-    </main>
+      </main>
+    </AuthContextProvider>
   )
 }
 

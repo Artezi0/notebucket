@@ -8,7 +8,7 @@ import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
-export default function Side({ handleSide }) {
+export default function Side({ handleSide, setUser }) {
   const [ ongoing, isOngoing ] = useState(false) 
   const [ delayed, isDelayed ] = useState(false) 
   const [ completed, isCompleted ] = useState(false) 
