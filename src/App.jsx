@@ -6,7 +6,6 @@ import Side from './components/Side'
 import Top from './components/Top'
 import Login from './components/Login'
 import { AuthContextProvider } from './context/AuthContext'
-import { NoUserRoutes, UserRoutes } from './context/ProtectedRoutes'
 
 import './styles/app.scss'
 
@@ -40,12 +39,9 @@ export default function App() {
       <AuthContextProvider>
         <Routes>
           <Route path='/' element={    
-            // <NoUserRoutes>
               <Login />
-            // </NoUserRoutes>        
           }/>
           <Route path='/notes' element={
-            // <UserRoutes>
               <main className='App__app'>
                 <section className='App__app-left' id='left'>
                   <Side handleSide={handleSide} />
@@ -60,7 +56,6 @@ export default function App() {
                   <Body read={read} />
                 </section>
               </main>
-            // </UserRoutes>
           }/>
         </Routes>
       </AuthContextProvider>
