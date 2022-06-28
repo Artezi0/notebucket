@@ -1,11 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react"
-import { doc, collection, onSnapshot, addDoc, updateDoc, deleteDoc } from "firebase/firestore"
+import { createContext, useContext, useEffect, useState } from 'react'
+import { doc, collection, onSnapshot, addDoc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { auth, db } from '../firebase'
 import { GoogleAuthProvider,
          GithubAuthProvider,
          signInWithPopup,
          onAuthStateChanged,
-         signOut } from "firebase/auth"
+         signOut } from 'firebase/auth'
 
 const UserContext = createContext()
 

@@ -40,12 +40,12 @@ export default function App() {
       <AuthContextProvider>
         <Routes>
           <Route path='/' element={    
-            <NoUserRoutes>
+            // <NoUserRoutes>
               <Login />
-            </NoUserRoutes>        
+            // </NoUserRoutes>        
           }/>
           <Route path='/notes' element={
-            <UserRoutes>
+            // <UserRoutes>
               <main className='App__app'>
                 <section className='App__app-left' id='left'>
                   <Side handleSide={handleSide} />
@@ -60,7 +60,7 @@ export default function App() {
                   <Body read={read} />
                 </section>
               </main>
-            </UserRoutes>
+            // </UserRoutes>
           }/>
         </Routes>
       </AuthContextProvider>
