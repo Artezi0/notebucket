@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router'
 import ReactTooltip from 'react-tooltip'
 
 import Spotlight from './Spotlight'
-import { UserAuth } from '../context/AuthContext'
 import data from '../../package.json'
+import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
@@ -21,7 +21,6 @@ export default function Side({ handleSide }) {
     user, 
     notes,
     onAdd,
-    onDeleteAll,
     active,
     setActive,
     logout } = UserAuth()
@@ -32,9 +31,7 @@ export default function Side({ handleSide }) {
   let sortedCompleted = notes.filter((note) => note.stats.includes('#89CA00'))
   let sortedDropped = notes.filter((note) => note.stats.includes('#FF605C'))
 
-  if (state) { 
-    sorted = notes.sort((a, b) => b.lastModified - a.lastModified)
-  }
+  if (state) { sorted = notes.sort((a, b) => b.lastModified - a.lastModified) }
   if (!state) {
     sorted = notes.sort((a, b) => {
       if(a.title.toLowerCase() < b.title.toLowerCase()) return -1
@@ -42,12 +39,6 @@ export default function Side({ handleSide }) {
       
       return 0
     })
-  }
-    
-  async function deleteAll() {
-    if (confirm('Are you sure want delete all of your data?') == true) {
-      onDeleteAll()
-    }
   }
 
   async function handleLogout() {
@@ -68,7 +59,9 @@ export default function Side({ handleSide }) {
   }
 
   function handleShortcut(e) {
-    if (e.ctrlKey === true && e.altKey === true && e.keyCode === 70) { isSpot(!spot) }
+    if (e.ctrlKey === true && e.altKey === true && e.keyCode === 70) { 
+      isSpot(!spot) 
+    }
   }
 
   useEffect(() => {
@@ -81,15 +74,16 @@ export default function Side({ handleSide }) {
 
   return (
     <>
-      {spot && 
-      <Spotlight isSpot={isSpot} />
-      }
+      {spot && <Spotlight isSpot={isSpot} />}
       <div className='side'>
         <div className='side__header'>
           <div className='side__header-logo'>
-            <svg width='14' height='14' viewBox='0 0 51 51' fill='none' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M0 8.74151C0 3.91371 3.9137 0 8.7415 0H41.9585C46.7863 0 50.7 3.9137 50.7 8.7415V41.9585C50.7 46.7863 46.7863 50.7 41.9585 50.7H2.91384C1.30457 50.7 0 49.3954 0 47.7862V8.74151Z' fill='black'/>
-              <path d='M10.2378 36.9614V45.231H6.27064V30.9267H10.0516V33.4505H10.2192C10.5358 32.6185 11.0667 31.9604 11.8117 31.4762C12.5567 30.9857 13.46 30.7405 14.5217 30.7405C15.515 30.7405 16.3811 30.9578 17.1199 31.3924C17.8587 31.827 18.433 32.4478 18.8428 33.2549C19.2525 34.0558 19.4574 35.0119 19.4574 36.1232V45.231H15.4902V36.831C15.4964 35.9556 15.2729 35.2727 14.8197 34.7822C14.3665 34.2855 13.7425 34.0372 12.9478 34.0372C12.4139 34.0372 11.9421 34.152 11.5323 34.3817C11.1288 34.6115 10.8121 34.9467 10.5824 35.3875C10.3589 35.8221 10.244 36.3467 10.2378 36.9614ZM20.5607 45.231V26.1586H24.5279V33.3294H24.6489C24.8228 32.9445 25.0742 32.5534 25.4033 32.156C25.7385 31.7525 26.1731 31.4172 26.707 31.1502C27.2472 30.8771 27.9177 30.7405 28.7186 30.7405C29.7616 30.7405 30.7239 31.0137 31.6055 31.56C32.4871 32.1001 33.1918 32.9166 33.7195 34.0092C34.2472 35.0957 34.5111 36.4585 34.5111 38.0975C34.5111 39.6931 34.2534 41.0403 33.7381 42.1392C33.229 43.2319 32.5337 44.0607 31.6521 44.6257C30.7767 45.1845 29.7957 45.4638 28.7093 45.4638C27.9394 45.4638 27.2844 45.3366 26.7443 45.082C26.2104 44.8275 25.7727 44.5077 25.4312 44.1228C25.0897 43.7317 24.829 43.3374 24.6489 42.9401H24.472V45.231H20.5607ZM24.4441 38.0789C24.4441 38.9294 24.562 39.6713 24.7979 40.3046C25.0339 40.9379 25.3753 41.4314 25.8223 41.7853C26.2693 42.133 26.8126 42.3068 27.4521 42.3068C28.0977 42.3068 28.6441 42.1299 29.0911 41.776C29.5381 41.4159 29.8765 40.9192 30.1062 40.286C30.3421 39.6465 30.46 38.9108 30.46 38.0789C30.46 37.2532 30.3452 36.5268 30.1155 35.8997C29.8858 35.2727 29.5474 34.7822 29.1004 34.4283C28.6534 34.0744 28.1039 33.8975 27.4521 33.8975C26.8064 33.8975 26.26 34.0682 25.813 34.4097C25.3722 34.7511 25.0339 35.2354 24.7979 35.8625C24.562 36.4895 24.4441 37.2283 24.4441 38.0789Z' fill='white'/>
+            <svg width='18' height='18' viewBox='0 0 152 152' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <rect x='1' y='1' width='150' height='150' rx='20' fill='black'/>
+              <path d='M131.655 55.4545L118.615 134H104.271L78.3835 84.5639H77.7699L69.5241 134H52.9176L65.9574 55.4545H80.5312L106.304 104.852H106.956L115.125 55.4545H131.655Z' fill='#BDBDBD'/>
+              <path d='M114.655 32.4545L101.615 111H87.2713L61.3835 61.5639H60.7699L52.5241 111H35.9176L48.9574 32.4545H63.5312L89.304 81.8523H89.956L98.125 32.4545H114.655Z' fill='#E1DFE1'/>
+              <path d='M96.6548 18.4545L83.6151 97H69.2713L43.3835 47.5639H42.7699L34.5241 97H17.9176L30.9574 18.4545H45.5312L71.304 67.8523H71.956L80.125 18.4545H96.6548Z' fill='#F5F5F5'/>
+              <rect x='1' y='1' width='150' height='150' rx='20' stroke='#B1B1B1'/>
             </svg>
             <p>Notebucket <span>{data.version}</span></p>
           </div>
@@ -104,7 +98,7 @@ export default function Side({ handleSide }) {
         </div>
         <ul className='side__actions'>
           <div className='side__actions-user'>
-            <img src={user.photoURL} alt=''/>
+            <img src={user.photoURL} alt='avatar'/>
             <p className='user__name'>{user.displayName}</p>
             <button className='user__logout' onClick={handleLogout} data-tip data-for='accTip'>
               <svg width='14' height='13' viewBox='0 0 16 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -133,7 +127,7 @@ export default function Side({ handleSide }) {
           <ReactTooltip id='sortTip' effect='solid' type='dark' place='right' className='tooltip' backgroundColor='#000' arrowColor='transparent'>
             <span>Sort notes alphabhetically</span>
           </ReactTooltip>
-          <button type='button' onClick={deleteAll}>
+          <button type='button'>
             <svg width='14' height='17' viewBox='0 0 18 21' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path d='M4.96582 20.7686H13.043C14.3965 20.7686 15.2666 19.9512 15.3369 18.5977L15.9258 5.94141H16.8926C17.3408 5.94141 17.6836 5.58984 17.6836 5.15039C17.6836 4.71094 17.332 4.37695 16.8926 4.37695H12.9902V3.05859C12.9902 1.70508 12.1289 0.914062 10.6611 0.914062H7.32129C5.85352 0.914062 4.99219 1.70508 4.99219 3.05859V4.37695H1.10742C0.667969 4.37695 0.316406 4.71973 0.316406 5.15039C0.316406 5.59863 0.667969 5.94141 1.10742 5.94141H2.07422L2.66309 18.5977C2.7334 19.96 3.59473 20.7686 4.96582 20.7686ZM6.63574 3.1377C6.63574 2.68945 6.95215 2.39941 7.43555 2.39941H10.5469C11.0303 2.39941 11.3467 2.68945 11.3467 3.1377V4.37695H6.63574V3.1377ZM5.1416 19.1953C4.6582 19.1953 4.30664 18.835 4.28027 18.3164L3.69141 5.94141H14.2822L13.7109 18.3164C13.6934 18.8438 13.3506 19.1953 12.8496 19.1953H5.1416ZM6.40723 17.7803C6.78516 17.7803 7.02246 17.543 7.01367 17.1914L6.75 7.99805C6.74121 7.64648 6.49512 7.41797 6.13477 7.41797C5.76562 7.41797 5.52832 7.65527 5.53711 8.00684L5.80078 17.2002C5.80957 17.5518 6.05566 17.7803 6.40723 17.7803ZM9 17.7803C9.36914 17.7803 9.62402 17.5518 9.62402 17.2002V8.00684C9.62402 7.65527 9.36914 7.41797 9 7.41797C8.63086 7.41797 8.38477 7.65527 8.38477 8.00684V17.2002C8.38477 17.5518 8.63086 17.7803 9 17.7803ZM11.5928 17.7891C11.9443 17.7891 12.1904 17.5518 12.1992 17.2002L12.4629 8.00684C12.4717 7.65527 12.2344 7.42676 11.8652 7.42676C11.5049 7.42676 11.2588 7.65527 11.25 8.00684L10.9863 17.2002C10.9775 17.543 11.2148 17.7891 11.5928 17.7891Z' fill='currentColor'/>
             </svg>

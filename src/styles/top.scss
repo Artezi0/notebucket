@@ -22,15 +22,13 @@
     }
 
     &__info {
-        gap: .2em;
-        font-size: 13px;
         display: flex;
         align-items: center;
-
+        gap: .5em;
+        
         &-filename {
+            font-size: 14px;
             font-weight: 600;
-            border-radius: 4px;
-            padding: .2em .4em;
         }
     }
 
@@ -54,6 +52,7 @@
     background: $main_light;
     color: $text_innactive;
     box-shadow: 0 5px 10px 0px rgba(0,0,0,0.05);
+    user-select: none;
 
     &__title {
         font-size: 14px;
@@ -88,7 +87,7 @@
 
         &-export {
             border-radius: 4px;
-            padding: .5em;
+            padding: .3em .5em;
 
             label {
                 display: flex;

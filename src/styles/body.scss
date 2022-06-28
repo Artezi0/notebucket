@@ -10,23 +10,6 @@
         width: 0;
     }
 
-    &__notif {
-        z-index: 10;
-        bottom: 3em;
-        left: 50%;
-        position: fixed;
-        padding: .4em 1em;
-        transform: translateX(-50%);
-        background: #202020;
-        color: $main_light;
-        border-radius: 4px;
-
-        &-text {
-            font-size: 14px;
-            font-weight: 500;
-        }
-    }
-
     &__msg {
         width: 100%;
         height: 100%;
@@ -59,7 +42,7 @@
             transition: .3s;
 
             &:hover {
-                background: $shade_blue;
+                background: $shade_blue !important;
                 color: $main_light;
             }
         }
@@ -300,18 +283,18 @@
         }
 
         &-actions {
+            z-index: 2;
             width: 100%;
-            padding: 0 15% 1em 15%;
+            position: relative;
             display: flex;
             align-items: center;
             gap: .5em;
+            padding: 0 15% 1em 15%;
+            font-size: 14px;
             color: $text_innactive;
-            font-size: 13px;
-            position: relative;
-            z-index: 2;
 
             .status-block {
-                width: 13px;
+                width: 14px;
                 aspect-ratio: 1/1;
                 background: $main_mid;
                 border-radius: 2px;
@@ -324,7 +307,6 @@
             button {
                 display: flex;
                 align-items: center;
-                gap: .5em;
                 padding: .2em .4em;
                 height: fit-content;
                 color: inherit;
@@ -333,6 +315,10 @@
                 
                 &:hover {
                     background: $main_mid;
+                }
+
+                i {
+                    margin-left: .5em;
                 }
             }
 
@@ -356,20 +342,19 @@
                     display: flex;
                     gap: .5em;
                     padding: .2em;
-                    font-size: 13px;
+                    font-size: 14px;
                     font-weight: 600;
                     text-align: left;
                     color: $text_innactive;
                     
                     &-stats {
-                        width: 13px;
+                        width: 14px;
                         aspect-ratio: 1/1;
                         border-radius: 2px;
                     }
 
                     &:hover {
-                        color: $text_active;
-                        background: none;
+                        background: $main_mid;
                     }
                 }
 
@@ -377,191 +362,6 @@
                 button:nth-child(2) > div { background: $shade_yellow; }
                 button:nth-child(3) > div { background: $shade_green; }
                 button:nth-child(4) > div { background: $shade_red; }
-            }
-        }
-
-        &-split {
-            padding: 0 15%;
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 50%);
-            position: relative;
-
-            .input {
-                width: 100%;
-                height: 100%;
-                
-                // Input container style
-                .cm-scroller {
-                    font-family: 'JetBrains Mono', monospace;                    
-                    line-height: 1.3rem;
-                    font-size: 14px;
-                }
-
-                .cm-gutters {
-                    background: none;
-                    color: $text_innactive;
-                }
-                
-                .cm-activeLineGutter, .cm-activeLine { background: $main_mid; }
-                .cm-editor.cm-focused { outline: none; }
-                .cm-selectionMatch { background: $shade_green; }
-                .cm-selectionMatch { background: $shade_lightBlue; }
-                .cm-selectionBackground { background: $main_dark; }
-            
-                // Syntax style 
-                .ͼa { color: $gb-lm-dark-yellow; }
-                .ͼc { color: $gb-lm-dark-aqua; }
-                .ͼ5 { color: $gb-lm-dark-gray; }
-                .ͼ6 {
-                    color: $gb-lm-dark-red;
-                    text-decoration: none;
-                }
-
-                .ͼ6.ͼ5 { color: $gb-lm-dark-gray }
-                .ͼ6.ͼc {
-                    color: $gb-lm-dark-green;
-                    text-decoration: underline;
-                }
-                
-                .ͼ7 {
-                    text-decoration: none;
-                    font-size: 18px;
-                    font-weight: 600;
-                    color: $gb-lm-dark-blue;
-                }
-
-                .ͼ7.ͼ5 { color: $gb-lm-light-blue; }
-                .ͼ8.ͼ5, .ͼ9.ͼ5 { color: $gb-lm-light-orange }
-                .ͼ8, .ͼ9 { color: $gb-lm-dark-orange; }
-                .ͼa.ͼ5 { color: $gb-lm-light-yellow; }
-            }
-
-            .view {
-                // Global stylesheet
-                padding: .5em;
-                font-size: 14px;
-                border-left: 1px solid $main_dark;
-
-                // Header stylesheet
-                h1, h2, h3 { font-weight: 600; }
-                h4, h5, h6 { font-weight: 500; }
-                h1 { font-size: 32px; }
-                h2 { font-size: 24px; }
-                h3 { font-size: 18.72px; }
-                h4 { font-size: 16px; }
-                h5 { font-size: 13.28px; }
-                h6 { font-size: 10.72px; }
-
-                // Other text stylesheet
-                p { line-height: 1.3rem; text-align: justify; }
-                a { color: $shade_blue; }
-
-                blockquote {
-                    border-left: 5px solid $main_mid;
-                    margin: .5em 0;
-                    padding: .5em 10px;
-                    font-weight: 500;
-                    font-style: italic;
-                }
-            
-                // List stylesheet
-                ol, ul { padding-left: 1.2em; }
-            
-                .contains-task-list {
-                    padding: 0;
-                    list-style: none;
-                    line-height: 1.5em;
-
-                    .task-list-item {
-                        input[type="checkbox"]:disabled {
-
-                            &:checked {
-                                background: blue !important;
-                                accent-color: blue !important;
-                                color: blue !important;
-                                accent-color: blue !important;    
-                            }
-                        }
-                    
-                        ul {
-                            li {
-                                margin-left: 1.2em;   
-                            }
-                        }
-                    }
-                }
-            
-                // Codeblock stylesheet
-                code {
-                    background: $main_mid;
-                    border-radius: 2px;
-                    padding: .2em;
-                    font-size: 14px !important;
-                    font-family: 'JetBrains Mono', Courier, monospace !important;
-                }
-            
-                pre {
-                    background: $main_mid;
-                    border-radius: 2px;
-                    padding: .2em 1em;
-
-                    div {
-                        font-size: 20px;
-
-                        code {
-                            padding: 0;
-                            background: none;
-                            border-radius: 0;
-                            font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
-                        }  
-                    }
-                }
-            
-                hr {
-                    width: 100%;
-                    height: .5px;
-                    outline: none;
-                    border: none;
-                    margin: 1em 0;
-                    background: $text_innactive;
-                }
-            
-                // Table stylesheet
-                table {
-                    border: 1px solid $main_dark;
-                    padding: 0;
-                    margin: 0;                    
-                
-                    thead {
-                        background: $main_mid;
-                        font-weight: 500;
-                    
-                        tr {          
-                            padding: 0;
-                            margin: 0;
-                        
-                            th {
-                                font-weight: 600;
-                                padding: .2em 2em;
-                            }
-                        }
-                    }
-                
-                    tbody {
-                        font-size: 14px;
-                        text-align: center;
-                    }
-                }
-            
-                // Katex stylesheet
-                .katex-display {
-                    width: fit-content;
-                    background: $main_mid;
-                    border-radius: 2px;
-                    padding: .5em 1em;
-                    display: flex;
-                }
             }
         }
 
@@ -748,6 +548,15 @@
                     margin: 1em 0;
                 }
             }
+        }
+
+        // Media querries
+        @media screen and (min-width: 320px) and (max-width: 480px) {
+            &-info { padding: 2em 5% 1em 5%; }
+            &-actions { 
+                padding: 0 5% 1em 5%; 
+            }
+            &-main { padding: 0 5%; }
         }
     }
 }
