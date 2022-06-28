@@ -13,7 +13,6 @@ import './styles/app.scss'
 export default function App() {
   const [ sidebar, isSidebar ] = useState(true)
   const [ read, isRead ] = useState(false)
-  const [ split, isSplit ] = useState(false)  
 
   function handleSide() {
     isSidebar(!sidebar)
@@ -55,15 +54,10 @@ export default function App() {
                   <Top 
                     handleSide={handleSide}
                     sidebar={sidebar}
-                    isSplit={isSplit}
-                    split={split}
                     isRead={isRead}
                     read={read}
                   />
-                  <Body
-                    split={split}
-                    read={read}
-                  />
+                  <Body read={read} />
                 </section>
               </main>
             </UserRoutes>

@@ -1,8 +1,6 @@
-import { useState } from 'react'
 import CodeMirror from '@uiw/react-codemirror'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
-import TextareaAutosize from 'react-textarea-autosize'
 
 import { UserAuth } from '../context/AuthContext'
 

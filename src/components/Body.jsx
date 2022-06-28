@@ -8,14 +8,14 @@ import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
-export default function Body({ split, read }) {
+export default function Body({ read }) {
   const [ state, setState ] = useState('Status')
   const [ status, isStatus ] = useState(false)
   const [ modal, isModal ] = useState(false)
   const [ input, isInput ] = useState(false)
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
-  
+  const [ str, setStr ] = useState('')
   
   const { 
     onAdd,
@@ -257,7 +257,6 @@ export default function Body({ split, read }) {
               <div onClick={() => isInput(true)}  className={input ? 'info-name disabled' : 'info-name'}>
                 <form onSubmit={(e) => e.preventDefault() & isInput(false)}>
                   <input 
-                    autoFocus
                     onChange={(e) => onEdit('title', e.target.value)} 
                     value={getActive().title} 
                     spellCheck='false'
@@ -275,18 +274,9 @@ export default function Body({ split, read }) {
               <button type='button' className='actions__delete' onClick={onDelete}>Delete note</button>
             </div>
           </div>
-          {split ?
-          <div className="body__header-split">
-            <Edit />
-            <View  />
-          </div> : 
           <div className="body__header-main">
-            {read ? 
-            <View /> :
-            <Edit />
-            }
+            {read ? <View /> : <Edit />}
           </div> 
-          }
         </>
       }
     </section>
