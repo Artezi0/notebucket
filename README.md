@@ -1,7 +1,7 @@
 <!-- Cover -->
 <div align='center'>
 
-<img src='./src/assets/logo.svg' alt='logo' width=120>
+<img src='https://i.ibb.co/1RMFF12/Frame-21.png' alt='logo' width=100>
 
 <br>
 <br>

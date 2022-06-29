@@ -13,19 +13,15 @@
     &__header {
         text-align: center;
 
-        h1 {
-            font-size: 50px;
-            font-weight: 700;
+        svg {
+            margin-bottom: 1em;
         }
 
-        p {
-            margin-top: .5em;
-            font-size: 14px;
-            font-weight: 500;
-
-            a {
-                color: $shade_blue;
-            }
+        h3 {
+            margin-bottom: .2em;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 90%;
         }
     }
 
@@ -38,7 +34,14 @@
         align-items: center;
         gap: .5em;
         padding-bottom: 1em;
-        border-bottom: 1px solid $main_dark;
+
+        p {
+            margin-top: 1em;
+            text-align: justify;
+            font-size: 14px;
+            font-weight: 500;
+            color: $text_innactive;
+        }
 
         button {
             width: 100%;
@@ -55,156 +58,9 @@
         }
     }
 
-    &__form {
-        width: 20em;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: .5em;
-
-        p {
-            font-size: 14px;
-            font-weight: 500;
-            color: $shade_red;
-        }
-        
-        input {
-            width: 100%;
-            padding: .6em 0 .6em 1em;
-            background: $main_mid;
-            border: 1px solid $main_dark;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: rgb(15 15 15 / 5%) 0px 1px 2px;
-
-            &:focus {
-                outline: 2px solid $shade_lightBlue;
-            }
-        }
-
-        button {
-            width: 100%;
-            padding: .6em 0;
-            background: $shade_lightBlue;
-            color: $shade_blue;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: rgb(15 15 15 / 5%) 0px 1px 2px;
-
-            &:hover {
-                background: $shade_blue;
-                color: $main_light;
-            }
-        }
+    .error {
+        font-size: 14px;
+        font-weight: 500;
+        color: $shade_red;
     }
 }
-
-
-.sign {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-    user-select: none;
-
-    &__header {
-        text-align: center;
-
-        h1 {
-            font-size: 50px;
-            font-weight: 700;
-        }
-
-        p {
-            margin-top: .5em;
-            font-size: 14px;
-            font-weight: 500;
-
-            a {
-                color: $shade_blue;
-            }
-        }
-    }
-
-    &__btn {
-        width: 20em;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: .5em;
-        padding-bottom: 1em;
-        border-bottom: 1px solid $main_dark;
-
-        button {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid $main_dark;
-            border-radius: 4px;
-            padding: .6em 0;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: rgb(15 15 15 / 5%) 0px 1px 2px;
-            gap: .5em;
-        }
-    }
-
-    &__form {
-        width: 20em;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: .5em;
-
-        p {
-            font-size: 14px;
-            font-weight: 500;
-            color: $shade_red;
-        }
-        
-        input {
-            width: 100%;
-            padding: .6em 0 .6em 1em;
-            background: $main_mid;
-            border: 1px solid $main_dark;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: rgb(15 15 15 / 5%) 0px 1px 2px;
-
-            &:focus {
-                outline: 2px solid $shade_lightBlue;
-            }
-        }
-
-        button {
-            width: 100%;
-            padding: .6em 0;
-            background: $shade_lightBlue;
-            color: $shade_blue;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: rgb(15 15 15 / 5%) 0px 1px 2px;
-
-            &:hover {
-                background: $shade_blue;
-                color: $main_light;
-            }
-        }
-    }
-}
-
-
