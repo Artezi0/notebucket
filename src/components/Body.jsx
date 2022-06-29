@@ -14,14 +14,13 @@ export default function Body({ read }) {
   const [ input, isInput ] = useState(false)
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
-  
   const { 
     onAdd,
     onUpdate,
     onDelete,
     active, 
     getActive } = UserAuth()
-  
+    
   function handleStatusText() {
     if(getActive().stats == '#E8E7E3') { return 'Active' }
     if(getActive().stats == '#FFBD44') { return 'Delayed' } 
@@ -70,7 +69,7 @@ export default function Body({ read }) {
       if(file.size < 5000000) {
         isNotif(true)
         setInfo('Uploading...')        
-        let resp = await fetch('https://api.cloudinary.com/v1_1/artezi0/image/upload', {
+        let resp = await fetch(import.meta.env.VITE_IMGBB_API, {
           method: 'POST',
           body: data
         })

@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = initializeApp({
-  apiKey: 'AIzaSyDgMEojn5fQBQAYU6XGnZiuoa_tvGNf2fM',
+  apiKey: import.meta.env.VITE_FIREBASE_API,
   authDomain: 'notebucket-d3638.firebaseapp.com',
   projectId: 'notebucket-d3638',
   storageBucket: 'notebucket-d3638.appspot.com',
