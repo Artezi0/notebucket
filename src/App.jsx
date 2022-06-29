@@ -12,7 +12,7 @@ import './styles/app.scss'
 export default function App() {
   const [ sidebar, isSidebar ] = useState(true)
   const [ read, isRead ] = useState(false)
-
+  
   function handleSide() {
     isSidebar(!sidebar)
     document.getElementById('left').classList.toggle('disabled')
