@@ -8,7 +8,6 @@ import View from './View'
 import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
-import ReactTextareaAutosize from 'react-textarea-autosize'
 
 export default function Body({ read }) {
   const [ status, isStatus ] = useState(false)

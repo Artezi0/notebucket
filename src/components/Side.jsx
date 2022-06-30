@@ -87,7 +87,7 @@ export default function Side({ handleSide, setUser }) {
             </svg>
             <p>Notebucket <span>{data.version}</span></p>
           </div>
-          <button type='button' onClick={handleSide} data-tip data-for='sideTip'>
+          <button type='button' aria-label='Toggle sidebar' onClick={handleSide} data-tip data-for='sideTip'>
             <svg width='22' height='22' viewBox='0 0 28 28' fill='none' xmlns='https://www.w3.org/2000/svg'>
               <path d='M14 6.85156C13.2266 5.9375 11.5039 5.12012 9.48242 5.12012C6.78418 5.12012 4.60449 6.51758 4.02441 7.84473V21.0371C4.02441 21.8984 4.58691 22.2324 5.21094 22.2324C5.67676 22.2324 5.94043 22.0918 6.23926 21.8721C6.83691 21.3887 7.8125 20.8262 9.48242 20.8262C11.1611 20.8262 12.3037 21.3887 12.8135 21.8193C13.0947 22.0303 13.4199 22.2324 14 22.2324C14.5801 22.2324 14.8965 22.0127 15.1865 21.8193C15.7314 21.415 16.8389 20.8262 18.5176 20.8262C20.1875 20.8262 21.1807 21.3975 21.7607 21.8721C22.0596 22.0918 22.3232 22.2324 22.7891 22.2324C23.4131 22.2324 23.9756 21.8984 23.9756 21.0371V7.84473C23.3955 6.51758 21.2246 5.12012 18.5176 5.12012C16.4961 5.12012 14.7822 5.9375 14 6.85156ZM5.93164 8.45117C6.16895 7.87109 7.46973 6.88672 9.48242 6.88672C11.4951 6.88672 12.8398 7.87988 13.0508 8.45117V20.0439C12.1455 19.3936 10.8535 19.042 9.48242 19.042C8.10254 19.042 6.81934 19.3936 5.93164 20.0703V8.45117ZM22.0684 8.45117V20.0703C21.1807 19.3936 19.8975 19.042 18.5176 19.042C17.1465 19.042 15.8545 19.3936 14.9492 20.0439V8.45117C15.1602 7.87988 16.5049 6.88672 18.5176 6.88672C20.5303 6.88672 21.8311 7.87109 22.0684 8.45117Z' fill='currentColor'/>
             </svg>
@@ -96,11 +96,11 @@ export default function Side({ handleSide, setUser }) {
             <span>Toggle Sidebar</span>
           </ReactTooltip>   
         </div>
-        <ul className='side__actions'>
+        <div className='side__actions'>
           <div className='side__actions-user'>
-            <img src={user.photoURL} alt='avatar'/>
+            <img src={user.photoURL ? 'https://i.pinimg.com/280x280_RS/55/96/4e/55964ebb02710d6b9ce1c26f1d857906.jpg' : user.photoURL} alt='avatar' width="18" height="18"/>
             <p className='user__name'>{user.displayName}</p>
-            <button className='user__logout' onClick={handleLogout} data-tip data-for='accTip'>
+            <button type='button' aria-label='Log out' className='user__logout' onClick={handleLogout} data-tip data-for='accTip'>
               <svg width='14' height='13' viewBox='0 0 16 15' fill='none' xmlns='https://www.w3.org/2000/svg'>
                 <path d='M0.125 7.50488C0.125 8.06738 0.520508 8.46289 1.10059 8.46289H9.2832L11.1377 8.375L8.55371 10.7217L6.76953 12.5322C6.59375 12.708 6.48828 12.9453 6.48828 13.2178C6.48828 13.7539 6.88379 14.1494 7.42871 14.1494C7.68359 14.1494 7.9209 14.0439 8.13184 13.833L13.6953 8.2168C13.8447 8.07617 13.9414 7.90039 13.9854 7.70703V13.3145C13.9854 13.8506 14.3896 14.2373 14.9346 14.2373C15.4707 14.2373 15.875 13.8506 15.875 13.3145V1.7041C15.875 1.15918 15.4707 0.763672 14.9346 0.763672C14.3896 0.763672 13.9854 1.15918 13.9854 1.7041V7.30273C13.9414 7.10938 13.8447 6.93359 13.6953 6.78418L8.13184 1.16797C7.9209 0.957031 7.68359 0.860352 7.42871 0.860352C6.88379 0.860352 6.48828 1.24707 6.48828 1.7832C6.48828 2.05566 6.59375 2.29297 6.76953 2.46875L8.55371 4.2793L11.1289 6.62598L9.2832 6.53809H1.10059C0.520508 6.53809 0.125 6.93359 0.125 7.50488Z' fill='currentColor'/>
               </svg>
@@ -133,7 +133,7 @@ export default function Side({ handleSide, setUser }) {
             </svg>
             Delete all
           </button>
-        </ul>
+        </div>
         <div className='side__status'>
           <div className='side__status-btn'>
             <button type='button'>
@@ -150,19 +150,19 @@ export default function Side({ handleSide, setUser }) {
               Active
             </button>
             {ongoing && 
-            <ul className='list__notes'>
-            {sortedActive.map(({ id, title }) => {
-            return (
-            <div className={`note ${id === active && 'active'}`}
-                onClick={() => setActive(id)} 
-                key={id}>
-              <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
-              </svg>
-              <p className='note__title'>{handleTitle(title)}</p>
-            </div>       
-            )})}
-            </ul>
+            <div className='list__notes'>
+              {sortedActive.map(({ id, title }) => {
+              return (
+                <div className={`note ${id === active && 'active'}`}
+                    onClick={() => setActive(id)} 
+                    key={id}>
+                  <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
+                    <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
+                  </svg>
+                  <p className='note__title'>{handleTitle(title)}</p>
+                </div>       
+              )})}
+            </div>
             }
           </div>
           <div className='side__status-list'>
@@ -172,19 +172,19 @@ export default function Side({ handleSide, setUser }) {
               Delayed
             </button>
             {delayed && 
-            <ul className='list__notes'>
-            {sortedDelayed.map(({ id, title }) => {
-            return (
-            <div className={`note ${id === active && 'active'}`}
-                onClick={() => setActive(id)} 
-                key={id}>
-              <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
-              </svg>
-              <p className='note__title'>{handleTitle(title)}</p>
-            </div>       
-            )})}
-            </ul>
+            <div className='list__notes'>
+              {sortedDelayed.map(({ id, title }) => {
+              return (
+                <div className={`note ${id === active && 'active'}`}
+                    onClick={() => setActive(id)} 
+                    key={id}>
+                  <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
+                    <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
+                  </svg>
+                  <p className='note__title'>{handleTitle(title)}</p>
+                </div>       
+              )})}
+            </div>
             }
           </div>
           <div className='side__status-list'>
@@ -194,19 +194,19 @@ export default function Side({ handleSide, setUser }) {
               Completed
             </button>
             {completed && 
-            <ul className='list__notes'>
-            {sortedCompleted.map(({ id, title }) => {
-            return (
-            <div className={`note ${id === active && 'active'}`}
-                onClick={() => setActive(id)} 
-                key={id}>
-              <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
-              </svg>
-              <p className='note__title'>{handleTitle(title)}</p>
-            </div>       
-            )})}
-            </ul>
+            <div className='list__notes'>
+              {sortedCompleted.map(({ id, title }) => {
+              return (
+                <div className={`note ${id === active && 'active'}`}
+                    onClick={() => setActive(id)} 
+                    key={id}>
+                  <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
+                    <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
+                  </svg>
+                  <p className='note__title'>{handleTitle(title)}</p>
+                </div>       
+              )})}
+            </div>
             }
           </div>
           <div className='side__status-list'>
@@ -216,19 +216,19 @@ export default function Side({ handleSide, setUser }) {
               Dropped
             </button>
             {dropped && 
-            <ul className='list__notes'>
-            {sortedDropped.map(({ id, title }) => {
-            return (
-            <div className={`note ${id === active && 'active'}`}
-                onClick={() => setActive(id)} 
-                key={id}>
-              <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
-              </svg>
-              <p className='note__title'>{handleTitle(title)}</p>
-            </div>       
-            )})}
-            </ul>              
+            <div className='list__notes'>
+              {sortedDropped.map(({ id, title }) => {
+              return (
+                <div className={`note ${id === active && 'active'}`}
+                    onClick={() => setActive(id)} 
+                    key={id}>
+                  <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
+                    <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
+                  </svg>
+                  <p className='note__title'>{handleTitle(title)}</p>
+                </div>       
+              )})}
+            </div>              
             }
           </div>
         </div>
@@ -240,7 +240,7 @@ export default function Side({ handleSide, setUser }) {
               </svg>
               Notes
             </button>
-            <button type='button' onClick={onAdd} data-tip data-for='addTip'>
+            <button type='button' aria-label='Add note' onClick={onAdd} data-tip data-for='addTip'>
               <svg width='10' height='10' viewBox='0 0 16 16' fill='none' xmlns='https://www.w3.org/2000/svg'>
                 <path d='M1.63672 8.65625H6.99805V14.0176C6.99805 14.5625 7.44629 15.0195 8 15.0195C8.55371 15.0195 9.00195 14.5625 9.00195 14.0176V8.65625H14.3633C14.9082 8.65625 15.3652 8.20801 15.3652 7.6543C15.3652 7.10059 14.9082 6.65234 14.3633 6.65234H9.00195V1.29102C9.00195 0.746094 8.55371 0.289062 8 0.289062C7.44629 0.289062 6.99805 0.746094 6.99805 1.29102V6.65234H1.63672C1.0918 6.65234 0.634766 7.10059 0.634766 7.6543C0.634766 8.20801 1.0918 8.65625 1.63672 8.65625Z' fill='currentColor'/>
               </svg>
@@ -249,8 +249,8 @@ export default function Side({ handleSide, setUser }) {
               <span>Create note</span>
             </ReactTooltip>   
           </div>
-          <ul className='side__notes-list'>
-          {sorted.map(({ id, title }) => {
+          <div className='side__notes-list'>
+            {sorted.map(({ id, title }) => {
             return (
               <div className={`note ${id === active && 'active'}`}
                   onClick={() => setActive(id)} 
@@ -261,8 +261,8 @@ export default function Side({ handleSide, setUser }) {
                 <p className='note__title'>{handleTitle(title)}</p>
               </div>       
             )})
-          }
-          </ul> 
+            }
+          </div> 
         </div>
       </div>
     </>

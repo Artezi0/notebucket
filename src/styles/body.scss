@@ -34,15 +34,15 @@
         button {
             margin-top: 1em;
             padding: .4em .8em;
-            color: $shade_blue;
+            color: $main_light;
             font-weight: 500;
             font-size: 14px !important;
-            background: $shade_lightBlue !important;
+            background: $shade_blue !important;
             border-radius: 4px;
             transition: .3s;
 
             &:hover {
-                background: $shade_blue !important;
+                background: $text_active!important;
                 color: $main_light;
             }
         }

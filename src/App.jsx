@@ -12,6 +12,7 @@ import './styles/app.scss'
 export default function App() {
   const [ sidebar, isSidebar ] = useState(true)
   const [ read, isRead ] = useState(false)
+  const [ theme, setTheme ] = useState()
   
   function handleSide() {
     isSidebar(!sidebar)
@@ -52,6 +53,7 @@ export default function App() {
                     sidebar={sidebar}
                     isRead={isRead}
                     read={read}
+                    setTheme={theme}
                   />
                   <Body read={read} />
                 </section>
