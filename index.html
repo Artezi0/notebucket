@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <base href="/">
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./src/assets/logo.svg" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
@@ -21,5 +22,8 @@
   <body>
     <div id="root"></div>
     <script type="module" src="./src/index.jsx"></script>
+    <script>
+      System.config({ baseURL: '/' })
+    </script>
   </body>
 </html>
