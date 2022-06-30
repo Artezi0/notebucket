@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import ReactTooltip from 'react-tooltip'
+import { FaCaretRight, FaCaretDown } from 'react-icons/fa'
 
 import Spotlight from './Spotlight'
 import data from '../../package.json'
@@ -145,7 +146,7 @@ export default function Side({ handleSide, setUser }) {
           </div>
           <div className='side__status-list'>
             <button type='button' className='list__btn' onClick={() => isOngoing(!ongoing)}>
-              <i className={ongoing ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+              {ongoing ? <FaCaretDown/> : <FaCaretRight/>}
               <div className='list__btn-stats active'></div>
               Active
             </button>
@@ -167,7 +168,7 @@ export default function Side({ handleSide, setUser }) {
           </div>
           <div className='side__status-list'>
             <button type='button' className='list__btn' onClick={() => isDelayed(!delayed)}>
-              <i className={delayed ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+              {delayed ? <FaCaretDown/> : <FaCaretRight/>}
               <div className='list__btn-stats delayed'></div>
               Delayed
             </button>
@@ -189,7 +190,7 @@ export default function Side({ handleSide, setUser }) {
           </div>
           <div className='side__status-list'>
             <button type='button' className='list__btn' onClick={() => isCompleted(!completed)}>
-              <i className={completed ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+              {completed ? <FaCaretDown/> : <FaCaretRight/>}
               <div className='list__btn-stats completed'></div>
               Completed
             </button>
@@ -211,7 +212,7 @@ export default function Side({ handleSide, setUser }) {
           </div>
           <div className='side__status-list'>
             <button type='button' className='list__btn' onClick={() => isDropped(!dropped)}>
-              <i className={dropped ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i>
+              {dropped ? <FaCaretDown/> : <FaCaretRight/>}
               <div className='list__btn-stats dropped'></div>
               Dropped
             </button>
