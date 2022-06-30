@@ -45,8 +45,8 @@ export default function Login() {
         <button type="button" onClick={handleGoogle}><FcGoogle />Continue with Google</button>
         <button type="button" onClick={handleGithub}><BsGithub />Continue with Github</button>
         <p>
-          Organize your documents with Notebucket. Write your notes, todos or anyting and customize 
-          them freelly.
+          Organize your documents with Notebucket. Write your notes, todos or anything and customize 
+          them freely.
         </p>
       </div>
       {error && <p className="error">{error}</p>}

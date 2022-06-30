@@ -26,28 +26,15 @@ $shade_red: #FF605C;
 $shade_yellow: #FFBD44; 
 $shade_green: #89CA00;
 
+$text_big: 40px;
+$text_medium: 16px;
+$text_small: 14px;
+
 // ----------------------------------------------------------------------------
 // Gruvbox scss file
 // June 18 2017
 // Author: Will Tanna
 // ----------------------------------------------------------------------------
-
-// Background
-$gb-lm-bg0: #fbf1c7;
-$gb-lm-bg0-hard: #f9f5d7;
-$gb-lm-bg0-soft: #f2e5bc;
-$gb-lm-bg1: #ebdbb2;
-$gb-lm-bg2: #d5c4a1;
-$gb-lm-bg3: #bdae93;
-$gb-lm-bg4: #a89984;
-
-// Foreground
-$gb-lm-fg0: #282828;
-$gb-lm-fg1: #3c3836;
-$gb-lm-fg2: #504945;
-$gb-lm-fg3: #665c54;
-$gb-lm-fg4: #7c6f64;
-
 // Colors
 $gb-lm-dark-red: #e64a1f;
 $gb-lm-dark-green: #98971a;
@@ -158,7 +145,5 @@ $gb-lm-light-gray: #7c6f64;
                 display: none;
             }
         }
-    
-       
     }
 }

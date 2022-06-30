@@ -108,24 +108,15 @@ export function AuthContextProvider({ children }) {
 
   /* Update user data */ 
   async function onUpdate(updated) {
-    const arrays = notes.map((note) => {
-      if (note.id === updated.id) {
-        return updated
-      }
-
-     return note
-    })
-    
-    const x = arrays.find(({ id }) => id === active)
     await updateDoc(doc(db, user.uid, active), {
-      title: x.title,
-      lastModified: x.lastModified,
-      stats: x.stats,
+      title: updated.title,
+      lastModified: updated.lastModified,
+      stats: updated.stats,
       cover: {
-        isCover: x.cover.isCover,
-        value: x.cover.value
+        isCover: updated.cover.isCover,
+        value: updated.cover.value
       },
-      body: x.body,
+      body: updated.body,
     })
   }
 

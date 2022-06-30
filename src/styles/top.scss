@@ -27,7 +27,7 @@
         gap: .5em;
         
         &-filename {
-            font-size: 14px;
+            font-size: $text_small;
             font-weight: 600;
         }
     }
@@ -55,7 +55,7 @@
     user-select: none;
 
     &__title {
-        font-size: 14px;
+        font-size: $text_small;
         font-weight: 600;
         margin-bottom: .5em;
     }
@@ -76,7 +76,7 @@
                 align-items: center;
                 justify-content: flex-start;
                 gap: .5em;
-                font-size: 14px;
+                font-size: $text_small;
                 font-weight: 600;
             }
 
@@ -94,7 +94,7 @@
                 align-items: flex-start;
                 justify-content: flex-start;
                 gap: .5em;
-                font-size: 14px;
+                font-size: $text_small;
                 font-weight: 600;
 
                 span {
@@ -118,7 +118,7 @@
 
         li {
             padding: .5em;
-            font-size: 14px;
+            font-size: $text_small;
             font-weight: 600;
             border-radius: 4px;
             list-style: none;

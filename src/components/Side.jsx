@@ -51,8 +51,8 @@ export default function Side({ handleSide, setUser }) {
   } 
 
   function handleTitle(e) {
-    if (e.length > 20) {
-      return e.slice(0, 20) + '...'
+    if (e.length > 15) {
+      return e.slice(0, 15) + '...'
     } 
 
     return e

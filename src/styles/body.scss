@@ -253,24 +253,19 @@
                 max-width: 100%;
                 height: fit-content;
                 position: relative;
-                cursor: pointer;
+                right: 1em;
 
-                input {
+                .input {
                     width: 100%;
+                    font-family: inherit;                    
                     font-size: 40px;
                     font-weight: 700;
-                    font-family: inherit;
                     border: none;
-                    padding-bottom: .2em;
+                    color: $text_active;
+                    background: none;
 
                     &:focus {
                         outline: none;
-                    }
-
-                    &:disabled {
-                        color: $text_active;
-                        background: none;
-                        cursor: pointer;
                     }
                 }
             }    
@@ -380,12 +375,24 @@
                     font-family: 'JetBrains Mono', monospace;                    
                     line-height: 1.3rem;
                     font-size: 14px;
+                    font-weight: 500;
                     overflow: hidden;
                 }
                 
                 .cm-gutters {
                     background: none;
                     color: $text_innactive;
+                }
+
+                // Media querries
+                @media screen and (min-width: 320px) and (max-width: 480px) {
+                    .cm-gutters {
+                        display: none;
+                    }
+
+                    .cm-scroller {
+                        overflow-x: scroll;
+                    }
                 }
                 
                 .cm-activeLineGutter, .cm-activeLine { background: $main_mid; }
@@ -397,6 +404,9 @@
                 // Syntax style 
                 .ͼa { color: $gb-lm-dark-yellow; }
                 .ͼc { color: $gb-lm-dark-aqua; }
+                .ͼe { color: $gb-lm-dark-green; }
+                .ͼi { color: $gb-lm-dark-orange; }
+                .ͼm { color: $text_innactive; }
                 .ͼ5 { color: $gb-lm-dark-gray; }
                 .ͼ6 {
                     color: $gb-lm-dark-red;
@@ -427,7 +437,7 @@
                 font-size: 14px;
              
                 // Header stylesheet
-                h1, h2, h3 { font-weight: 600; }
+                h1, h2, h3 { font-weight: 600; padding-bottom: .5em; }
                 h4, h5, h6 { font-weight: 500; }
                 h1 { font-size: 32px; }
                 h2 { font-size: 24px; }
@@ -449,7 +459,12 @@
                 }
 
                 // List stylesheet
-                ol, ul { padding-left: 1.2em; }
+                ol, ul { 
+                    padding-left: 1.2em; 
+                    li {
+                        margin: .5em 0;
+                    }
+                }
 
                 .contains-task-list {
                     padding: 0;
@@ -544,6 +559,7 @@
 
                 // Image stylesheet
                 img {
+                    max-width: 100%;
                     display: block;
                     margin: 1em 0;
                 }

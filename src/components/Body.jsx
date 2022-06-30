@@ -1,12 +1,14 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { HexColorPicker } from 'react-colorful'
 import React, { useState } from 'react'
+import CodeEditor from '@uiw/react-textarea-code-editor';
 
 import Edit from './Edit'
 import View from './View'
 import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
+import ReactTextareaAutosize from 'react-textarea-autosize'
 
 export default function Body({ read }) {
   const [ status, isStatus ] = useState(false)
@@ -20,7 +22,7 @@ export default function Body({ read }) {
     onDelete,
     active, 
     getActive } = UserAuth()
-    
+      
   function handleStatusText() {
     if(getActive().stats == '#E8E7E3') { return 'Active' }
     if(getActive().stats == '#FFBD44') { return 'Delayed' } 
@@ -248,12 +250,12 @@ export default function Body({ read }) {
             <div className='body__header-info'>
               <div onClick={() => isInput(true)}  className={input ? 'info-name disabled' : 'info-name'}>
                 <form onSubmit={(e) => e.preventDefault() & isInput(false)}>
-                  <input
-                    onChange={(e) => onEdit('title', e.target.value)} 
-                    value={getActive().title} 
-                    spellCheck='false'
-                    disabled={input ? false : true}
-                  />
+                <CodeEditor
+                  className='input'
+                  value={getActive().title}
+                  onChange={(evn) => onEdit('title', evn.target.value)}                 
+                  padding={15}
+                />            
                 </form>
               </div>
               <p className='info-date'>Last modified {handleDateStr()}</p>
