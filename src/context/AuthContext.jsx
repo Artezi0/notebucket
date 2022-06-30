@@ -22,17 +22,22 @@ export function AuthContextProvider({ children }) {
   useEffect(() => {
     const authChange = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
-      onSnapshot(collection(db, currentUser.uid), (snapShot) => {
-        let list = []  
-        
-        snapShot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() })
+      if (currentUser) { 
+        navigate('/notes')
+        onSnapshot(collection(db, currentUser.uid), (snapShot) => {
+          let list = []  
+          
+          snapShot.docs.forEach((doc) => {
+            list.push({ id: doc.id, ...doc.data() })
+          })  
+          setNotes(list)
+        }, 
+        (error) => {
+          console.warn(error)
         })  
-        setNotes(list)
-      }, 
-      (error) => {
-        console.warn(error)
-      })        
+      }
+      
+      if (!user) { navigate('/') }
     })
     
     return () => {
