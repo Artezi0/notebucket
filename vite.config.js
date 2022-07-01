@@ -9,8 +9,10 @@ export default defineConfig({
     viteCompression(),
     VitePWA({ 
       registerType: 'autoUpdate', 
-      injectRegister: 'inline',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      injectRegister: 'auto',
+      workbox: {
+        globPatterns: ['**/*{js,css,html,ico,png,svg}']  
+      },
       manifest: {
         name: 'Notebcuket',
         short_name: 'Notebucket',
@@ -18,33 +20,25 @@ export default defineConfig({
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'fullscreen',
-        orientation: "portrait",
+        orientation: 'portrait',
         scope: '/',
         start_url: 'https://notebuckett.netlify.app/',
         icons: [
           {
-            src: "pwa-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-            purpose: "any maskable"
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
           },
           {
-            src: "pwa-256x256.png",
-            sizes: "256x256",
-            type: "image/png",
-            purpose: "any"
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
           },
           {
-            src: "pwa-384x384.png",
-            sizes: "384x384",
-            type: "image/png",
-            purpose: "any"
-          },
-          {
-            src: "pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any"
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
           }
         ]
       }
