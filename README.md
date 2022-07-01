@@ -18,7 +18,7 @@
 
 <!-- Description -->
 ## Notebucket 📒
-Tired of seeing your notes scattered around and untidy? Organize your documents with Notebucket. With powerfull markdown editor build with codemirror, write your notes, todos or anyting and customize them freelly.
+Tired of seeing your notes scattered around and untidy? Organize your documents with Notebucket. With powerfull markdown editor build with codemirror, write your notes, todos or anything and customize them freely.
 
 <img src='./src/assets/Screenshot1.png' alt='Scr1'>
 
