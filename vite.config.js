@@ -19,31 +19,31 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'fullscreen',
         scope: '/',
-        start_url: 'https://notebucket.netlify.app/',
+        start_url: 'https://notebuckett.netlify.app/',
         icons: [
           {
             "src": "src/assets/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png",
-            "purpose": "maskable"
+            "purpose": "any"
           },
           {
             "src": "src/assets/icon-256x256.png",
             "sizes": "256x256",
             "type": "image/png",
-            "purpose": "maskable"
+            "purpose": "any"
           },
           {
             "src": "src/assets/icon-384x384.png",
             "sizes": "384x384",
             "type": "image/png",
-            "purpose": "maskable"
+            "purpose": "any"
           },
           {
             "src": "src/assets/icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png",
-            "purpose": "maskable"
+            "purpose": "any"
           }
         ]
       }
