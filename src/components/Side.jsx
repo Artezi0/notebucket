@@ -9,7 +9,7 @@ import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
-export default function Side({ handleSide, setUser }) {
+export default function Side({ handleSide }) {
   const [ ongoing, isOngoing ] = useState(false) 
   const [ delayed, isDelayed ] = useState(false) 
   const [ completed, isCompleted ] = useState(false) 
@@ -17,14 +17,7 @@ export default function Side({ handleSide, setUser }) {
   const [ state, setState ] = useState(true)
   const [ spot, isSpot ] = useState(false)
   const navigate = useNavigate()
-  
-  const { 
-    user, 
-    notes,
-    onAdd,
-    active,
-    setActive,
-    logout } = UserAuth()
+  const { user, notes, onAdd, active, setActive, logout } = UserAuth()
 
   let sorted
   let sortedActive = notes.filter((note) => note.stats.includes('#E8E7E3'))
@@ -76,7 +69,7 @@ export default function Side({ handleSide, setUser }) {
   return (
     <>
       {spot && <Spotlight isSpot={isSpot} />}
-      <div className='side'>
+      <section className='side'>
         <div className='side__header'>
           <div className='side__header-logo'>
             <svg width='18' height='18' viewBox='0 0 152 152' fill='none' xmlns='https://www.w3.org/2000/svg'>
@@ -265,7 +258,7 @@ export default function Side({ handleSide, setUser }) {
             }
           </div> 
         </div>
-      </div>
+      </section>
     </>
   )
 }

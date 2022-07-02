@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { HexColorPicker } from 'react-colorful'
-import React, { useState } from 'react'
-import CodeEditor from '@uiw/react-textarea-code-editor';
+import CodeEditor from '@uiw/react-textarea-code-editor'
+import { FaCaretRight, FaCaretDown } from 'react-icons/fa'
 
 import Edit from './Edit'
 import View from './View'
@@ -15,12 +16,7 @@ export default function Body({ read }) {
   const [ input, isInput ] = useState(false)
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
-  const { 
-    onAdd,
-    onUpdate,
-    onDelete,
-    active, 
-    getActive } = UserAuth()
+  const { onAdd, onUpdate, onDelete, active, getActive } = UserAuth()
       
   function handleStatusText() {
     if(getActive().stats == '#E8E7E3') { return 'Active' }
@@ -262,8 +258,9 @@ export default function Body({ read }) {
             <div className='body__header-actions'>
               {status && <Status />}
               <div className='status-block' style={{ background: `${getActive().stats}` }}></div>
-              <button type='button' className='actions__stats' onClick={() => isStatus(!status)}>{handleStatusText()} <i className={status ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-right'}></i></button>
-              <button type='button' className='actions__cover' onClick={() => onUpdate({...getActive(), cover: {isCover: true, value: getActive().cover.value}, lastModified: Date.now()})}>Add Cover</button>
+              <button type='button' className='actions__stats' onClick={() => isStatus(!status)}>{handleStatusText()}{status ? <FaCaretDown /> : <FaCaretRight />}</button>
+              {/* <button type='button' className='actions__icon'>Add icon</button> */}
+              <button type='button' className='actions__cover' onClick={() => onUpdate({...getActive(), cover: {isCover: true, value: getActive().cover.value}, lastModified: Date.now()})}>Add cover</button>
               <button type='button' className='actions__delete' onClick={onDelete}>Delete note</button>
             </div>
           </div>

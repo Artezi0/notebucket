@@ -1,16 +1,13 @@
-import React from "react"
-import ReactMarkdown from "react-markdown"
+import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { gruvboxLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import rehypeRaw from 'rehype-raw'
+import rehypeKatex from 'rehype-katex'
+import remarkRehype from 'remark-rehype'
+import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
 
-import { UserAuth } from "../context/AuthContext"
-
-// Markdown Plugins
-import rehypeRaw from "rehype-raw"
-import rehypeKatex from "rehype-katex"
-import remarkRehype from "remark-rehype"
-import remarkGfm from "remark-gfm"
-import remarkMath from "remark-math"
+import { UserAuth } from '../context/AuthContext'
 
 export default function View() {
   const { getActive } = UserAuth()
@@ -35,7 +32,7 @@ export default function View() {
                 padding: '0',
               }}
               language={match[1]}
-              PreTag="div"
+              PreTag='div'
               {...props}
             />
           ) : (

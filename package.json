@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/gutter": "^0.19.9",
     "@codemirror/lang-markdown": "^6.0.0",
     "@codemirror/language-data": "^6.1.0",
     "@uiw/react-codemirror": "^4.9.4",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import Body from './components/Body'
@@ -8,6 +8,7 @@ import Login from './components/Login'
 import { AuthContextProvider } from './context/AuthContext'
 
 import './styles/app.scss'
+import Home from './components/Home'
 
 export default function App() {
   const [ sidebar, isSidebar ] = useState(true)
@@ -39,10 +40,9 @@ export default function App() {
     <AuthContextProvider>
       <main className='App'>
         <Routes>
-          <Route path='/' element={    
-            <Login />
-          }/>
-          <Route path='/notes' element={
+          <Route path='/'>
+            <Route index element={<Login />} />
+            <Route path='notes' element={ 
               <main className='App__app'>
                 <section className='App__app-left' id='left'>
                   <Side handleSide={handleSide}/>
@@ -58,7 +58,8 @@ export default function App() {
                   <Body read={read} />
                 </section>
               </main>
-          }/>
+            }/>
+          </Route>
         </Routes>
       </main>
     </AuthContextProvider>

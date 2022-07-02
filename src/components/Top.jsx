@@ -1,19 +1,19 @@
-import { collection, addDoc } from 'firebase/firestore'
-import ReactTooltip from 'react-tooltip'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import FileSaver from 'file-saver'
+import ReactTooltip from 'react-tooltip'
+import { collection, addDoc } from 'firebase/firestore'
 
-import { db } from '../firebase'
 import { UserAuth } from '../context/AuthContext'
+import { db } from '../firebase'
 
 import '../styles/app.scss'
 
-export default function Top({ handleSide, sidebar, isRead, read,  }) {
+export default function Top({ handleSide, sidebar, isRead, read }) {
   const [ submenu, isSubmenu ] = useState(false)
   const { active, getActive, user } = UserAuth()
 
-  let filenameStyle = undefined
-  let filename = undefined 
+  let filenameStyle 
+  let filename 
 
   function handleStyle() {
     if (active) {
@@ -36,6 +36,7 @@ export default function Top({ handleSide, sidebar, isRead, read,  }) {
 
     return filename && filenameStyle
   }
+
   handleStyle()
 
   const Submenu = () => {
@@ -64,7 +65,6 @@ export default function Top({ handleSide, sidebar, isRead, read,  }) {
       reader.readAsText(blob)
       isSubmenu(false)
     }
-    
   
     function handleExport() {
       let blob = new Blob([getActive().body], {type: 'text/plain;charset=utf-8'})
@@ -76,7 +76,13 @@ export default function Top({ handleSide, sidebar, isRead, read,  }) {
     return (
       <div className='submenu'>
         <h3 className='submenu__title'>Options</h3>
-        <ul className='submenu__actions'>
+        <div className='submenu__actions'>
+          <div className='submenu__actions-switch'>
+            <button type='button'>Line</button>
+          </div>
+          <div className='submenu__actions-switch'>
+            <button type='button'>Theme</button>
+          </div>
           <div className='submenu__actions-import'>
             <label htmlFor='importFile'>
               <svg width='10' height='14' viewBox='0 0 14 18' fill='none' xmlns='https://www.w3.org/2000/svg'>
@@ -103,7 +109,7 @@ export default function Top({ handleSide, sidebar, isRead, read,  }) {
               </span> 
             </label>
           </div>
-        </ul>
+        </div>
         <ul className='submenu__info'>
           <li><a href='httpss://github.com/Artezi0/note' target='_blank'>
             <svg width='14' height='14' viewBox='0 0 19 19' fill='none' xmlns='https://www.w3.org/2000/svg'>

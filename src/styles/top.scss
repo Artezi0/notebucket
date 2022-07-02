@@ -67,6 +67,49 @@
         border-bottom: 1px solid $main_dark;
         padding: .2em 0;
 
+        &-switch {
+            width: 100%;
+            padding: .5em;
+            display: flex;
+            gap: .5em;
+
+            .toggle {
+                position: relative;
+                display: flex;
+                justify-content: flex-start;
+                width: 32px;
+                height: 18px;
+                background: $main_dark;
+                border-radius: 50px;
+                overflow: hidden;
+                padding: 1px;
+            }
+
+            .toggle:after {
+                content: '';
+                top: 50%;
+                transform: translateY(-50%);
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                border-radius: 50px;
+                background: $main_light;
+            }
+
+            .switch:checked + .toggle {
+                justify-content: flex-end;
+            }
+
+            .switch:checked + .toggle {
+                background: $shade_blue;
+            }
+
+            label {
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+
         &-import {
             border-radius: 4px;
             padding: .5em;

@@ -22,21 +22,6 @@ $shade_red: #FF605C;
 $shade_yellow: #FFBD44; 
 $shade_green: #89CA00;
 
-// Dark mode
-$d-main_light: #FFFFFF;
-$d-main_mid: #F7F6F3;
-$d-main_dark: #E8E7E3;
-
-$d-text_innactive: #19171199;
-$d-text_active: #000000;
-
-$d-shade_blue: #007DFF;
-$d-shade_lightBlue: #C8E2FF;
-$d-shade_lighterBlue: #D2E4F8;
-$d-shade_red: #FF605C;
-$d-shade_yellow: #FFBD44; 
-$d-shade_green: #89CA00;
-
 // ----------------------------------------------------------------------------
 // Gruvbox scss file
 // June 18 2017
@@ -46,21 +31,14 @@ $gb-lm-dark-red: #e64a1f;
 $gb-lm-dark-green: #98971a;
 $gb-lm-dark-yellow: #d79921;
 $gb-lm-dark-blue: #458588;
-$gb-lm-dark-purple: #b16286;
 $gb-lm-dark-aqua: #689d6a;
 $gb-lm-dark-orange: #ff7316;
 $gb-lm-dark-gray: #CCC0B3;
-
-$gb-lm-light-red: #9d0006;
-$gb-lm-light-green: #79740e;
 $gb-lm-light-yellow: #f2bf5b;
 $gb-lm-light-blue: #7ebbc7;
-$gb-lm-light-purple: #8f3f71;
-$gb-lm-light-aqua: #427b58;
 $gb-lm-light-orange: #ff9d5c;
-$gb-lm-light-gray: #7c6f64;
 
-*, *::before, *::after {
+* {
     padding: 0;
     margin: 0;  
     box-sizing: border-box;
@@ -72,9 +50,10 @@ $gb-lm-light-gray: #7c6f64;
     position: relative;
     background: $main_light;
     color: $text_active;
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
     text-rendering: optimizeLegibility;
     image-rendering: optimizeSpeed;
+
 
     a {
         text-decoration: none;
@@ -142,7 +121,6 @@ $gb-lm-light-gray: #7c6f64;
             }
         }
 
-        // Media querries
         @media screen and (min-width: 320px) and (max-width: 480px) {
             &-left {
                 position: fixed;

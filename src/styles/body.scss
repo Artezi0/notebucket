@@ -312,8 +312,11 @@
                     background: $main_mid;
                 }
 
-                i {
-                    margin-left: .5em;
+                svg {
+                    position: relative;
+                    font-size: 16px;
+                    padding: 0;
+                    margin-left: .2em;
                 }
             }
 
