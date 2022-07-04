@@ -77,12 +77,12 @@ export default function Top({ handleSide, sidebar, isRead, read }) {
       <div className='submenu'>
         <h3 className='submenu__title'>Options</h3>
         <div className='submenu__actions'>
-          <div className='submenu__actions-switch'>
+          {/* <div className='submenu__actions-switch'>
             <button type='button'>Line</button>
           </div>
           <div className='submenu__actions-switch'>
             <button type='button'>Theme</button>
-          </div>
+          </div> */}
           <div className='submenu__actions-import'>
             <label htmlFor='importFile'>
               <svg width='10' height='14' viewBox='0 0 14 18' fill='none' xmlns='https://www.w3.org/2000/svg'>

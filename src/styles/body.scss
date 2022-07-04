@@ -253,20 +253,21 @@
                 max-width: 100%;
                 height: fit-content;
                 position: relative;
-                right: 1em;
+                right: .3em;
 
                 .input {
                     width: 100%;
-                    font-family: inherit;                    
-                    font-size: 40px;
-                    font-weight: 700;
                     border: none;
-                    color: $text_active;
-                    background: none;
-
-                    &:focus {
-                        outline: none;
+                    
+                    .cm-scroller {
+                        font-family: inherit;                    
+                        font-size: 40px;
+                        font-weight: 700;
+                        overflow: hidden;
+                        background: none;
                     }
+                    
+                    .cm-editor.cm-focused { outline: none; }
                 }
             }    
 
@@ -373,7 +374,6 @@
                 height: 100%;
                 position: relative;
                 
-                // Input container style
                 .cm-scroller {
                     font-family: 'JetBrains Mono', monospace;                    
                     line-height: 1.3rem;
@@ -383,19 +383,10 @@
                 }
                 
                 .cm-gutters {
+                    border: none;
                     background: none;
                     color: $text_innactive;
-                }
-
-                // Media querries
-                @media screen and (min-width: 320px) and (max-width: 480px) {
-                    .cm-gutters {
-                        display: none;
-                    }
-
-                    .cm-scroller {
-                        overflow-x: scroll;
-                    }
+                    user-select: none;
                 }
                 
                 .cm-activeLineGutter, .cm-activeLine { background: $main_mid; }
@@ -404,7 +395,6 @@
                 .cm-selectionMatch { background: $shade_lightBlue; }
                 .cm-selectionBackground { background: $main_dark; }
                 
-                // Syntax style 
                 .ͼa { color: $gb-lm-dark-yellow; }
                 .ͼc { color: $gb-lm-dark-aqua; }
                 .ͼe { color: $gb-lm-dark-green; }
@@ -436,10 +426,8 @@
             }
 
             .view {
-                // Global stylesheet
                 font-size: 14px;
              
-                // Header stylesheet
                 h1, h2, h3 { font-weight: 600; padding-bottom: .5em; }
                 h4, h5, h6 { font-weight: 500; }
                 h1 { font-size: 32px; }
@@ -449,7 +437,6 @@
                 h5 { font-size: 13.28px; }
                 h6 { font-size: 10.72px; }
 
-                // Other text stylesheet
                 p { line-height: 1.3rem; text-align: justify; }
                 a { color: $shade_blue; }
 
@@ -461,7 +448,6 @@
                     font-style: italic;
                 }
 
-                // List stylesheet
                 ol, ul { 
                     padding-left: 1.2em; 
                     li {
@@ -489,7 +475,6 @@
                     }
                 }
 
-                // Codeblock stylesheet
                 code {
                     background: $main_mid;
                     border-radius: 2px;
@@ -524,7 +509,6 @@
                     background: $text_innactive;
                 }
 
-                // Table stylesheet
                 table {
                     border: 1px solid $main_dark;
                     padding: 0;
@@ -551,7 +535,6 @@
                     }
                 }
 
-                // Katex stylesheet
                 .katex-display {
                     width: fit-content;
                     background: $main_mid;
@@ -560,7 +543,6 @@
                     display: flex;
                 }
 
-                // Image stylesheet
                 img {
                     max-width: 100%;
                     display: block;
@@ -568,13 +550,10 @@
                 }
             }
         }
-
-        // Media querries
+        
         @media screen and (min-width: 320px) and (max-width: 480px) {
             &-info { padding: 2em 5% 1em 5%; }
-            &-actions { 
-                padding: 0 5% 1em 5%; 
-            }
+            &-actions { padding: 0 5% 1em 5%; }
             &-main { padding: 0 5%; }
         }
     }

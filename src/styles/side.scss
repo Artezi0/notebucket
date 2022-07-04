@@ -277,13 +277,12 @@
         left: 50%;
         transform: translateX(-50%);
         position: relative;
-        height: 12em;
-        width: 22em;
-        display: block;
+        height: fit-content;
+        width: 30em;
+        max-height: 15em;
         background: $main_light;
-        border: 1px solid $main_dark;
         border-radius: 4px;
-        overflow: hidden;
+        overflow-y: hidden;
 
         &-input {
             padding: .5em 1em;
@@ -316,7 +315,7 @@
 
         &-tips {
             width: 100%;
-            padding: .5em 1em;
+            padding: 1em;
             display: flex;
             align-items: center;
 
@@ -340,13 +339,8 @@
 
         &-result {
             width: 100%;
-            height: 55%;
-            padding: .5em 1em;
-            overflow-y: scroll;
-
-            &::-webkit-scrollbar {
-                width: 0;
-            }
+            height: 100%;
+            padding-bottom: .5em;
 
             .note {
                 width: 100%;
@@ -356,22 +350,18 @@
                 align-items: center;
                 justify-content: flex-start;
                 gap: .5em;
-                padding: .5em;
+                padding: .5em 1.2em;
                 border-radius: 4px;
                 font-size: 14px;
                 font-weight: 500;
                 cursor: pointer;
-                transition: .3s;
-
-                &__stats {
-                    width: 13px;
-                    height: 13px;
-                    border-radius: 2px;
-                    background: $main_dark;
+                
+                svg {
+                    color: $text_innactive;
                 }
 
                 &__action {
-                    right: .5em;
+                    right: 1.2em;
                     position: absolute;
                     color: $text_innactive;
                     font-weight: inherit;  
@@ -391,17 +381,16 @@
                     align-items: center;
                     justify-content: flex-start;
                     gap: .5em;
-                    padding: .5em;
+                    padding: .5em 1.2em;
                     font-size: 14px;
                     font-weight: 500;
                     color: $text_innactive;
                     border-radius: 4px;
                     cursor: pointer;
-                    transition: .3s;
 
                     &__action {
                         position: absolute;
-                        right: .5em;
+                        right: 1.2em;
                     }
 
                     &:hover {
@@ -411,22 +400,49 @@
             }
 
             .result__warn {
-                padding-top: 1em;
+                padding: 1em 0;                
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
-                font-size: 14px;
+                font-size: 500;
                 
                 h3 {
+                    font-size: 16px;
                     font-weight: 600;
                 }
+
                 
                 p {
-                    font-weight: 500;
+                    font-size: 14px;
                     color: $text_innactive;
-                    margin: 0 4em;
+                    margin: .5em 8em;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 480px) {
+        &__container {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: fit-content;
+            max-height: 80%;
+            width: 80%;     
+            border-radius: 4px;     
+            
+            &-result {
+                width: 100%;
+                height: 100%;
+    
+                .result__warn {
+                    height: 100%;
+                    
+                    p {
+                        margin: .5em 6em;
+                    }
                 }
             }
         }

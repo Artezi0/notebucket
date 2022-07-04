@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { HexColorPicker } from 'react-colorful'
-import CodeEditor from '@uiw/react-textarea-code-editor'
+import CodeMirror from '@uiw/react-codemirror'
+import { EditorView } from '@codemirror/view'
 import { FaCaretRight, FaCaretDown } from 'react-icons/fa'
 
 import Edit from './Edit'
@@ -245,11 +246,14 @@ export default function Body({ read }) {
             <div className='body__header-info'>
               <div onClick={() => isInput(true)}  className={input ? 'info-name disabled' : 'info-name'}>
                 <form onSubmit={(e) => e.preventDefault() & isInput(false)}>
-                <CodeEditor
+                <CodeMirror
                   className='input'
+                  basicSetup={false}
                   value={getActive().title}
-                  onChange={(evn) => onEdit('title', evn.target.value)}                 
-                  padding={15}
+                  onChange={(value) => onEdit('title', value)}
+                  extensions={[
+                    EditorView.lineWrapping,
+                  ]}                  
                 />            
                 </form>
               </div>

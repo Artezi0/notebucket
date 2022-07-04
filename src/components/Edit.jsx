@@ -1,6 +1,8 @@
 import CodeMirror from '@uiw/react-codemirror'
-import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
+import { EditorView } from '@codemirror/view'
 import { languages } from '@codemirror/language-data'
+import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
+
 import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
@@ -25,7 +27,8 @@ export default function Edit() {
         markdown({
           base: markdownLanguage, 
           codeLanguages: languages 
-        })
+        }),
+        EditorView.lineWrapping,
       ]} 
     />
   )
