@@ -9,152 +9,61 @@ import { UserAuth } from '../context/AuthContext'
 
 import '../styles/app.scss'
 
+const gray= '#CCC0B3',
+      red = '#fb4934',
+      green = '#b8bb26',
+      yellow = '#fabd2f',
+      blue = '#83a598',
+      purple = '#d3869b',
+      aqua = '#8ec07c',
+      orange = '#fe8019'
+
 const theme = createTheme({
   theme: 'light',
   settings: {
     background: '#ffffff',
   },
   styles: [
-    // XML Style 
-    {
-      tag: t.quote,
-      color: '#b16286'
+    { tag: t.keyword, color: red },
+    { tag: [t.name, t.deleted, t.character, t.propertyName, t.macroName], color: aqua },
+    { tag: [t.variableName], color: blue },
+    { tag: [t.function(t.variableName)], color: green, fontStyle: 'bold' },
+    { tag: [t.labelName], color: gray },
+    { tag: [t.color, t.constant(t.name), t.standard(t.name)], color: purple},
+    { tag: [t.definition(t.name), t.separator], color: gray },
+    { tag: [t.brace], color: gray },
+    { tag: [t.annotation], color: red },
+    { tag: [t.number, t.changed, t.annotation, t.modifier, t.self, t.namespace], color: purple },
+    { tag: [t.typeName, t.className], color: yellow },
+    { tag: [t.operator, t.operatorKeyword], color: aqua },
+    { tag: [t.tagName], color: aqua, fontStyle: 'bold' },
+    { tag: [t.squareBracket], color: orange },
+    { tag: [t.angleBracket], color: blue },
+    { tag: [t.attributeName], color: aqua },
+    { tag: [t.regexp], color: aqua },
+    { tag: [t.quote], color: purple },
+    { tag: [t.string], color: green },
+    { tag: t.link, color: orange,
+      textDecoration: 'underline',
+      textUnderlinePosition: 'under',
+      cursor: 'pointer'
     },
-    {
-      tag: t.monospace,
-      background: '#F7F6F3',
-    },
-    {
-      tag: t.strikethrough,
-      textDecoration: 'line-through',
-    },
-    {
-      tag: t.emphasis,
-      color: '#ff9d5c',
-      fontStyle: 'italic'
-    },
-    {
-      tag: t.strong,
-      color: '#e64a1f',
-      fontWeight: '600'
-    },
-    {
-      tag: t.link,
-      color: '#98971a'
-    },
-    {
-      tag: t.url,
-      color: '#458588',
-    },
-     {
-      tag: t.labelName,
-      color: '#458588'
-    },
-    { 
-      tag: t.heading1,
-      fontSize: '32px',
-      fontWeight: '600',
-      color: '#458588',
-      lineHeight: '2em',
-    },
-    { 
-      tag: t.heading2, 
-      fontSize: '24px',
-      fontWeight: '600',
-      color: '#458588',
-      lineHeight: '2em',
-    },
-    { 
-      tag: t.heading3, 
-      fontSize: '18.72px',
-      fontWeight: '600',
-      color: '#458588',
-      lineHeight: '2em',
-    },
-    { 
-      tag: t.heading4, 
-      fontSize: '16px',
-      fontWeight: '600',
-      color: '#458588',
-      lineHeight: '2em',
-    },
-    { 
-      tag: t.heading5, 
-      fontSize: '13.28px',
-      fontWeight: '600',
-      color: '#458588',
-      lineHeight: '2em',
-    },
-    { 
-      tag: t.heading6, 
-      fontSize: '10.72px',
-      fontWeight: '600',
-      color: '#458588',
-      lineHeight: '2em',
-    },
-    {
-      tag: t.contentSeparator,
-      color: '#CCC0B3'
-    },
-    {
-      tag: t.inserted,
-      color: '#0000ff'
-    },
-
-    // Global style
-    {
-      tag: t.comment,
-      color: '#CCC0B3',
-      fontStyle: 'italic'
-    },
-    {
-      tag: t.name,
-      color: '#ff9d5c'
-    },
-    {
-      tag: t.propertyName,
-      color: '#e64a1f'
-    },
-    {
-      tag: t.variableName,
-      color: '#458588'
-    },
-    {
-      tag: t.number,
-      color: '#b16286'
-    },
-    {
-      tag: t.null,
-      color: '#b16286'
-    },
-    {
-      tag: t.operator,
-      color: '#689d6a'
-    },
-    {
-      tag: t.bool,
-      color: '#b16286'
-    },
-    {
-      tag: t.brace,
-      color: '#CCC0B3'
-    },
-    {
-      tag: t.bracket,
-      color: '#CCC0B3'
-    },
-    {
-      tag: t.string,
-      color: '#98971a'
-    },
-    {
-      tag: t.keyword,
-      color: '#e64a1f'
-    },
-    {
-      tag: t.meta,
-      color: '#CCC0B3'
-    },    
+    { tag: [t.url, t.escape, t.special(t.string)], color: green},
+    { tag: [t.meta], color: yellow },
+    { tag: [t.comment], color: gray, fontStyle: 'italic' },
+    { tag: t.strong, fontWeight: 'bold', color: orange },
+    { tag: t.emphasis, fontStyle: 'italic', color: yellow },
+    { tag: t.strikethrough, textDecoration: 'line-through' },
+    { tag: t.heading1, lineHeight: '1.5em', fontWeight: 'bold', fontSize: '32px', color: aqua },
+    { tag: t.heading2, lineHeight: '1.5em', fontWeight: 'bold', fontSize: '24px', color: aqua },
+    { tag: t.heading3, lineHeight: '1.5em', fontWeight: 'bold', fontSize: '18.72px', color: aqua },
+    { tag: t.heading4, lineHeight: '1.5em', fontWeight: 'bold', fontSize: '16px', color: aqua },
+    { tag: t.heading5, lineHeight: '1.5em', fontWeight: 'bold', fontSize: '13.28px', color: aqua },
+    { tag: t.heading6, lineHeight: '1.5em', fontWeight: 'bold', fontSize: '10.72px', color: aqua },
+    { tag: [t.atom, t.bool, t.special(t.variableName)], color: purple },
+    { tag: [t.processingInstruction, t.inserted], color: blue },
+    { tag: [t.contentSeparator], color: gray },
+    { tag: t.invalid, color: orange, borderBottom: `1px dotted ${red}` }
   ],
 })
 

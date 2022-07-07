@@ -49,9 +49,9 @@ export function AuthContextProvider({ children }) {
   }, [])
 
   /* Google authentication */ 
-  function googleAuth() {
+  async function googleAuth() {
     return ( 
-      signInWithPopup(auth, providerGoogle) 
+      signInWithPopup(auth, providerGoogle)     
     )
   } 
   
