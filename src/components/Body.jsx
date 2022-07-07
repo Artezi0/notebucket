@@ -18,7 +18,7 @@ export default function Body({ read }) {
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
   const { onAdd, onUpdate, onDelete, active, getActive } = UserAuth()
-      
+  
   function handleStatusText() {
     if(getActive().stats == '#E8E7E3') { return 'Active' }
     if(getActive().stats == '#FFBD44') { return 'Delayed' } 
@@ -60,14 +60,11 @@ export default function Body({ read }) {
       data.append('file', file)
       data.append('upload_preset', 'notebucket')
       data.append('cloud_name', 'artezi0')
-      
-      if(file.size > 5000000) {
-        alert('File is too big')
-      }
+    
       if(file.size < 5000000) {
         isNotif(true)
         setInfo('Uploading...')        
-        let resp = await fetch(import.meta.env.VITE_IMGBB_API, {
+        let resp = await fetch('https://api.cloudinary.com/v1_1/artezi0/image/upload', {
           method: 'POST',
           body: data
         })
@@ -80,11 +77,12 @@ export default function Body({ read }) {
           ...getActive(), 
           cover: {
             isCover: true,
-          value: img
+            value: img
           },
           lastModified: Date.now()
         })
       }
+      
       isModal(false)
     }
 
@@ -102,6 +100,7 @@ export default function Body({ read }) {
           lastModified: Date.now()
         })
       }
+
       isModal(false)
     }
 

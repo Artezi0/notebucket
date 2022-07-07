@@ -383,7 +383,6 @@
                 }
                 
                 .cm-gutters {
-                    border: none;
                     background: none;
                     color: $text_innactive;
                     user-select: none;
@@ -394,48 +393,49 @@
                 .cm-selectionMatch { background: $shade_green; }
                 .cm-selectionMatch { background: $shade_lightBlue; }
                 .cm-selectionBackground { background: $main_dark; }
-                
-                .ͼa { color: $gb-lm-dark-yellow; }
-                .ͼc { color: $gb-lm-dark-aqua; }
-                .ͼe { color: $gb-lm-dark-green; }
-                .ͼi { color: $gb-lm-dark-orange; }
-                .ͼm { color: $text_innactive; }
-                .ͼ5 { color: $gb-lm-dark-gray; }
-                .ͼ6 {
-                    color: $gb-lm-dark-red;
-                    text-decoration: none;
-                }
-                
-                .ͼ6.ͼ5 { color: $gb-lm-dark-gray }
-                .ͼ6.ͼc {
-                    color: $gb-lm-dark-green;
-                    text-decoration: underline;
-                }
-                
-                .ͼ7 {
-                    text-decoration: none;
-                    font-size: 18px;
-                    font-weight: 600;
-                    color: $gb-lm-dark-blue;
-                }
-
-                .ͼ7.ͼ5 { color: $gb-lm-light-blue; }
-                .ͼ8.ͼ5, .ͼ9.ͼ5 { color: $gb-lm-light-orange }
-                .ͼ8, .ͼ9 { color: $gb-lm-dark-orange; }
-                .ͼa.ͼ5 { color: $gb-lm-light-yellow; }
             }
 
             .view {
                 font-size: 14px;
              
-                h1, h2, h3 { font-weight: 600; padding-bottom: .5em; }
-                h4, h5, h6 { font-weight: 500; }
-                h1 { font-size: 32px; }
-                h2 { font-size: 24px; }
-                h3 { font-size: 18.72px; }
-                h4 { font-size: 16px; }
-                h5 { font-size: 13.28px; }
-                h6 { font-size: 10.72px; }
+                h1 { 
+                    font-size: 32px; 
+                    font-weight: 600;
+                    border-bottom: 1px solid $main_dark;
+                    margin: .5em 0;
+                    padding-bottom: .2em;
+                }
+                h2 { 
+                    font-size: 24px; 
+                    font-weight: 600;
+                    border-bottom: 1px solid $main_dark;
+                    margin: .5em 0;
+                    padding-bottom: .2em;
+                }
+
+                h3 { 
+                    font-size: 18.72px; 
+                    font-weight: 600;
+                    margin: .5em 0;
+                }
+
+                h4 { 
+                    font-size: 16px; 
+                    font-weight: 500; 
+                    margin: .5em 0;                
+                }
+
+                h5 { 
+                    font-size: 13.28px; 
+                    font-weight: 500; 
+                    margin: .5em 0;
+                }
+
+                h6 { 
+                    font-size: 10.72px; 
+                    font-weight: 500; 
+                    margin: .5em 0;
+                }
 
                 p { line-height: 1.3rem; text-align: justify; }
                 a { color: $shade_blue; }
@@ -483,11 +483,7 @@
                     font-family: 'JetBrains Mono', Courier, monospace !important;
                 }
 
-                pre {
-                    background: $main_mid;
-                    border-radius: 2px;
-                    padding: .2em 1em;
-                    
+                pre {                    
                     div {
                         font-size: 20px;
                         
@@ -510,13 +506,15 @@
                 }
 
                 table {
+                    max-width: 100%;
                     border: 1px solid $main_dark;
-                    padding: 0;
-                    margin: 0;                    
+                    border-radius: 4px;
+                    margin: 1em auto;
 
                     thead {
                         background: $main_mid;
                         font-weight: 500;
+                        border-radius: 2px;
 
                         tr {          
                             padding: 0;
@@ -524,7 +522,7 @@
 
                             th {
                                 font-weight: 600;
-                                padding: .2em 2em;
+                                padding: .5em 2em;
                             }
                         }
                     }
@@ -538,8 +536,9 @@
                 .katex-display {
                     width: fit-content;
                     background: $main_mid;
-                    border-radius: 2px;
+                    border-radius: 4px;
                     padding: .5em 1em;
+                    margin: 1em auto;
                     display: flex;
                 }
 
@@ -547,6 +546,7 @@
                     max-width: 100%;
                     display: block;
                     margin: 1em 0;
+                    border-radius: 4px;
                 }
             }
         }

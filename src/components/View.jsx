@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { gruvboxLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { gruvboxDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import rehypeRaw from 'rehype-raw'
 import rehypeKatex from 'rehype-katex'
 import remarkRehype from 'remark-rehype'
@@ -25,11 +25,11 @@ export default function View() {
           return !inline && match ? (
             <SyntaxHighlighter
               children={String(children).replace(/\n$/, '')}
-              style={gruvboxLight}
+              style={gruvboxDark}
               wrapLongLines
               customStyle={{
-                background: 'none',
-                padding: '0',
+                padding: '.5em .5em .5em 1em',
+                borderRadius: '4px'
               }}
               language={match[1]}
               PreTag='div'

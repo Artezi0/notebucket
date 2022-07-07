@@ -10,6 +10,9 @@ export default function Spotlight({ isSpot }) {
   const { onAdd, onDelete, active, setActive, notes } = UserAuth()
   const ref = useRef(null)
 
+  function handleAdd() { onAdd(); isSpot(false)}
+  function handleDel() { onDelete(); isSpot(false)}
+
   let commands = [
     {
       id: 0,
@@ -18,7 +21,7 @@ export default function Spotlight({ isSpot }) {
       </svg>
       ,
       title: 'New note',
-      action: onAdd,
+      action: handleAdd,
     },
     {
       id: 1,
@@ -27,7 +30,7 @@ export default function Spotlight({ isSpot }) {
       </svg>           
       ,
       title: 'Delete note',
-      action: onDelete
+      action: handleDel
     },
     {
       id: 2,
@@ -72,6 +75,7 @@ export default function Spotlight({ isSpot }) {
 
     if (active) {
       FileSaver.saveAs(blob, `${active.title}.txt`)
+      isSpot(false)
     }
   }
 

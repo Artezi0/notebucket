@@ -13,10 +13,12 @@ const UserContext = createContext()
 export function AuthContextProvider({ children }) {
   const providerGoogle = new GoogleAuthProvider()
   const providerGithub = new GithubAuthProvider()
+  const navigate = useNavigate()
+  
+  const [ active, setActive ] = useState(false)
   const [ notes, setNotes ] = useState([])
   const [ user, setUser ] = useState({})
-  const [ active, setActive ] = useState(false)
-  const navigate = useNavigate()
+
 
   /* Listen and fetch database realtime */
   useEffect(() => {
@@ -35,6 +37,7 @@ export function AuthContextProvider({ children }) {
         (error) => {
           console.warn(error)
         })  
+
       }
       
       if (!user) { navigate('/') }
@@ -90,6 +93,7 @@ export function AuthContextProvider({ children }) {
   /* Delete current document */
   async function onDelete() {
     setActive(false)
+    
     await deleteDoc(doc(db, user.uid, active))
   }
 
