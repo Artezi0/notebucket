@@ -389,6 +389,7 @@
                 }
                 
                 .cm-activeLineGutter, .cm-activeLine { background: $main_mid; }
+                .cm-gutterElement { span { color: transparent; } }
                 .cm-editor.cm-focused { outline: none; }
                 .cm-selectionMatch { background: $shade_green; }
                 .cm-selectionMatch { background: $shade_lightBlue; }

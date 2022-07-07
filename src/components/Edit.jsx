@@ -15,6 +15,19 @@ const theme = createTheme({
     background: '#ffffff',
   },
   styles: [
+    // XML Style 
+    {
+      tag: t.quote,
+      color: '#b16286'
+    },
+    {
+      tag: t.monospace,
+      background: '#F7F6F3',
+    },
+    {
+      tag: t.strikethrough,
+      textDecoration: 'line-through',
+    },
     {
       tag: t.emphasis,
       color: '#ff9d5c',
@@ -26,64 +39,92 @@ const theme = createTheme({
       fontWeight: '600'
     },
     {
-      tag: t.strikethrough,
-      textDecoration: 'line-through',
-      color: '#CCC0B3'
-    },
-    {
       tag: t.link,
-      color: '#e64a1f'
+      color: '#98971a'
     },
     {
       tag: t.url,
-      color: '#98971a',
+      color: '#458588',
+    },
+     {
+      tag: t.labelName,
+      color: '#458588'
     },
     { 
-      tag: t.heading1, 
+      tag: t.heading1,
       fontSize: '32px',
       fontWeight: '600',
       color: '#458588',
+      lineHeight: '2em',
     },
     { 
       tag: t.heading2, 
       fontSize: '24px',
       fontWeight: '600',
       color: '#458588',
+      lineHeight: '2em',
     },
     { 
       tag: t.heading3, 
       fontSize: '18.72px',
       fontWeight: '600',
       color: '#458588',
+      lineHeight: '2em',
     },
     { 
       tag: t.heading4, 
       fontSize: '16px',
       fontWeight: '600',
-      color: '#458588'
+      color: '#458588',
+      lineHeight: '2em',
     },
     { 
       tag: t.heading5, 
       fontSize: '13.28px',
       fontWeight: '600',
-      color: '#458588' 
+      color: '#458588',
+      lineHeight: '2em',
     },
     { 
       tag: t.heading6, 
       fontSize: '10.72px',
       fontWeight: '600',
-      color: '#458588'
+      color: '#458588',
+      lineHeight: '2em',
+    },
+    {
+      tag: t.contentSeparator,
+      color: '#CCC0B3'
+    },
+    {
+      tag: t.inserted,
+      color: '#0000ff'
+    },
+
+    // Global style
+    {
+      tag: t.comment,
+      color: '#CCC0B3',
+      fontStyle: 'italic'
+    },
+    {
+      tag: t.name,
+      color: '#ff9d5c'
+    },
+    {
+      tag: t.propertyName,
+      color: '#e64a1f'
     },
     {
       tag: t.variableName,
       color: '#458588'
     },
     {
-      tag: t.keyword,
-      color: '#e64a1f'
+      tag: t.number,
+      color: '#b16286'
     },
     {
-      tag: t.number,
+      tag: t.null,
       color: '#b16286'
     },
     {
@@ -91,13 +132,29 @@ const theme = createTheme({
       color: '#689d6a'
     },
     {
-      tag: t.comment,
+      tag: t.bool,
+      color: '#b16286'
+    },
+    {
+      tag: t.brace,
       color: '#CCC0B3'
+    },
+    {
+      tag: t.bracket,
+      color: '#CCC0B3'
+    },
+    {
+      tag: t.string,
+      color: '#98971a'
+    },
+    {
+      tag: t.keyword,
+      color: '#e64a1f'
     },
     {
       tag: t.meta,
       color: '#CCC0B3'
-    },
+    },    
   ],
 })
 
