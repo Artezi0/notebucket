@@ -18,7 +18,7 @@ export default function Body({ read }) {
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
   const { onAdd, onUpdate, onDelete, active, getActive } = UserAuth()
-  
+
   function handleStatusText() {
     if(getActive().stats == '#E8E7E3') { return 'Active' }
     if(getActive().stats == '#FFBD44') { return 'Delayed' } 
@@ -179,7 +179,7 @@ export default function Body({ read }) {
 
   const Cover = () => {    
     return (
-      <div className='body__header-cover' style={{ background: getActive().cover.value}}>
+      <div className='body__header-cover' style={{ background: getActive().cover.value}}> 
         {modal && <Modal />}
         <div className='cover__actions'>
           <button type='button' onClick={() => isModal(!modal)}>Edit</button>
@@ -262,7 +262,6 @@ export default function Body({ read }) {
               {status && <Status />}
               <div className='status-block' style={{ background: `${getActive().stats}` }}></div>
               <button type='button' className='actions__stats' onClick={() => isStatus(!status)}>{handleStatusText()}{status ? <FaCaretDown /> : <FaCaretRight />}</button>
-              {/* <button type='button' className='actions__icon'>Add icon</button> */}
               <button type='button' className='actions__cover' onClick={() => onUpdate({...getActive(), cover: {isCover: true, value: getActive().cover.value}, lastModified: Date.now()})}>Add cover</button>
               <button type='button' className='actions__delete' onClick={onDelete}>Delete note</button>
             </div>
