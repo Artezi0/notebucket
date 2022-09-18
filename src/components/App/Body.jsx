@@ -4,12 +4,13 @@ import { HexColorPicker } from 'react-colorful'
 import CodeMirror from '@uiw/react-codemirror'
 import { EditorView } from '@codemirror/view'
 import { FaCaretRight, FaCaretDown } from 'react-icons/fa'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import Edit from './Edit'
 import View from './View'
-import { UserAuth } from '../context/AuthContext'
+import { UserAuth } from '../../context/AuthContext'
 
-import '../styles/app.scss'
+import '../../styles/app.scss'
 
 export default function Body({ read }) {
   const [ status, isStatus ] = useState(false)
@@ -18,6 +19,8 @@ export default function Body({ read }) {
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
   const { onAdd, onUpdate, onDelete, active, getActive } = UserAuth()
+
+  if (getActive()) document.title = getActive().title
 
   function handleStatusText() {
     if(getActive().stats == '#E8E7E3') { return 'Active' }
@@ -129,16 +132,6 @@ export default function Body({ read }) {
           <Tab>Color</Tab>
           <Tab>Link</Tab>
           <Tab>Upload</Tab>
-          <button onClick={
-            () => onUpdate({
-              ...getActive(), 
-              cover: {
-                isCover: false,
-                value: getActive().cover.value
-              },
-              lastModified: Date.now()
-            })
-          }>Remove</button>
         </TabList>
         <TabPanel className='cover__modal-color'>
           <button onClick={handleColor}>Randomize</button>
@@ -179,13 +172,15 @@ export default function Body({ read }) {
 
   const Cover = () => {    
     return (
-      <div className='body__header-cover' style={{ background: getActive().cover.value}}> 
+      <motion.div 
+        className='body__header-cover' 
+        style={{ background: getActive().cover.value }}> 
         {modal && <Modal />}
         <div className='cover__actions'>
-          <button type='button' onClick={() => isModal(!modal)}>Edit</button>
+          <button type='button' onClick={() => isModal(!modal)}>Edit cover</button>
         </div>
         <img src={getActive().cover.value} className='cover-image' alt=''/>
-      </div>
+      </motion.div>
     )
   }
 
@@ -262,12 +257,15 @@ export default function Body({ read }) {
               {status && <Status />}
               <div className='status-block' style={{ background: `${getActive().stats}` }}></div>
               <button type='button' className='actions__stats' onClick={() => isStatus(!status)}>{handleStatusText()}{status ? <FaCaretDown /> : <FaCaretRight />}</button>
-              <button type='button' className='actions__cover' onClick={() => onUpdate({...getActive(), cover: {isCover: true, value: getActive().cover.value}, lastModified: Date.now()})}>Add cover</button>
+              {getActive().cover.isCover ? 
+                <button type='button' className='actions__cover' onClick={() => onUpdate({...getActive(), cover: {isCover: false,value: getActive().cover.value},lastModified: Date.now()})}>Remove cover</button>:
+                <button type='button' className='actions__cover' onClick={() => onUpdate({...getActive(), cover: {isCover: true, value: getActive().cover.value}, lastModified: Date.now()})}>Add cover</button>
+              }
               <button type='button' className='actions__delete' onClick={onDelete}>Delete note</button>
             </div>
           </div>
           <div className='body__header-main'>
-            {read ? <View /> : <Edit />}
+            {getActive().isRead ? <View /> : <Edit />}
           </div> 
         </>
       }

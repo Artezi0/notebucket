@@ -19,16 +19,15 @@
 
         &-logo {
             width: 100%;
+            padding: .2em 0;
             display: flex;
             align-items: center;
             gap: .3em;
             
-            svg { position: relative; }
-
             p {
                 font-size: 14px;
                 font-weight: 700;
-                
+
                 span {
                     font-weight: 600;
                     color: $text_innactive;
@@ -75,18 +74,53 @@
 
         &-user {
             display: flex;
-            justify-content: flex-start;
-            align-items: center;
             gap: .5em;
-            color: $text_innactive;
 
             img {
+                width: 18px;
                 border-radius: 2px;
             }
 
-            p {
-                font-size: 14px;
-                font-weight: 600;
+            .module {
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                z-index: 10;
+
+                &__container {
+                    inset: 5.5em 0 0 .8em;
+                    padding: .5em;
+                    height: fit-content;
+                    width: 15em;
+                    background: $main_light;
+                    display: block;
+                    position: relative;
+                    border-radius: 4px;
+                    border: 1px solid $main_dark;
+                
+                    &-info {
+                        font-size: 14px;
+                        font-weight: 600;
+                        padding-bottom: .5em;
+                        color: $text_innactive;
+                        border-bottom: 1px solid $main_dark;
+                        display: flex;
+                        gap: .5em;
+
+                        img {
+                            width: 40px;
+                            border-radius: 2px;
+                        }
+                    }
+
+                    &-btn {
+                        padding: .5em 0;
+                        button {
+                            color: $shade_red;
+                        }
+                    }
+                }
             }
         }
     }
@@ -125,15 +159,22 @@
                 font-weight: 600;
                 color: $text_innactive;
                 overflow: hidden;
-                
-                svg {
-                    left: -3px;
-                    position: absolute;
-                    font-size: 16px;
-                    padding: 0;
-                    margin: 0;
-                }
+                transition: all .3s ease-in-out;
 
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    
+                    svg {
+                        left: -3px;
+                        font-size: 16px;
+                        padding: 0;
+                        margin: 0;
+                    }
+                }
+                
                 &-stats {
                     width: 13px;
                     height: 13px;

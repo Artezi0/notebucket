@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FcGoogle, BsGithub } from 'react-icons/all'
-import { UserAuth } from '../context/AuthContext'
+import { UserAuth } from '../../context/AuthContext'
 
-import '../styles/app.scss'
+import '../../styles/app.scss'
 
 export default function Login() {
   const [ error, setError ] = useState('')

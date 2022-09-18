@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import FileSaver from 'file-saver'
 
-import { UserAuth } from '../context/AuthContext'
-import '../styles/app.scss'
+import { UserAuth } from '../../context/AuthContext'
+import '../../styles/app.scss'
 
 export default function Spotlight({ isSpot }) {
   const [ search, setSearch ] = useState('')

@@ -19,7 +19,6 @@ export function AuthContextProvider({ children }) {
   const [ notes, setNotes ] = useState([])
   const [ user, setUser ] = useState({})
 
-
   /* Listen and fetch database realtime */
   useEffect(() => {
     const authChange = onAuthStateChanged(auth, (currentUser) => {
@@ -37,9 +36,8 @@ export function AuthContextProvider({ children }) {
         (error) => {
           console.warn(error)
         })  
-
       }
-      
+    
       if (!user) { navigate('/') }
     })
     
@@ -80,6 +78,7 @@ export function AuthContextProvider({ children }) {
       title: 'Untitled',
       body: `# Hello world`,
       lastModified: Date.now(),
+      isRead: false,
       cover: {
         isCover: false,
         value: '#E8E7E3'
@@ -92,7 +91,7 @@ export function AuthContextProvider({ children }) {
 
   /* Delete current document */
   async function onDelete() {
-    setActive(false)
+    setActive(notes[1].id)
     
     await deleteDoc(doc(db, user.uid, active))
   }
@@ -109,6 +108,7 @@ export function AuthContextProvider({ children }) {
       title: updated.title,
       lastModified: updated.lastModified,
       stats: updated.stats,
+      isRead: updated.isRead,
       cover: {
         isCover: updated.cover.isCover,
         value: updated.cover.value

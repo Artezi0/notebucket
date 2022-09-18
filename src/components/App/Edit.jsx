@@ -5,9 +5,9 @@ import { languages } from '@codemirror/language-data'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { tags as t } from '@lezer/highlight'
 
-import { UserAuth } from '../context/AuthContext'
+import { UserAuth } from '../../context/AuthContext'
 
-import '../styles/app.scss'
+import '../../styles/app.scss'
 
 const gray= '#CCC0B3',
       red = '#fb4934',

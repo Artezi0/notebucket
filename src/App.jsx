@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { UserAuth } from './context/AuthContext'
+import { AnimatePresence } from 'framer-motion'
 
-import Top from './components/Top'
-import Side from './components/Side'
-import Body from './components/Body'
-import Login from './components/Login'
-import { AuthContextProvider } from './context/AuthContext'
+import Top from './components/App/Top'
+import Side from './components/App/Side'
+import Body from './components/App/Body'
+import Login from './components/Web/Login'
+import Loader from './components/Module/Loader'
 
 import './styles/app.scss'
 
-export default function App() {
-  const [ sidebar, isSidebar ] = useState(true)
-  const [ read, isRead ] = useState(false)
-  
+export default function App() {  
+  const { notes } = UserAuth()
+
   useEffect(() => {
     document.addEventListener('keyup', handleShortcut)
     
@@ -22,7 +23,6 @@ export default function App() {
   }, [handleShortcut])
   
   function handleSide() {
-    isSidebar(!sidebar)
     document.getElementById('left').classList.toggle('disabled')
   }
 
@@ -34,33 +34,26 @@ export default function App() {
   }
   
   return (
-    <AuthContextProvider>
       <main className='App'>
-        <Routes>
-          <Route path='/'>
-            <Route index element={
-              <Login />
-            }/>
-            <Route path='notes' element={ 
-              <main className='App__app'>
-                <section className='App__app-left' id='left'>
-                  <Side handleSide={handleSide}/>
+        <AnimatePresence>
+          {notes.length > 0 ? 
+          <Routes>
+            <Route path='/'>
+              <Route index element={<Login />}/>
+              <Route path='notes' element={ 
+                <section className='App__app'>
+                  <section className='App__app-left' id='left'>
+                    <Side handleSide={handleSide}/>
+                  </section>
+                  <section className='App__app-right' id='right'>
+                    <Top handleSide={handleSide} />
+                    <Body />
+                  </section>
                 </section>
-                <section className='App__app-right' id='right'>
-                  <Top 
-                    handleSide={handleSide}
-                    sidebar={sidebar}
-                    isRead={isRead}
-                    read={read}
-                  />
-                  <Body read={read} />
-                </section>
-              </main>
-            }/>
-          </Route>
-        </Routes>
+              }/>
+            </Route>
+          </Routes> : <Loader />}
+        </AnimatePresence>
       </main>
-    </AuthContextProvider>
   )
 }
-

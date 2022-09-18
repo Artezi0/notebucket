@@ -1,48 +1,46 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
 import ReactTooltip from 'react-tooltip'
 import { FaCaretRight, FaCaretDown } from 'react-icons/fa'
 
-import Spotlight from './Spotlight'
-import data from '../../package.json'
-import { UserAuth } from '../context/AuthContext'
+import Spotlight from '../Module/Spotlight'
+import data from '../../../package.json'
+import UserModule from '../Module/UserModule'
+import { UserAuth } from '../../context/AuthContext'
 
-import '../styles/app.scss'
+import '../../styles/app.scss'
 
 export default function Side({ handleSide }) {
+  const [ userModule, setUserModule ] = useState(false)
+
   const [ ongoing, isOngoing ] = useState(false) 
   const [ delayed, isDelayed ] = useState(false) 
   const [ completed, isCompleted ] = useState(false) 
   const [ dropped, isDropped ] = useState(false) 
-  const [ state, setState ] = useState(true)
+  const [ sort, setSort ] = useState(true)
   const [ spot, isSpot ] = useState(false)
-  const navigate = useNavigate()
-  const { user, notes, onAdd, active, setActive, logout } = UserAuth()
-
+  const { user, notes, onAdd, active, setActive } = UserAuth()
+  
   let sorted
   let sortedActive = notes.filter((note) => note.stats.includes('#E8E7E3'))
   let sortedDelayed = notes.filter((note) => note.stats.includes('#FFBD44'))
   let sortedCompleted = notes.filter((note) => note.stats.includes('#89CA00'))
   let sortedDropped = notes.filter((note) => note.stats.includes('#FF605C'))
-
-  if (state) { sorted = notes.sort((a, b) => b.lastModified - a.lastModified) }
-  if (!state) {
-    sorted = notes.sort((a, b) => {
-      if(a.title.toLowerCase() < b.title.toLowerCase()) return -1
-      if(a.title.toLowerCase() > b.title.toLowerCase()) return 1
-      
-      return 0
-    })
-  }
-
-  async function handleLogout() {
-    try {
-      await logout()
-      navigate('/')
-    } catch(err) {
-      console.error(err.message)
+  
+  useEffect(() => {
+    document.addEventListener('keyup', handleShortcut)
+    
+    return () => {
+      document.removeEventListener('keyup', handleShortcut)
     }
-  } 
+  }, [handleShortcut])
+
+  sort ? 
+  sorted = notes.sort((a, b) => b.lastModified - a.lastModified) :
+  sorted = notes.sort((a, b) => {
+    if(a.title.toLowerCase() < b.title.toLowerCase()) return -1
+    if(a.title.toLowerCase() > b.title.toLowerCase()) return 1
+    return 0
+  }) 
 
   function handleTitle(e) {
     if (e.length > 15) {
@@ -57,14 +55,6 @@ export default function Side({ handleSide }) {
       isSpot(!spot) 
     }
   }
-
-  useEffect(() => {
-    document.addEventListener('keyup', handleShortcut)
-    
-    return () => {
-      document.removeEventListener('keyup', handleShortcut)
-    }
-  }, [handleShortcut])
 
   return (
     <>
@@ -81,28 +71,15 @@ export default function Side({ handleSide }) {
             </svg>
             <p>Notebucket <span>{data.version}</span></p>
           </div>
-          <button type='button' aria-label='Toggle sidebar' onClick={handleSide} data-tip data-for='sideTip'>
-            <svg width='22' height='22' viewBox='0 0 28 28' fill='none' xmlns='https://www.w3.org/2000/svg'>
-              <path d='M14 6.85156C13.2266 5.9375 11.5039 5.12012 9.48242 5.12012C6.78418 5.12012 4.60449 6.51758 4.02441 7.84473V21.0371C4.02441 21.8984 4.58691 22.2324 5.21094 22.2324C5.67676 22.2324 5.94043 22.0918 6.23926 21.8721C6.83691 21.3887 7.8125 20.8262 9.48242 20.8262C11.1611 20.8262 12.3037 21.3887 12.8135 21.8193C13.0947 22.0303 13.4199 22.2324 14 22.2324C14.5801 22.2324 14.8965 22.0127 15.1865 21.8193C15.7314 21.415 16.8389 20.8262 18.5176 20.8262C20.1875 20.8262 21.1807 21.3975 21.7607 21.8721C22.0596 22.0918 22.3232 22.2324 22.7891 22.2324C23.4131 22.2324 23.9756 21.8984 23.9756 21.0371V7.84473C23.3955 6.51758 21.2246 5.12012 18.5176 5.12012C16.4961 5.12012 14.7822 5.9375 14 6.85156ZM5.93164 8.45117C6.16895 7.87109 7.46973 6.88672 9.48242 6.88672C11.4951 6.88672 12.8398 7.87988 13.0508 8.45117V20.0439C12.1455 19.3936 10.8535 19.042 9.48242 19.042C8.10254 19.042 6.81934 19.3936 5.93164 20.0703V8.45117ZM22.0684 8.45117V20.0703C21.1807 19.3936 19.8975 19.042 18.5176 19.042C17.1465 19.042 15.8545 19.3936 14.9492 20.0439V8.45117C15.1602 7.87988 16.5049 6.88672 18.5176 6.88672C20.5303 6.88672 21.8311 7.87109 22.0684 8.45117Z' fill='currentColor'/>
-            </svg>
-          </button>
-          <ReactTooltip id='sideTip' effect='solid' type='dark' place='bottom' className='tooltip' backgroundColor='#000' arrowColor='transparent'>
-            <span>Toggle Sidebar</span>
-          </ReactTooltip>   
         </div>
         <div className='side__actions'>
+
           <div className='side__actions-user'>
-            <img src={user.photoURL ? 'https://i.pinimg.com/280x280_RS/55/96/4e/55964ebb02710d6b9ce1c26f1d857906.jpg' : user.photoURL} alt='avatar' width="18" height="18"/>
-            <p className='user__name'>{user.displayName}</p>
-            <button type='button' aria-label='Log out' className='user__logout' onClick={handleLogout} data-tip data-for='accTip'>
-              <svg width='14' height='13' viewBox='0 0 16 15' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                <path d='M0.125 7.50488C0.125 8.06738 0.520508 8.46289 1.10059 8.46289H9.2832L11.1377 8.375L8.55371 10.7217L6.76953 12.5322C6.59375 12.708 6.48828 12.9453 6.48828 13.2178C6.48828 13.7539 6.88379 14.1494 7.42871 14.1494C7.68359 14.1494 7.9209 14.0439 8.13184 13.833L13.6953 8.2168C13.8447 8.07617 13.9414 7.90039 13.9854 7.70703V13.3145C13.9854 13.8506 14.3896 14.2373 14.9346 14.2373C15.4707 14.2373 15.875 13.8506 15.875 13.3145V1.7041C15.875 1.15918 15.4707 0.763672 14.9346 0.763672C14.3896 0.763672 13.9854 1.15918 13.9854 1.7041V7.30273C13.9414 7.10938 13.8447 6.93359 13.6953 6.78418L8.13184 1.16797C7.9209 0.957031 7.68359 0.860352 7.42871 0.860352C6.88379 0.860352 6.48828 1.24707 6.48828 1.7832C6.48828 2.05566 6.59375 2.29297 6.76953 2.46875L8.55371 4.2793L11.1289 6.62598L9.2832 6.53809H1.10059C0.520508 6.53809 0.125 6.93359 0.125 7.50488Z' fill='currentColor'/>
-              </svg>
-            </button>
-            <ReactTooltip id='accTip' effect='solid' type='dark' place='right' className='tooltip' backgroundColor='#000' arrowColor='transparent'>
-              <span>Log out</span>
-            </ReactTooltip>
+            <img src="https://deno-avatar.deno.dev/avatar/11f2c2.svg" alt="avatar" />
+            <button className='user__name' onClick={() => setUserModule(!userModule)}>{user.displayName}</button>
+            {userModule && <UserModule setUserModule={setUserModule}/>}
           </div>
+          
           <button type='button' onClick={() => isSpot(!spot)} data-tip data-for='findTip'>
             <svg width='14' height='14' viewBox='0 0 18 18' fill='none' xmlns='https://www.w3.org/2000/svg'>
               <path d='M7.53223 14.0332C8.92969 14.0332 10.2393 13.6113 11.3291 12.8906L15.1787 16.749C15.4336 16.9951 15.7588 17.1182 16.1104 17.1182C16.8398 17.1182 17.376 16.5469 17.376 15.8262C17.376 15.4922 17.2617 15.167 17.0156 14.9209L13.1924 11.0801C13.9834 9.95508 14.4492 8.59277 14.4492 7.11621C14.4492 3.31055 11.3379 0.199219 7.53223 0.199219C3.73535 0.199219 0.615234 3.31055 0.615234 7.11621C0.615234 10.9219 3.72656 14.0332 7.53223 14.0332ZM7.53223 12.1875C4.74609 12.1875 2.46094 9.90234 2.46094 7.11621C2.46094 4.33008 4.74609 2.04492 7.53223 2.04492C10.3184 2.04492 12.6035 4.33008 12.6035 7.11621C12.6035 9.90234 10.3184 12.1875 7.53223 12.1875Z' fill='currentColor'/>
@@ -112,7 +89,7 @@ export default function Side({ handleSide }) {
           <ReactTooltip id='findTip' effect='solid' type='dark' place='right' className='tooltip' backgroundColor='#000' arrowColor='transparent'>
             <span>Find note</span>
           </ReactTooltip>
-          <button type='button' onClick={() => setState(!state)} data-tip data-for='sortTip'>
+          <button type='button' onClick={() => setSort(!sort)} data-tip data-for='sortTip'>
             <svg width='14' height='13' viewBox='0 0 18 17' fill='none' xmlns='https://www.w3.org/2000/svg'>
               <path d='M9 16.2744C9.46582 16.2744 9.84375 15.9053 9.84375 15.4395V7.73145C10.6787 7.39746 11.2764 6.57129 11.2764 5.62207C11.2764 4.67285 10.6787 3.84668 9.84375 3.5127V1.07812C9.84375 0.638672 9.46582 0.269531 9 0.269531C8.54297 0.269531 8.15625 0.638672 8.15625 1.07812V3.5127C7.32129 3.84668 6.72363 4.66406 6.72363 5.62207C6.72363 6.57129 7.32129 7.39746 8.15625 7.73145V15.4395C8.15625 15.9053 8.53418 16.2744 9 16.2744ZM12.8057 10.8252C12.8057 11.7744 13.3945 12.5918 14.2295 12.9346V15.4658C14.2295 15.9053 14.6074 16.2744 15.0732 16.2744C15.5479 16.2744 15.917 15.9053 15.917 15.4658V12.9346C16.7607 12.6006 17.3496 11.7744 17.3496 10.8252C17.3496 9.86719 16.7607 9.0498 15.917 8.70703V1.10449C15.917 0.638672 15.5391 0.269531 15.0732 0.269531C14.6162 0.269531 14.2295 0.638672 14.2295 1.10449V8.71582C13.3945 9.0498 12.8057 9.86719 12.8057 10.8252ZM2.92676 16.2744C3.39258 16.2744 3.77051 15.9053 3.77051 15.4658V12.9346C4.60547 12.5918 5.19434 11.7744 5.19434 10.8252C5.19434 9.86719 4.60547 9.0498 3.77051 8.71582V1.10449C3.77051 0.638672 3.39258 0.269531 2.92676 0.269531C2.46973 0.269531 2.08301 0.638672 2.08301 1.10449V8.70703C1.24805 9.0498 0.650391 9.86719 0.650391 10.8252C0.650391 11.7744 1.24805 12.6006 2.08301 12.9346V15.4658C2.08301 15.9053 2.46094 16.2744 2.92676 16.2744ZM7.91895 5.62207C7.91895 5.01562 8.39355 4.54102 9 4.54102C9.61523 4.54102 10.0811 5.01562 10.0811 5.62207C10.0811 6.2373 9.61523 6.70312 9 6.70312C8.39355 6.70312 7.91895 6.2373 7.91895 5.62207ZM13.9922 10.8252C13.9922 10.2188 14.4756 9.73535 15.082 9.73535C15.6973 9.73535 16.1631 10.2188 16.1631 10.8252C16.1631 11.4404 15.6973 11.9062 15.082 11.9062C14.4756 11.9062 13.9922 11.4404 13.9922 10.8252ZM1.8457 10.8252C1.8457 10.2188 2.32031 9.73535 2.92676 9.73535C3.54199 9.73535 4.00781 10.2188 4.00781 10.8252C4.00781 11.4404 3.54199 11.9062 2.92676 11.9062C2.32031 11.9062 1.8457 11.4404 1.8457 10.8252Z' fill='currentColor'/>
             </svg>
@@ -138,8 +115,8 @@ export default function Side({ handleSide }) {
             </button>
           </div>
           <div className='side__status-list'>
-            <button type='button' className='list__btn' onClick={() => isOngoing(!ongoing)}>
-              {ongoing ? <FaCaretDown/> : <FaCaretRight/>}
+            <button type='button' className='list__btn' onClick={() => {if(sortedActive.length > 0){isOngoing(!ongoing)}}}>
+            {sortedActive.length > 0 && <span>{ongoing ? <FaCaretDown/> : <FaCaretRight/>}</span>}
               <div className='list__btn-stats active'></div>
               Active
             </button>
@@ -160,8 +137,8 @@ export default function Side({ handleSide }) {
             }
           </div>
           <div className='side__status-list'>
-            <button type='button' className='list__btn' onClick={() => isDelayed(!delayed)}>
-              {delayed ? <FaCaretDown/> : <FaCaretRight/>}
+            <button type='button' className='list__btn' onClick={() => {if(sortedDelayed.length > 0){isDelayed(!delayed)}}}>
+              {sortedDelayed.length > 0 && <span>{delayed ? <FaCaretDown/> : <FaCaretRight/>}</span>}
               <div className='list__btn-stats delayed'></div>
               Delayed
             </button>
@@ -182,8 +159,8 @@ export default function Side({ handleSide }) {
             }
           </div>
           <div className='side__status-list'>
-            <button type='button' className='list__btn' onClick={() => isCompleted(!completed)}>
-              {completed ? <FaCaretDown/> : <FaCaretRight/>}
+            <button type='button' className='list__btn' onClick={() => {if(sortedCompleted.length > 0){isCompleted(!completed)}}}>
+            {sortedCompleted.length > 0 && <span>{completed ? <FaCaretDown/> : <FaCaretRight/>}</span>}
               <div className='list__btn-stats completed'></div>
               Completed
             </button>
@@ -204,8 +181,8 @@ export default function Side({ handleSide }) {
             }
           </div>
           <div className='side__status-list'>
-            <button type='button' className='list__btn' onClick={() => isDropped(!dropped)}>
-              {dropped ? <FaCaretDown/> : <FaCaretRight/>}
+            <button type='button' className='list__btn' onClick={() => {if(sortedDropped.length > 0){isDropped(!dropped)}}}>
+              {sortedDropped.length > 0 && <span>{dropped ? <FaCaretDown/> : <FaCaretRight/>}</span>}
               <div className='list__btn-stats dropped'></div>
               Dropped
             </button>
@@ -257,8 +234,8 @@ export default function Side({ handleSide }) {
             )})
             }
           </div> 
-        </div>
-      </section>
+        </div> 
+      </section>  
     </>
   )
 }

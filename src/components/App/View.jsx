@@ -7,7 +7,7 @@ import remarkRehype from 'remark-rehype'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 
-import { UserAuth } from '../context/AuthContext'
+import { UserAuth } from '../../context/AuthContext'
 
 export default function View() {
   const { getActive } = UserAuth()
