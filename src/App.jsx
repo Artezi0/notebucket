@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { UserAuth } from './context/AuthContext'
 import { AnimatePresence } from 'framer-motion'
 
+import View from './components/Web/View'
 import Top from './components/App/Top'
 import Side from './components/App/Side'
 import Body from './components/App/Body'
@@ -13,6 +14,7 @@ import './styles/app.scss'
 
 export default function App() {  
   const { notes } = UserAuth()
+  const [ sidebar, isSidebar ] = useState(true)
 
   useEffect(() => {
     document.addEventListener('keyup', handleShortcut)
@@ -24,6 +26,7 @@ export default function App() {
   
   function handleSide() {
     document.getElementById('left').classList.toggle('disabled')
+    isSidebar(!sidebar)
   }
 
   function handleShortcut(e) {      
@@ -46,11 +49,28 @@ export default function App() {
                     <Side handleSide={handleSide}/>
                   </section>
                   <section className='App__app-right' id='right'>
-                    <Top handleSide={handleSide} />
+                    <Top 
+                      handleSide={handleSide}  
+                      side={sidebar} />
                     <Body />
                   </section>
                 </section>
               }/>
+              {notes.map(({id, title, cover, body}) => {
+                return (
+                  <Route 
+                    key={id}
+                    path={id} 
+                    element={
+                      <View 
+                        title={title}
+                        cover={cover}
+                        body={body}
+                      />
+                    }   
+                  />
+                )
+              })}
             </Route>
           </Routes> : <Loader />}
         </AnimatePresence>

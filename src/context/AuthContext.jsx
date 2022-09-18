@@ -24,7 +24,6 @@ export function AuthContextProvider({ children }) {
     const authChange = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
       if (currentUser) { 
-        navigate('/notes')
         onSnapshot(collection(db, currentUser.uid), (snapShot) => {
           let list = []  
           
@@ -38,7 +37,7 @@ export function AuthContextProvider({ children }) {
         })  
       }
     
-      if (!user) { navigate('/') }
+      // if (!user) { navigate('/') }
     })
     
     return () => {
