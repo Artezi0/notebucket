@@ -13,7 +13,7 @@ import Loader from './components/Module/Loader'
 import './styles/app.scss'
 
 export default function App() {  
-  const { notes } = UserAuth()
+  const { notes, ProtectedRoute } = UserAuth()
   const [ sidebar, isSidebar ] = useState(true)
 
   useEffect(() => {
@@ -42,7 +42,9 @@ export default function App() {
           {notes.length > 0 ? 
           <Routes>
             <Route path='/'>
-              <Route index element={<Login />}/>
+              <Route index element={
+                  <Login />
+              }/>
               <Route path='notes' element={ 
                 <section className='App__app'>
                   <section className='App__app-left' id='left'>

@@ -6,7 +6,7 @@ import { GoogleAuthProvider,
          signInWithPopup,
          onAuthStateChanged,
          signOut } from 'firebase/auth'
-import { useNavigate } from 'react-router'
+import { Navigate, useNavigate } from 'react-router'
 
 const UserContext = createContext()
 
@@ -19,11 +19,16 @@ export function AuthContextProvider({ children }) {
   const [ notes, setNotes ] = useState([])
   const [ user, setUser ] = useState({})
 
+  const ProtectedRoute = ({ children }) => {
+    return user ? children : <Navigate to='/' />
+  }
+
   /* Listen and fetch database realtime */
   useEffect(() => {
     const authChange = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
       if (currentUser) { 
+        navigate('/notes')
         onSnapshot(collection(db, currentUser.uid), (snapShot) => {
           let list = []  
           
@@ -37,7 +42,7 @@ export function AuthContextProvider({ children }) {
         })  
       }
     
-      // if (!user) { navigate('/') }
+      if (!user) { navigate('/') }
     })
     
     return () => {
@@ -129,7 +134,8 @@ export function AuthContextProvider({ children }) {
                getActive,
                active,
                notes, 
-               user }}>
+               user,
+               ProtectedRoute }}>
       {children}
     </UserContext.Provider>
   )
