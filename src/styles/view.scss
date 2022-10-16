@@ -26,6 +26,15 @@
     position: relative;
     overflow: hidden;
     height: 12em;
+
+    img {
+      top: 50%;
+      left: 50%;
+      image-rendering: optimizeSpeed;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      width: 100%;
+    }
   }
 
   &__info {

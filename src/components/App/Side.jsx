@@ -47,8 +47,8 @@ export default function Side({ handleSide }) {
   }) 
 
   function handleTitle(e) {
-    if (e.length > 22) {
-      return e.slice(0, 22) + '...'
+    if (e.length > 20) {
+      return e.slice(0, 20) + '...'
     } 
 
     return e

@@ -33,9 +33,7 @@ export default function({ title, cover, body, lastModified }) {
         Open Notebucket
       </Link>
       {cover.isCover && 
-        <div 
-          className='viewNote__cover' 
-          style={{ background: cover.value }}> 
+        <div className='viewNote__cover' style={{ background: cover.value }}> 
           <img src={cover.value} alt=''/>
         </div>
       }

@@ -590,4 +590,24 @@
             &-main { padding: 0 5%; }
         }
     }
+
+    .confirmDelete {
+        padding: .5em;
+        display: flex;
+        gap: .5em;
+        justify-content: center;
+        align-items: center;
+        color: $main_light;
+        background: $shade_red;
+        font-size: 14px;
+        font-weight: 500;
+
+        button {
+            color: inherit;
+            border: 1px solid $main_light;
+            padding: .2em .4em;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+    }
 }

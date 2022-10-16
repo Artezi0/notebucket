@@ -18,6 +18,7 @@ export default function Body({ read }) {
   const [ input, isInput ] = useState(false)
   const [ info, setInfo ] = useState('')
   const [ notif, isNotif ] = useState(false)
+  const [ del, setDel ] = useState(false)
   const { onAdd, onUpdate, onDelete, active, getActive } = UserAuth()
 
   if (getActive()) document.title = getActive().title
@@ -54,6 +55,17 @@ export default function Body({ read }) {
       </div>
     )
   }
+
+  const ConfirmDelete = () => {
+    return (
+      <div className='confirmDelete'>
+        <p>Confirm action</p>
+        <button type='button' onClick={() => setDel(false) & onDelete()}>Continue</button>
+        <button type='button' onClick={() => setDel(false)}>Revert</button>
+      </div>
+    )
+  }
+
   const Modal = () => {
     async function handleImage(e) {
       const file = e.target.files[0]
@@ -234,6 +246,7 @@ export default function Body({ read }) {
       {active &&
         <>
           {notif && <Notification />}
+          {del && <ConfirmDelete />}
           <div className='body__header'>
             {getActive().cover.isCover && <Cover />}
             <div className='body__header-info'>
@@ -260,7 +273,7 @@ export default function Body({ read }) {
                 <button type='button' className='actions__cover' onClick={() => onUpdate({...getActive(), cover: {isCover: false,value: getActive().cover.value},lastModified: Date.now()})}>Remove cover</button>:
                 <button type='button' className='actions__cover' onClick={() => onUpdate({...getActive(), cover: {isCover: true, value: getActive().cover.value}, lastModified: Date.now()})}>Add cover</button>
               }
-              <button type='button' className='actions__delete' onClick={onDelete}>Delete note</button>
+              <button type='button' className='actions__delete' onClick={() => setDel(true)}>Delete note</button>
             </div>
           </div>
           <div className='body__header-main'>
