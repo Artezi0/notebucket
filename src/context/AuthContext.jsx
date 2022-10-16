@@ -3,7 +3,7 @@ import { doc, collection, onSnapshot, addDoc, updateDoc, deleteDoc } from 'fireb
 import { auth, db } from '../firebase'
 import { GoogleAuthProvider,
          GithubAuthProvider,
-         signInWithPopup,
+         signInWithRedirect,
          onAuthStateChanged,
          signOut } from 'firebase/auth'
 import { Navigate, useNavigate } from 'react-router'
@@ -53,14 +53,14 @@ export function AuthContextProvider({ children }) {
   /* Google authentication */ 
   async function googleAuth() {
     return ( 
-      signInWithPopup(auth, providerGoogle)     
+      signInWithRedirect(auth, providerGoogle)
     )
   } 
   
   /* Github authentication */ 
   function githubAuth() {
     return (
-      signInWithPopup(auth, providerGithub)
+      signInWithRedirect(auth, providerGithub)
     )
   }
   
@@ -90,13 +90,13 @@ export function AuthContextProvider({ children }) {
       stats: ''
     }
 
-   await addDoc(collection(db, user.uid), newNote)
+    await addDoc(collection(db, user.uid), newNote)
   }
 
   /* Delete current document */
-  async function onDelete() {
-    setActive(notes[1].id)
-    
+  async function onDelete() {        
+    setActive(false)
+
     await deleteDoc(doc(db, user.uid, active))
   }
 

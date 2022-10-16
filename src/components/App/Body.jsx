@@ -4,7 +4,7 @@ import { HexColorPicker } from 'react-colorful'
 import CodeMirror from '@uiw/react-codemirror'
 import { EditorView } from '@codemirror/view'
 import { FaCaretRight, FaCaretDown } from 'react-icons/fa'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import Edit from './Edit'
 import View from './View'
@@ -54,7 +54,6 @@ export default function Body({ read }) {
       </div>
     )
   }
-
   const Modal = () => {
     async function handleImage(e) {
       const file = e.target.files[0]
@@ -216,7 +215,7 @@ export default function Body({ read }) {
       </div>
     )
   }
-
+  
   const Warn = () => {
     return (
       <div className='body__msg'>
@@ -265,7 +264,7 @@ export default function Body({ read }) {
             </div>
           </div>
           <div className='body__header-main'>
-            {getActive().isRead ? <View /> : <Edit />}
+            {getActive().isRead ? <View /> : <Edit /> }
           </div> 
         </>
       }

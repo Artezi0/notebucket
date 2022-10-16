@@ -13,7 +13,7 @@ import Loader from './components/Module/Loader'
 import './styles/app.scss'
 
 export default function App() {  
-  const { notes, ProtectedRoute } = UserAuth()
+  const { notes } = UserAuth()
   const [ sidebar, isSidebar ] = useState(true)
 
   useEffect(() => {
@@ -35,17 +35,16 @@ export default function App() {
     if (e.ctrlKey === true && e.altKey === true && e.keyCode === 82) { if (active) { isRead(!read); isSplit(false) }}
     if (e.ctrlKey === true && e.altKey === true && e.keyCode === 87) { if (active) { isSplit(!split); isRead(false) }}
   }
-  
+
   return (
       <main className='App'>
         <AnimatePresence>
-          {notes.length > 0 ? 
           <Routes>
             <Route path='/'>
               <Route index element={
-                  <Login />
+                <Login />
               }/>
-              <Route path='notes' element={ 
+              <Route path='notes' element={   
                 <section className='App__app'>
                   <section className='App__app-left' id='left'>
                     <Side handleSide={handleSide}/>
@@ -58,7 +57,7 @@ export default function App() {
                   </section>
                 </section>
               }/>
-              {notes.map(({id, title, cover, body}) => {
+              {notes.map(({id, title, cover, body, lastModified}) => {
                 return (
                   <Route 
                     key={id}
@@ -68,13 +67,14 @@ export default function App() {
                         title={title}
                         cover={cover}
                         body={body}
+                        lastModified={lastModified}
                       />
                     }   
                   />
                 )
               })}
             </Route>
-          </Routes> : <Loader />}
+          </Routes>
         </AnimatePresence>
       </main>
   )

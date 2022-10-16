@@ -194,57 +194,71 @@
     z-index: 10;
 
     &__container {
-      width: 22em;
-      height: fit-content;
-      position: fixed;
-      padding: 2em 1em;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: $main_light;
-      border-radius: 4px;
-
-      &-header {
-        text-align: center;
-        margin-bottom: 1em;
-
-        & > h3 {
-          font-size: 16px;
-          font-weight: 600;
-          margin: .5em 0;
-        }
-
-        & > p {
-          margin: 0 2em;
-          text-align: center;
-          font-weight: 500;
-          font-size: 14px;
-          color: $text_innactive;
-        }
-      }
-
-      &-qr {
-        margin-bottom: 1em;
-      }
-
-      & :nth-child(3) {
-        background: $main_mid;
-        border-radius: 4px;
-        padding: .5em 1em;
-        font-weight: 600;
-        color: $text_active;
-      }
-
-      & > button {
-        margin: .5em 0;
+        width: 22em;
+        height: fit-content;
+        position: fixed;
+        padding: 2em 1em;
         display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        gap: .5em;
-        font-weight: 600;
-        font-size: 14px !important;
-        color: $text_innactive;
-        background: none;
-      }
+        background: $main_light;
+        border-radius: 4px;
+
+        &-header {
+          text-align: center;
+          margin-bottom: 1em;
+
+          & > h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: .5em 0;
+          }
+
+          & > p {
+            margin: 0 2em;
+            text-align: center;
+            font-weight: 500;
+            font-size: 14px;
+            color: $text_innactive;
+          }
+        }
+
+        &-qr {
+          margin-bottom: 1em;
+        }
+
+        & :nth-child(3) {
+          background: $main_mid;
+          border-radius: 4px;
+          padding: .5em 1em;
+          font-weight: 600;
+          color: $text_active;
+        }
+
+        & > button {
+          margin: .5em 0;
+          display: flex;
+          align-items: center;
+          gap: .5em;
+          font-weight: 600;
+          font-size: 14px !important;
+          color: $text_innactive;
+          background: none;
+        }
+
+        & > a {
+          margin: .5em 0;
+          display: flex;
+          align-items: center;  
+          color: $shade_blue !important;
+          font-weight: 600;
+          font-size: 14px;
+
+          & > svg {
+            align-items: center;
+            margin-left: .5em;            
+          }
+        }
     }
-  }
+}

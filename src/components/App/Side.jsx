@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
-import { FaCaretRight, FaCaretDown } from 'react-icons/fa'
 
 import Spotlight from '../Module/Spotlight'
 import data from '../../../package.json'
@@ -11,11 +10,7 @@ import '../../styles/app.scss'
 
 export default function Side({ handleSide }) {
   const [ userModule, setUserModule ] = useState(false)
-
-  const [ ongoing, isOngoing ] = useState(false) 
-  const [ delayed, isDelayed ] = useState(false) 
-  const [ completed, isCompleted ] = useState(false) 
-  const [ dropped, isDropped ] = useState(false) 
+  const [ filter, setFilter ] = useState(0)
   const [ sort, setSort ] = useState(true)
   const [ spot, isSpot ] = useState(false)
   const { user, notes, onAdd, active, setActive } = UserAuth()
@@ -26,6 +21,15 @@ export default function Side({ handleSide }) {
   let sortedCompleted = notes.filter((note) => note.stats.includes('#89CA00'))
   let sortedDropped = notes.filter((note) => note.stats.includes('#FF605C'))
   
+  function sortedNotes() {
+    if (filter == 1) {return sortedActive}
+    if (filter == 2) {return sortedDelayed}
+    if (filter == 3) {return sortedCompleted}
+    if (filter == 4) {return sortedDropped}
+
+    return sorted
+  }
+
   useEffect(() => {
     document.addEventListener('keyup', handleShortcut)
     
@@ -43,8 +47,8 @@ export default function Side({ handleSide }) {
   }) 
 
   function handleTitle(e) {
-    if (e.length > 15) {
-      return e.slice(0, 15) + '...'
+    if (e.length > 22) {
+      return e.slice(0, 22) + '...'
     } 
 
     return e
@@ -82,7 +86,9 @@ export default function Side({ handleSide }) {
         </div>
         <div className='side__actions'>
           <div className='side__actions-user'>
-            <img src="https://deno-avatar.deno.dev/avatar/11f2c2.svg" alt="avatar" />
+            <svg width="14" height="15" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.00879 8.5752C9.9248 8.5752 11.5508 6.87012 11.5508 4.66406C11.5508 2.51074 9.91602 0.858398 8.00879 0.858398C6.09277 0.858398 4.44922 2.53711 4.45801 4.68164C4.45801 6.87012 6.08398 8.5752 8.00879 8.5752ZM2.52441 16.749H13.4756C14.9258 16.749 15.4268 16.3096 15.4268 15.501C15.4268 13.2422 12.5615 10.1309 8 10.1309C3.44727 10.1309 0.573242 13.2422 0.573242 15.501C0.573242 16.3096 1.07422 16.749 2.52441 16.749Z" fill="currentColor"/>
+            </svg>
             <button className='user__name' onClick={() => setUserModule(!userModule)}>{user.displayName}</button>
             {userModule && <UserModule setUserModule={setUserModule}/>}
           </div>
@@ -102,14 +108,8 @@ export default function Side({ handleSide }) {
             Sort note
           </button>
           <ReactTooltip id='sortTip' effect='solid' type='dark' place='right' className='tooltip' backgroundColor='#000' arrowColor='transparent'>
-            <span>Sort notes alphabhetically</span>
+            {sort ? <span>Sort alphabhetically</span> : <span>Sort from latest</span>}
           </ReactTooltip>
-          <button type='button'>
-            <svg width='14' height='17' viewBox='0 0 18 21' fill='none' xmlns='https://www.w3.org/2000/svg'>
-              <path d='M4.96582 20.7686H13.043C14.3965 20.7686 15.2666 19.9512 15.3369 18.5977L15.9258 5.94141H16.8926C17.3408 5.94141 17.6836 5.58984 17.6836 5.15039C17.6836 4.71094 17.332 4.37695 16.8926 4.37695H12.9902V3.05859C12.9902 1.70508 12.1289 0.914062 10.6611 0.914062H7.32129C5.85352 0.914062 4.99219 1.70508 4.99219 3.05859V4.37695H1.10742C0.667969 4.37695 0.316406 4.71973 0.316406 5.15039C0.316406 5.59863 0.667969 5.94141 1.10742 5.94141H2.07422L2.66309 18.5977C2.7334 19.96 3.59473 20.7686 4.96582 20.7686ZM6.63574 3.1377C6.63574 2.68945 6.95215 2.39941 7.43555 2.39941H10.5469C11.0303 2.39941 11.3467 2.68945 11.3467 3.1377V4.37695H6.63574V3.1377ZM5.1416 19.1953C4.6582 19.1953 4.30664 18.835 4.28027 18.3164L3.69141 5.94141H14.2822L13.7109 18.3164C13.6934 18.8438 13.3506 19.1953 12.8496 19.1953H5.1416ZM6.40723 17.7803C6.78516 17.7803 7.02246 17.543 7.01367 17.1914L6.75 7.99805C6.74121 7.64648 6.49512 7.41797 6.13477 7.41797C5.76562 7.41797 5.52832 7.65527 5.53711 8.00684L5.80078 17.2002C5.80957 17.5518 6.05566 17.7803 6.40723 17.7803ZM9 17.7803C9.36914 17.7803 9.62402 17.5518 9.62402 17.2002V8.00684C9.62402 7.65527 9.36914 7.41797 9 7.41797C8.63086 7.41797 8.38477 7.65527 8.38477 8.00684V17.2002C8.38477 17.5518 8.63086 17.7803 9 17.7803ZM11.5928 17.7891C11.9443 17.7891 12.1904 17.5518 12.1992 17.2002L12.4629 8.00684C12.4717 7.65527 12.2344 7.42676 11.8652 7.42676C11.5049 7.42676 11.2588 7.65527 11.25 8.00684L10.9863 17.2002C10.9775 17.543 11.2148 17.7891 11.5928 17.7891Z' fill='currentColor'/>
-            </svg>
-            Delete all
-          </button>
         </div>
         <div className='side__status'>
           <div className='side__status-btn'>
@@ -121,102 +121,45 @@ export default function Side({ handleSide }) {
             </button>
           </div>
           <div className='side__status-list'>
-            <button type='button' className='list__btn' onClick={() => {if(sortedActive.length > 0){isOngoing(!ongoing)}}}>
-            {sortedActive.length > 0 && <span>{ongoing ? <FaCaretDown/> : <FaCaretRight/>}</span>}
-              <div className='list__btn-stats active'></div>
-              Active
+            <button type='button' className='list__btn' onClick={() => setFilter(1)}>
+              <div className='list__btn-stats active'></div>Active
+              <p>{sortedActive.length}</p>
             </button>
-            {ongoing && 
-            <div className='list__notes'>
-              {sortedActive.map(({ id, title }) => {
-              return (
-                <div className={`note ${id === active && 'active'}`}
-                    onClick={() => setActive(id)} 
-                    key={id}>
-                  <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                    <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
-                  </svg>
-                  <p className='note__title'>{handleTitle(title)}</p>
-                </div>       
-              )})}
-            </div>
-            }
           </div>
           <div className='side__status-list'>
-            <button type='button' className='list__btn' onClick={() => {if(sortedDelayed.length > 0){isDelayed(!delayed)}}}>
-              {sortedDelayed.length > 0 && <span>{delayed ? <FaCaretDown/> : <FaCaretRight/>}</span>}
-              <div className='list__btn-stats delayed'></div>
-              Delayed
+            <button type='button' className='list__btn' onClick={() => setFilter(2)}>
+              <div className='list__btn-stats delayed'></div>Delayed
+              <p>{sortedDelayed.length}</p>
             </button>
-            {delayed && 
-            <div className='list__notes'>
-              {sortedDelayed.map(({ id, title }) => {
-              return (
-                <div className={`note ${id === active && 'active'}`}
-                    onClick={() => setActive(id)} 
-                    key={id}>
-                  <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                    <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
-                  </svg>
-                  <p className='note__title'>{handleTitle(title)}</p>
-                </div>       
-              )})}
-            </div>
-            }
           </div>
           <div className='side__status-list'>
-            <button type='button' className='list__btn' onClick={() => {if(sortedCompleted.length > 0){isCompleted(!completed)}}}>
-            {sortedCompleted.length > 0 && <span>{completed ? <FaCaretDown/> : <FaCaretRight/>}</span>}
-              <div className='list__btn-stats completed'></div>
-              Completed
+            <button type='button' className='list__btn' onClick={() => setFilter(3)}>
+              <div className='list__btn-stats completed'></div>Completed
+              <p>{sortedCompleted.length}</p>
             </button>
-            {completed && 
-            <div className='list__notes'>
-              {sortedCompleted.map(({ id, title }) => {
-              return (
-                <div className={`note ${id === active && 'active'}`}
-                    onClick={() => setActive(id)} 
-                    key={id}>
-                  <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                    <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
-                  </svg>
-                  <p className='note__title'>{handleTitle(title)}</p>
-                </div>       
-              )})}
-            </div>
-            }
           </div>
           <div className='side__status-list'>
-            <button type='button' className='list__btn' onClick={() => {if(sortedDropped.length > 0){isDropped(!dropped)}}}>
-              {sortedDropped.length > 0 && <span>{dropped ? <FaCaretDown/> : <FaCaretRight/>}</span>}
-              <div className='list__btn-stats dropped'></div>
-              Dropped
+            <button type='button' className='list__btn' onClick={() => setFilter(4)}>
+              <div className='list__btn-stats dropped'></div>Dropped
+              <p>{sortedDropped.length}</p>
             </button>
-            {dropped && 
-            <div className='list__notes'>
-              {sortedDropped.map(({ id, title }) => {
-              return (
-                <div className={`note ${id === active && 'active'}`}
-                    onClick={() => setActive(id)} 
-                    key={id}>
-                  <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                    <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
-                  </svg>
-                  <p className='note__title'>{handleTitle(title)}</p>
-                </div>       
-              )})}
-            </div>              
-            }
           </div>
         </div>
         <div className='side__notes'>
           <div className='side__notes-btn'>
-            <button type='button'>
-              <svg width='12' height='16' viewBox='0 0 16 20' fill='none' xmlns='https://www.w3.org/2000/svg'>
-                <path d='M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684Z' fill='currentColor'/>
+            <div className='filter'>
+              <svg width="12" height="18" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.4688 19.7334C15.5674 19.1973 15.8574 18.7051 15.8574 17.5537V4.11523C15.8574 2.6123 15.1631 1.90039 13.7217 1.90039H12.8867V1.66309C12.8867 0.731445 12.4121 0.230469 11.5684 0.230469C11.2871 0.230469 10.9531 0.300781 10.5664 0.432617C7.91211 1.28516 5.48633 1.85645 2.39258 1.85645H1.72461C0.713867 1.85645 0.142578 2.43652 0.142578 3.35938V18.4414C0.142578 19.1797 0.318359 19.6279 1.00391 19.9619C2.51562 20.6387 4.76562 21.0693 7.10352 21.0781C9.65234 21.0693 12.4912 20.6826 14.4688 19.7334ZM1.79492 17.6504V3.86914C1.79492 3.63184 1.91797 3.49121 2.14648 3.49121H2.56836C5.53906 3.49121 8.36914 2.87598 10.7861 2.12891C11.0674 2.03223 11.2432 2.11133 11.2432 2.375V15.3125C11.2432 15.7432 11.1816 15.9277 10.7686 16.2002C9.01074 17.4307 5.96973 18.1602 2.10254 17.9668C1.88281 17.958 1.79492 17.8613 1.79492 17.6504ZM12.0342 17.3164C12.7021 16.8066 12.8867 16.4375 12.8867 15.6201V3.55273H13.6777C14.0381 3.55273 14.2051 3.7373 14.2051 4.1416V17.3779C14.2051 17.8965 14.1172 18.1162 13.6162 18.3271C11.9111 19.0742 9.39746 19.5488 7.10352 19.5576C6.24219 19.5576 5.40723 19.5312 4.56348 19.4521C7.6748 19.2852 10.5752 18.415 12.0342 17.3164ZM3.49121 5.75V8.65039C3.49121 8.78223 3.59668 8.85254 3.70215 8.85254C5.73242 8.85254 7.81543 8.49219 9.39746 7.85938C9.47656 7.82422 9.52051 7.74512 9.52051 7.66602V4.66016C9.52051 4.45801 9.33594 4.41406 9.23926 4.44922C7.41992 5.12598 5.65332 5.44238 3.70215 5.52148C3.5791 5.53027 3.49121 5.62695 3.49121 5.75Z" fill="currentColor"/>
               </svg>
               Notes
-            </button>
+              <button type='button' data-filter={filter} className='filter__btn' onClick={() => setFilter(0)}>
+                {filter == 0 && <p>All</p>}
+                {filter == 1 && <p>Active</p>}
+                {filter == 2 && <p>Delayed</p>}
+                {filter == 3 && <p>Completed</p>}
+                {filter == 4 && <p>Dropped</p>}
+              </button>
+            </div>
             <button type='button' aria-label='Add note' onClick={onAdd} data-tip data-for='addTip'>
               <svg width='10' height='10' viewBox='0 0 16 16' fill='none' xmlns='https://www.w3.org/2000/svg'>
                 <path d='M1.63672 8.65625H6.99805V14.0176C6.99805 14.5625 7.44629 15.0195 8 15.0195C8.55371 15.0195 9.00195 14.5625 9.00195 14.0176V8.65625H14.3633C14.9082 8.65625 15.3652 8.20801 15.3652 7.6543C15.3652 7.10059 14.9082 6.65234 14.3633 6.65234H9.00195V1.29102C9.00195 0.746094 8.55371 0.289062 8 0.289062C7.44629 0.289062 6.99805 0.746094 6.99805 1.29102V6.65234H1.63672C1.0918 6.65234 0.634766 7.10059 0.634766 7.6543C0.634766 8.20801 1.0918 8.65625 1.63672 8.65625Z' fill='currentColor'/>
@@ -227,7 +170,7 @@ export default function Side({ handleSide }) {
             </ReactTooltip>   
           </div>
           <div className='side__notes-list'>
-            {sorted.map(({ id, title }) => {
+            {sortedNotes().map(({ id, title }) => {
             return (
               <div className={`note ${id === active && 'active'}`}
                   onClick={() => setActive(id)} 

@@ -1,10 +1,25 @@
 @import './var.scss';
 
-.view {
-  height: 90%;
+.viewNote {
+  height: 100%;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
+
+  &__btn {
+    margin: .5em;
+    padding: .4em;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: .5em;
+    font-weight: 600;
+    font-size: 14px;
+
+    &:hover {
+      background: $main_mid;
+    }
+  }
 
   &__cover {
     width: 100%;
@@ -15,17 +30,23 @@
 
   &__info {
     width: 100%;
-    padding: 2em 15% 1em 15%;
+    padding: 2em 10% 1em 10%;
 
     &-title {
       font-size: 40px;
       font-weight: 700;
       line-height: 1.2em;                    
     }
+
+    &-date {
+      font-size: 14px;
+      color: $text_innactive;
+      font-weight: 500;
+    }
   }
 
   &__body {
-    padding: 0 15%;
+    padding: 0 10%;
     width: 100%;
     position: relative;
     font-size: 14px;

@@ -1,11 +1,6 @@
-import { motion } from 'framer-motion'
-import { UserAuth } from '../../context/AuthContext'
-
 import '../../styles/app.scss'
 
-export default function() {  
-  const { notes } = UserAuth()
-  
+export default function() {    
   window.setInterval( function() {
     let loader = document.getElementById('loader')
     if (loader) {
@@ -15,7 +10,7 @@ export default function() {
   }, 300)
 
   return (
-    <motion.div className='loader'>
+    <div className='loader'>
       <svg width='80' height='80' viewBox='0 0 152 152' fill='none' xmlns='https://www.w3.org/2000/svg'>
         <rect x='1' y='1' width='150' height='150' rx='20' fill='black'/>
         <path d='M131.655 55.4545L118.615 134H104.271L78.3835 84.5639H77.7699L69.5241 134H52.9176L65.9574 55.4545H80.5312L106.304 104.852H106.956L115.125 55.4545H131.655Z' fill='#BDBDBD'/>
@@ -24,6 +19,6 @@ export default function() {
         <rect x='1' y='1' width='150' height='150' rx='20' stroke='#B1B1B1'/>
       </svg>
       <p id='loader'></p>
-    </motion.div>
+    </div>
   )
 }
